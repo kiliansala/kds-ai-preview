@@ -1,0 +1,105 @@
+/**
+ * @package @kds/tokens
+ * @description CSS Custom Properties generated from Figma design tokens
+ * @source Untitled UI - FREE Figma UI kit v2.0
+ * @extracted 2026-02-10 via MCP get_variable_defs
+ */
+
+:root {
+  /* ========================================
+   * COLOR TOKENS
+   * ======================================== */
+
+  /* Base Colors */
+  --kds-color-white: #FFFFFF;
+
+  /* Brand Colors */
+  --kds-color-brand-25: #FCFAFF;
+  --kds-color-brand-50: #F9F5FF;
+  --kds-color-brand-100: #F4EBFF;
+  --kds-color-brand-200: #E9D7FE;
+  --kds-color-brand-300: #D6BBFB;
+  --kds-color-brand-600: #7F56D9;
+  --kds-color-brand-700: #6941C6;
+  --kds-color-brand-800: #53389E;
+
+  /* Error Colors */
+  --kds-color-error-25: #FFFBFA;
+  --kds-color-error-50: #FEF3F2;
+  --kds-color-error-100: #FEE4E2;
+  --kds-color-error-200: #FECDCA;
+  --kds-color-error-300: #FDA29B;
+  --kds-color-error-600: #D92D20;
+  --kds-color-error-700: #B42318;
+  --kds-color-error-800: #912018;
+
+  /* Gray Colors */
+  --kds-color-gray-50: #FAFAFA;
+  --kds-color-gray-200: #E9EAEB;
+  --kds-color-gray-300: #D5D7DA;
+  --kds-color-gray-600: #535862;
+  --kds-color-gray-700: #414651;
+  --kds-color-gray-800: #252B37;
+
+  /* Success Colors */
+  --kds-color-success-500: #12B76A;
+
+  /* ========================================
+   * TYPOGRAPHY TOKENS
+   * ======================================== */
+
+  /* Font Family */
+  --kds-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Text SM Semibold (14px) */
+  --kds-text-sm-font-size: 14px;
+  --kds-text-sm-font-weight: 600;
+  --kds-text-sm-line-height: 20px;
+  --kds-text-sm-letter-spacing: 0;
+
+  /* Text MD Semibold (16px) */
+  --kds-text-md-font-size: 16px;
+  --kds-text-md-font-weight: 600;
+  --kds-text-md-line-height: 24px;
+  --kds-text-md-letter-spacing: 0;
+
+  /* ========================================
+   * SHADOW TOKENS
+   * ======================================== */
+
+  /* Base Shadow */
+  --kds-shadow-xs: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+
+  /* Focus Ring Shadows */
+  --kds-shadow-xs-focused-primary: 0 0 0 4px #F4EBFF, 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+  --kds-shadow-xs-focused-error: 0 0 0 4px #FEE4E2, 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+  --kds-shadow-xs-focused-gray: 0 0 0 4px #F5F5F5, 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+
+  /* ========================================
+   * COMPONENT TOKENS - BUTTON
+   * ======================================== */
+
+  /* Border Radius */
+  --kds-button-border-radius: 8px;
+
+  /* Gap (icon to text) */
+  --kds-button-gap: 8px;
+
+  /* Heights by Size */
+  --kds-button-height-sm: 36px;
+  --kds-button-height-md: 40px;
+  --kds-button-height-lg: 44px;
+  --kds-button-height-xl: 48px;
+
+  /* Horizontal Padding by Size */
+  --kds-button-padding-x-sm: 12px;
+  --kds-button-padding-x-md: 16px;
+  --kds-button-padding-x-lg: 18px;
+  --kds-button-padding-x-xl: 20px;
+
+  /* Vertical Padding by Size */
+  --kds-button-padding-y-sm: 8px;
+  --kds-button-padding-y-md: 10px;
+  --kds-button-padding-y-lg: 12px;
+  --kds-button-padding-y-xl: 14px;
+}

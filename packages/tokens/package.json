@@ -1,0 +1,29 @@
+{
+  "name": "@kds/tokens",
+  "version": "0.1.0",
+  "description": "Design tokens extracted from Untitled UI in Figma",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./css": "./dist/tokens.css",
+    "./json": "./dist/tokens.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:ts && npm run build:assets",
+    "clean": "rm -rf dist && mkdir -p dist",
+    "build:ts": "tsc",
+    "build:assets": "cp src/tokens.json dist/ && cp src/button-tokens.json dist/ && cp src/tokens.css dist/",
+    "prebuild": "npm run clean"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

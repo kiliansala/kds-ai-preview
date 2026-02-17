@@ -1,0 +1,47 @@
+@*
+    @package @kds/blazor
+    @component KdsTooltip
+    @description Blazor component wrapper for kds-tooltip web component
+*@
+
+@namespace Kds.Blazor.Components
+
+<kds-tooltip
+    theme="@Theme"
+    arrow="@Arrow"
+    text="@Text"
+    supporting-text="@SupportingText">
+    @ChildContent
+</kds-tooltip>
+
+@code {
+    /// <summary>
+    /// Tooltip color theme
+    /// </summary>
+    [Parameter]
+    public string Theme { get; set; } = "light";
+
+    /// <summary>
+    /// Arrow position
+    /// </summary>
+    [Parameter]
+    public string Arrow { get; set; } = "none";
+
+    /// <summary>
+    /// Tooltip title text
+    /// </summary>
+    [Parameter]
+    public string? Text { get; set; }
+
+    /// <summary>
+    /// Supporting/description text
+    /// </summary>
+    [Parameter]
+    public string? SupportingText { get; set; }
+
+    /// <summary>
+    /// Child content
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

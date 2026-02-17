@@ -1,0 +1,103 @@
+@*
+    @package @kds/blazor
+    @component KdsButton
+    @description Blazor component wrapper for kds-button web component
+*@
+
+@namespace Kds.Blazor.Components
+@inject IJSRuntime JS
+
+<kds-button
+    @ref="buttonElement"
+    size="@Size"
+    hierarchy="@Hierarchy"
+    icon-position="@IconPosition"
+    destructive="@(Destructive ? "" : null)"
+    disabled="@(Disabled ? "" : null)"
+    type="@Type"
+    aria-label="@AriaLabel">
+    @ChildContent
+</kds-button>
+
+@code {
+    private ElementReference buttonElement;
+    private DotNetObjectReference<KdsButton>? objRef;
+
+    /// <summary>
+    /// Button size
+    /// </summary>
+    [Parameter]
+    public string Size { get; set; } = "md";
+
+    /// <summary>
+    /// Visual hierarchy/style variant
+    /// </summary>
+    [Parameter]
+    public string Hierarchy { get; set; } = "primary";
+
+    /// <summary>
+    /// Icon position relative to text
+    /// </summary>
+    [Parameter]
+    public string IconPosition { get; set; } = "none";
+
+    /// <summary>
+    /// Destructive/danger variant
+    /// </summary>
+    [Parameter]
+    public bool Destructive { get; set; } = false;
+
+    /// <summary>
+    /// Disabled state
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// Button type attribute
+    /// </summary>
+    [Parameter]
+    public string Type { get; set; } = "button";
+
+    /// <summary>
+    /// ARIA label for icon-only buttons
+    /// </summary>
+    [Parameter]
+    public string? AriaLabel { get; set; }
+
+    /// <summary>
+    /// Child content (button text and/or icon)
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Event callback when button is clicked
+    /// </summary>
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("KdsBlazor.attachButtonListener", buttonElement, objRef);
+        }
+    }
+
+    [JSInvokable]
+    public async Task HandleButtonClick()
+    {
+        await OnClick.InvokeAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (objRef != null)
+        {
+            await JS.InvokeVoidAsync("KdsBlazor.detachButtonListener", buttonElement);
+            objRef.Dispose();
+        }
+    }
+}

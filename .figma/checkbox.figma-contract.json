@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Checkbox Component Contract",
+  "description": "Contract extracted from Figma Untitled UI Checkbox component. This defines all required properties that the LIT component must implement.",
+  "source": {
+    "figmaFileId": "CICp1MWc31lkvjX3jYo1rj",
+    "componentId": "1097:63652",
+    "componentName": "Checkbox",
+    "extractedAt": "2026-02-10T00:00:00Z",
+    "mcp": "figma-desktop",
+    "notes": "⚠️ PENDING: Component properties need to be extracted from Figma via MCP. NodeId confirmed, awaiting design_context data."
+  },
+  "properties": {
+    "size": {
+      "description": "Checkbox size variant",
+      "type": "enum",
+      "required": true,
+      "values": ["sm", "md"],
+      "default": "md",
+      "figmaProperty": "size",
+      "measurements": {
+        "sm": "16px × 16px",
+        "md": "20px × 20px"
+      },
+      "notes": "Size determines the checkbox dimensions and typography scale"
+    },
+    "checked": {
+      "description": "Whether the checkbox is checked",
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "figmaProperty": "checked",
+      "notes": "Controls checked/unchecked state. Visual: checkmark icon appears when true"
+    },
+    "indeterminate": {
+      "description": "Whether the checkbox is in indeterminate state (partially checked)",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "indeterminate",
+      "notes": "Checkbox only (not for Radio). Visual: horizontal line instead of checkmark. Used for 'select all' scenarios"
+    },
+    "state": {
+      "description": "Interactive state of the checkbox",
+      "type": "enum",
+      "required": false,
+      "values": ["Default", "Hover", "Focused", "Disabled"],
+      "default": "Default",
+      "figmaProperty": "state",
+      "notes": "State is typically managed via CSS pseudo-classes (:hover, :focus-visible) and disabled attribute, not as a component property"
+    },
+    "text": {
+      "description": "Whether to show the label text ('Remember me')",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "text",
+      "notes": "In Figma, boolean prop to show/hide label. In code, label is provided via slot content"
+    },
+    "supportingText": {
+      "description": "Whether to show supporting text ('Save my login details for next time.')",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "supportingText",
+      "notes": "In Figma, boolean prop. In code, can be implemented as separate slot or property"
+    }
+  },
+  "mappings": {
+    "figmaToCode": {
+      "size": {
+        "sm": "sm",
+        "md": "md"
+      },
+      "state": {
+        "Default": "default (no class)",
+        "Hover": ":hover pseudo-class",
+        "Focused": ":focus-visible pseudo-class",
+        "Disabled": "disabled attribute"
+      },
+      "checked": {
+        "true": "checked (shows checkmark icon)",
+        "false": "unchecked (empty box)"
+      },
+      "indeterminate": {
+        "true": "indeterminate (shows horizontal line icon)",
+        "false": "not indeterminate"
+      }
+    }
+  },
+  "designTokens": {
+    "colors": {
+      "brand-600": "#7F56D9",
+      "brand-50": "#F9F5FF",
+      "brand-300": "#D6BBFB",
+      "gray-700": "#414651",
+      "gray-600": "#535862",
+      "gray-300": "#D5D7DA",
+      "gray-200": "#E9EAEB",
+      "gray-100": "#F5F5F5",
+      "white": "#FFFFFF"
+    },
+    "effects": {
+      "focus-ring": "0 0 0 4px #F4EBFF"
+    },
+    "typography": {
+      "label-sm": "Inter Medium, 14px/20px",
+      "label-md": "Inter Medium, 16px/24px",
+      "supporting-sm": "Inter Regular, 14px/20px",
+      "supporting-md": "Inter Regular, 16px/24px"
+    },
+    "spacing": {
+      "gap": "12px"
+    },
+    "usage": {
+      "checked-background": "brand-600",
+      "checked-border": "brand-600",
+      "unchecked-border": "gray-300",
+      "unchecked-background": "white",
+      "hover-border": "brand-600",
+      "hover-background-unchecked": "brand-50",
+      "focus-border-unchecked": "brand-300",
+      "disabled-border": "gray-200",
+      "disabled-background": "gray-100",
+      "label-text": "gray-700",
+      "supporting-text": "gray-600",
+      "checkmark-color": "white"
+    }
+  },
+  "validation": {
+    "requiredProps": ["size", "checked"],
+    "optionalProps": ["indeterminate", "disabled", "text", "supportingText", "name", "value", "required", "ariaLabel", "ariaDescribedBy"],
+    "notes": [
+      "All Figma component properties must have corresponding LIT component @property decorators",
+      "State management should use CSS pseudo-classes for hover/focus, not component properties",
+      "Additional web-specific props (name, value, ariaLabel, required) are acceptable and not in Figma",
+      "text and supportingText in Figma are booleans; in code they are slots or string properties"
+    ]
+  },
+  "_extraction_status": {
+    "status": "COMPLETE",
+    "extractedAt": "2026-02-10T19:50:00Z",
+    "extractedBy": "Figma MCP Desktop Server",
+    "dataSource": "get_design_context with nodeId 1097:63652",
+    "verified": true,
+    "notes": [
+      "All property values extracted from Figma design context",
+      "Design tokens documented and verified",
+      "Typography specifications confirmed",
+      "Component structure analyzed"
+    ]
+  }
+}

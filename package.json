@@ -1,0 +1,33 @@
+{
+  "name": "kds-ai-preview",
+  "version": "0.1.0",
+  "description": "Kapsch Design System - AI-friendly Design System PoC",
+  "author": "Kilian Sala <kilian@kapsch.net>",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "packages/wrappers/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "clean": "rm -rf node_modules packages/**/node_modules packages/**/dist",
+    "tokens:extract": "node scripts/extract-tokens.js",
+    "components:build": "npm run build --workspace=packages/web-components",
+    "wrappers:build": "npm run build --workspaces --workspace=packages/wrappers",
+    "validate:button": "tsx scripts/validate-button-contract.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

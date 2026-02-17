@@ -1,0 +1,12 @@
+{
+  "name": "@kds/blazor",
+  "version": "0.1.0",
+  "description": "Blazor wrappers for Kapsch Design System web components",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Blazor build - to be configured'"
+  },
+  "dependencies": {
+    "@kds/web-components": "*"
+  }
+}

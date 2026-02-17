@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Toggle Component Contract",
+  "description": "Contract extracted from Figma Untitled UI Toggle component. This defines all required properties that the LIT component must implement.",
+  "source": {
+    "figmaFileId": "CICp1MWc31lkvjX3jYo1rj",
+    "componentId": "1102:4208",
+    "componentName": "Toggle",
+    "extractedAt": "2026-02-11T00:00:00Z",
+    "mcp": "figma-desktop",
+    "notes": "Extracted via Figma Desktop MCP get_design_context + get_metadata + get_variable_defs"
+  },
+  "properties": {
+    "size": {
+      "description": "Toggle size variant",
+      "type": "enum",
+      "required": true,
+      "values": ["sm", "md"],
+      "default": "sm",
+      "figmaProperty": "Size",
+      "measurements": {
+        "sm": {
+          "track": "36px × 20px",
+          "knob": "16px × 16px",
+          "borderRadius": "12px"
+        },
+        "md": {
+          "track": "44px × 24px",
+          "knob": "20px × 20px",
+          "borderRadius": "12px"
+        }
+      },
+      "notes": "Size determines toggle track and knob dimensions, plus typography scale when text is present"
+    },
+    "pressed": {
+      "description": "Whether the toggle is pressed (on/off state)",
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "figmaProperty": "Pressed",
+      "notes": "Controls on/off state. Visual: knob slides to right when true, track color changes to Brand/600"
+    },
+    "state": {
+      "description": "Interactive state of the toggle",
+      "type": "enum",
+      "required": false,
+      "values": ["Default", "Hover", "Focus", "Disabled"],
+      "default": "Default",
+      "figmaProperty": "State",
+      "notes": "State is typically managed via CSS pseudo-classes (:hover, :focus-visible) and disabled attribute, not as a component property"
+    },
+    "text": {
+      "description": "Whether to show the label text",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "Text",
+      "notes": "In Figma, boolean prop to show/hide label. In code, label is provided via slot content or string property"
+    },
+    "supportingText": {
+      "description": "Whether to show supporting/helper text below the label",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "Supporting text",
+      "notes": "In Figma, boolean prop. In code, can be implemented as separate slot or property. Only visible when text is also true"
+    }
+  },
+  "mappings": {
+    "figmaToCode": {
+      "size": {
+        "sm": "sm",
+        "md": "md"
+      },
+      "state": {
+        "Default": "default (no class)",
+        "Hover": ":hover pseudo-class",
+        "Focus": ":focus-visible pseudo-class",
+        "Disabled": "disabled attribute"
+      },
+      "pressed": {
+        "true": "pressed/on (knob right, track Brand/600)",
+        "false": "unpressed/off (knob left, track Gray/100)"
+      }
+    }
+  },
+  "designTokens": {
+    "colors": {
+      "brand-600": "#7F56D9",
+      "gray-700": "#414651",
+      "gray-600": "#535862",
+      "gray-200": "#E9EAEB",
+      "gray-100": "#F5F5F5",
+      "gray-50": "#FAFAFA",
+      "white": "#FFFFFF"
+    },
+    "effects": {
+      "shadow-sm": "0 1px 2px rgba(10, 13, 18, 0.06), 0 1px 3px rgba(10, 13, 18, 0.10)",
+      "focus-ring": "0 0 0 4px #F4EBFF"
+    },
+    "typography": {
+      "label-sm": "Inter Medium, 14px/20px",
+      "label-md": "Inter Medium, 16px/24px",
+      "supporting-sm": "Inter Regular, 14px/20px",
+      "supporting-md": "Inter Regular, 16px/24px"
+    },
+    "spacing": {
+      "trackPadding": "2px",
+      "gap": "12px",
+      "textGap": "2px"
+    },
+    "usage": {
+      "track-off-default": "gray-100",
+      "track-off-hover": "gray-200",
+      "track-off-focus": "gray-50",
+      "track-off-disabled": "gray-100",
+      "track-on-default": "brand-600",
+      "track-on-hover": "brand-600",
+      "track-on-focus": "brand-600",
+      "track-on-disabled": "gray-100",
+      "knob-color": "white",
+      "knob-shadow": "shadow-sm",
+      "focus-ring": "focus-ring",
+      "label-text": "gray-700",
+      "supporting-text": "gray-600"
+    }
+  },
+  "validation": {
+    "requiredProps": ["size", "pressed"],
+    "optionalProps": ["disabled", "label", "supportingText", "name", "value", "ariaLabel", "ariaDescribedBy"],
+    "notes": [
+      "All Figma component properties must have corresponding LIT component @property decorators",
+      "State management should use CSS pseudo-classes for hover/focus, not component properties",
+      "Additional web-specific props (name, value, ariaLabel) are acceptable and not in Figma",
+      "text and supportingText in Figma are booleans; in code they are slots or string properties",
+      "Knob position: left (off) or right (on) - achieved via justify-start/justify-end on flex container",
+      "Disabled+pressed: track reverts to Gray/100 but knob stays on right side"
+    ]
+  },
+  "_extraction_status": {
+    "status": "COMPLETE",
+    "extractedAt": "2026-02-11T00:00:00Z",
+    "extractedBy": "Figma MCP Desktop Server",
+    "dataSource": "get_design_context + get_metadata + get_variable_defs on frame 1102:4208",
+    "verified": true,
+    "variantsAnalyzed": [
+      "1102:4200 (Pressed=False, Size=md, State=Default)",
+      "1102:4184 (Pressed=True, Size=md, State=Default)",
+      "1102:4196 (Pressed=False, Size=md, State=Hover)",
+      "1102:4192 (Pressed=False, Size=md, State=Focus)",
+      "1102:4204 (Pressed=False, Size=md, State=Disabled)",
+      "1102:4180 (Pressed=True, Size=md, State=Hover)",
+      "1102:4176 (Pressed=True, Size=md, State=Focus)",
+      "1102:4188 (Pressed=True, Size=md, State=Disabled)",
+      "1102:4406 (Pressed=True, Size=md, Text=True, Supporting text=True)"
+    ],
+    "notes": [
+      "All property values extracted from Figma design context",
+      "Design tokens documented and verified across all states",
+      "Typography specifications confirmed for both sizes",
+      "Component structure analyzed: track (flex container) + knob (circle with shadow)",
+      "48 total variants in Figma (2 pressed × 2 sizes × 2 text × 2 supporting × 4 states, minus combos)"
+    ]
+  }
+}

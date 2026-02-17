@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Button Component Contract",
+  "description": "Contract extracted from Figma Untitled UI Button component. This defines all required properties that the LIT component must implement.",
+  "source": {
+    "figmaFileId": "CICp1MWc31lkvjX3jYo1rj",
+    "componentId": "1038:34411",
+    "componentName": "Button",
+    "extractedAt": "2026-02-10T00:00:00Z",
+    "mcp": "figma-desktop"
+  },
+  "properties": {
+    "size": {
+      "description": "Button size variant",
+      "type": "enum",
+      "required": true,
+      "values": ["sm", "md", "lg", "xl"],
+      "default": "md",
+      "figmaProperty": "Size"
+    },
+    "hierarchy": {
+      "description": "Visual hierarchy/style of the button",
+      "type": "enum",
+      "required": true,
+      "values": [
+        "Primary",
+        "Secondary color",
+        "Secondary gray",
+        "Tertiary color",
+        "Tertiary gray",
+        "Link color",
+        "Link gray"
+      ],
+      "default": "Primary",
+      "figmaProperty": "Hierarchy",
+      "notes": "In code, spaces are replaced with hyphens (e.g., 'Secondary color' → 'secondary-color')"
+    },
+    "icon": {
+      "description": "Icon position in the button",
+      "type": "enum",
+      "required": true,
+      "values": ["False", "Leading", "Trailing", "Dot", "Only"],
+      "default": "False",
+      "figmaProperty": "Icon",
+      "notes": "In code, 'False' maps to 'none', 'True' would map to 'leading' or 'trailing'"
+    },
+    "destructive": {
+      "description": "Whether the button represents a destructive action",
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "figmaProperty": "Destructive"
+    },
+    "state": {
+      "description": "Interactive state of the button (managed by CSS/DOM, not as a prop)",
+      "type": "enum",
+      "required": false,
+      "values": ["Default", "Hover", "Focused", "Disabled"],
+      "default": "Default",
+      "figmaProperty": "State",
+      "notes": "State is typically managed via CSS pseudo-classes (:hover, :focus, :disabled), not as a component property"
+    }
+  },
+  "mappings": {
+    "figmaToCode": {
+      "hierarchy": {
+        "Primary": "primary",
+        "Secondary color": "secondary-color",
+        "Secondary gray": "secondary-gray",
+        "Tertiary color": "tertiary-color",
+        "Tertiary gray": "tertiary-gray",
+        "Link color": "link-color",
+        "Link gray": "link-gray"
+      },
+      "icon": {
+        "False": "none",
+        "Leading": "leading",
+        "Trailing": "trailing",
+        "Dot": "dot",
+        "Only": "only"
+      },
+      "state": {
+        "Default": "default (no class)",
+        "Hover": ":hover pseudo-class",
+        "Focused": ":focus-visible pseudo-class",
+        "Disabled": "disabled attribute"
+      }
+    }
+  },
+  "validation": {
+    "requiredProps": ["size", "hierarchy", "icon", "destructive"],
+    "optionalProps": ["disabled", "type", "ariaLabel"],
+    "notes": [
+      "All Figma component properties must have corresponding LIT component @property decorators",
+      "State management should use CSS pseudo-classes, not component properties",
+      "Additional web-specific props (type, ariaLabel) are acceptable and not in Figma"
+    ]
+  }
+}

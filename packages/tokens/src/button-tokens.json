@@ -1,0 +1,194 @@
+{
+  "button": {
+    "$type": "component",
+    "$description": "Button component from Untitled UI - Figma",
+    "variants": {
+      "size": {
+        "$description": "Button sizes",
+        "sm": {
+          "$value": "small"
+        },
+        "md": {
+          "$value": "medium"
+        },
+        "lg": {
+          "$value": "large"
+        },
+        "xl": {
+          "$value": "extra-large"
+        }
+      },
+      "hierarchy": {
+        "$description": "Button visual hierarchy",
+        "primary": {
+          "$value": "Primary"
+        },
+        "secondary-color": {
+          "$value": "Secondary color"
+        },
+        "secondary-gray": {
+          "$value": "Secondary gray"
+        },
+        "tertiary-color": {
+          "$value": "Tertiary color"
+        },
+        "tertiary-gray": {
+          "$value": "Tertiary gray"
+        },
+        "link-color": {
+          "$value": "Link color"
+        },
+        "link-gray": {
+          "$value": "Link gray"
+        }
+      },
+      "icon": {
+        "$description": "Icon configuration",
+        "none": {
+          "$value": "False"
+        },
+        "leading": {
+          "$value": "Leading"
+        },
+        "trailing": {
+          "$value": "Trailing"
+        },
+        "dot": {
+          "$value": "Dot"
+        },
+        "only": {
+          "$value": "Only"
+        }
+      },
+      "destructive": {
+        "$description": "Destructive action indicator",
+        "false": {
+          "$value": "false"
+        },
+        "true": {
+          "$value": "true"
+        }
+      },
+      "state": {
+        "$description": "Button interaction states",
+        "default": {
+          "$value": "Default"
+        },
+        "hover": {
+          "$value": "Hover"
+        },
+        "focused": {
+          "$value": "Focused"
+        },
+        "disabled": {
+          "$value": "Disabled"
+        }
+      }
+    },
+    "properties": {
+      "cornerRadius": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "Border radius for all button sizes"
+      },
+      "typography": {
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "Inter",
+          "$description": "Primary font family for button text"
+        },
+        "fontSize": {
+          "$type": "dimension",
+          "$description": "Font size per button size",
+          "sm": {
+            "$value": "14px"
+          },
+          "md": {
+            "$value": "14px"
+          },
+          "lg": {
+            "$value": "16px"
+          },
+          "xl": {
+            "$value": "16px"
+          }
+        },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "600",
+          "$description": "Semibold font weight"
+        },
+        "lineHeight": {
+          "$type": "dimension",
+          "$value": "1.5"
+        }
+      },
+      "spacing": {
+        "padding": {
+          "$type": "dimension",
+          "$description": "Horizontal and vertical padding per size",
+          "sm": {
+            "x": {
+              "$value": "12px"
+            },
+            "y": {
+              "$value": "8px"
+            }
+          },
+          "md": {
+            "x": {
+              "$value": "16px"
+            },
+            "y": {
+              "$value": "10px"
+            }
+          },
+          "lg": {
+            "x": {
+              "$value": "18px"
+            },
+            "y": {
+              "$value": "12px"
+            }
+          },
+          "xl": {
+            "x": {
+              "$value": "20px"
+            },
+            "y": {
+              "$value": "14px"
+            }
+          }
+        },
+        "gap": {
+          "$type": "dimension",
+          "$value": "8px",
+          "$description": "Gap between icon and text"
+        }
+      },
+      "height": {
+        "$type": "dimension",
+        "$description": "Height per button size",
+        "sm": {
+          "$value": "36px"
+        },
+        "md": {
+          "$value": "40px"
+        },
+        "lg": {
+          "$value": "44px"
+        },
+        "xl": {
+          "$value": "48px"
+        }
+      }
+    },
+    "metadata": {
+      "figmaFileId": "CICp1MWc31lkvjX3jYo1rj",
+      "figmaNodeId": "1038:34411",
+      "extractedAt": "2026-02-10",
+      "totalVariants": 1056,
+      "source": "Untitled UI - FREE Figma UI kit v2.0"
+    }
+  }
+}

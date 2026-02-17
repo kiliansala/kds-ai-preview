@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tooltip Component Contract",
+  "description": "Contract extracted from Figma Untitled UI Tooltip component. This defines all required properties that the LIT component must implement.",
+  "source": {
+    "figmaFileId": "CICp1MWc31lkvjX3jYo1rj",
+    "componentId": "1052:490",
+    "componentName": "Tooltip",
+    "extractedAt": "2026-02-17T00:00:00Z",
+    "mcp": "figma-desktop",
+    "notes": "Extracted via Figma Desktop MCP get_design_context + get_screenshot"
+  },
+  "properties": {
+    "theme": {
+      "description": "Tooltip color theme",
+      "type": "enum",
+      "required": false,
+      "values": ["light", "dark"],
+      "default": "light",
+      "figmaProperty": "Theme",
+      "notes": "Light theme uses white background with dark text; Dark theme uses Gray/900 background with white text"
+    },
+    "arrow": {
+      "description": "Arrow position relative to the tooltip body",
+      "type": "enum",
+      "required": false,
+      "values": ["none", "bottom-center", "bottom-left", "bottom-right", "top-center", "left", "right"],
+      "default": "none",
+      "figmaProperty": "Arrow",
+      "notes": "Arrow is an SVG triangle that points toward the trigger element. 'bottom-center' means the arrow is at the bottom center of the tooltip"
+    },
+    "supportingText": {
+      "description": "Whether to show supporting/description text below the title",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "Supporting text",
+      "notes": "In Figma, boolean prop. In code, content via slot or string property. When true, padding changes from 8px to 12px vertical, and width is constrained (320-328px)"
+    }
+  },
+  "mappings": {
+    "figmaToCode": {
+      "theme": {
+        "Light": "light",
+        "Dark": "dark"
+      },
+      "arrow": {
+        "None": "none",
+        "Bottom center": "bottom-center",
+        "Bottom left": "bottom-left",
+        "Bottom right": "bottom-right",
+        "Top center": "top-center",
+        "Left": "left",
+        "Right": "right"
+      }
+    }
+  },
+  "designTokens": {
+    "colors": {
+      "white": "#FFFFFF",
+      "gray-700": "#414651",
+      "gray-600": "#535862",
+      "gray-900": "#181D27"
+    },
+    "effects": {
+      "shadow-lg": "0px 4px 6px -2px rgba(10, 13, 18, 0.03), 0px 12px 16px -4px rgba(10, 13, 18, 0.08)"
+    },
+    "typography": {
+      "title": "Inter SemiBold, 12px/18px",
+      "supporting": "Inter Regular, 12px/18px"
+    },
+    "spacing": {
+      "padding-simple": "8px 12px",
+      "padding-supporting": "12px",
+      "text-gap": "4px"
+    },
+    "borderRadius": "8px",
+    "arrowSize": {
+      "center": "16px x 6px",
+      "side": "28px x 6px"
+    },
+    "usage": {
+      "bg-light": "white",
+      "bg-dark": "gray-900",
+      "title-text-light": "gray-700",
+      "title-text-dark": "white",
+      "supporting-text-light": "gray-600",
+      "supporting-text-dark": "white"
+    }
+  },
+  "validation": {
+    "requiredProps": [],
+    "optionalProps": ["theme", "arrow", "supportingText", "text", "ariaLabel"],
+    "notes": [
+      "Tooltip is a purely visual/informational component, no required props",
+      "All Figma component properties must have corresponding LIT @property decorators",
+      "Arrow is rendered as CSS triangles, not SVG images",
+      "supportingText in Figma is a boolean; in code it is a string property or slot",
+      "28 total variants: 2 themes x 7 arrow positions x 2 supportingText states",
+      "Width: auto for simple tooltips, 320-328px for tooltips with supporting text"
+    ]
+  },
+  "_extraction_status": {
+    "status": "COMPLETE",
+    "extractedAt": "2026-02-17T00:00:00Z",
+    "extractedBy": "Figma MCP Desktop Server",
+    "dataSource": "get_design_context + get_screenshot on Tooltip component set",
+    "verified": true,
+    "variantsAnalyzed": [
+      "1052:490 (Supporting text=True, Theme=Light, Arrow=Bottom center)",
+      "1052:497 (Supporting text=True, Theme=Light, Arrow=None)",
+      "1052:502 (Supporting text=False, Theme=Light, Arrow=Bottom center)",
+      "1052:507 (Supporting text=False, Theme=Light, Arrow=None)",
+      "1052:570 (Supporting text=True, Theme=Dark, Arrow=Bottom center)",
+      "1052:582 (Supporting text=False, Theme=Dark, Arrow=Bottom center)",
+      "1052:587 (Supporting text=False, Theme=Dark, Arrow=None)"
+    ],
+    "notes": [
+      "All property values extracted from Figma design context",
+      "Design tokens documented and verified across themes",
+      "Typography confirmed: Inter SemiBold 12/18 for title, Inter Regular 12/18 for supporting",
+      "Arrow implemented as CSS pseudo-elements (triangles), not SVG images",
+      "28 total variants (2 themes x 7 arrow positions x 2 supporting text states)"
+    ]
+  }
+}

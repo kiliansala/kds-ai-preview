@@ -1,0 +1,185 @@
+<div class="app">
+  <header>
+    <h1>{{ title }}</h1>
+    <p>Kapsch Design System - Angular Integration</p>
+  </header>
+
+  <main>
+    <!-- Basic Buttons -->
+    <section>
+      <h2>Button Sizes</h2>
+      <div class="button-group">
+        <kds-button-wrapper size="sm" hierarchy="primary" (buttonClick)="handleClick('Small')">
+          Small
+        </kds-button-wrapper>
+        <kds-button-wrapper size="md" hierarchy="primary" (buttonClick)="handleClick('Medium')">
+          Medium
+        </kds-button-wrapper>
+        <kds-button-wrapper size="lg" hierarchy="primary" (buttonClick)="handleClick('Large')">
+          Large
+        </kds-button-wrapper>
+        <kds-button-wrapper size="xl" hierarchy="primary" (buttonClick)="handleClick('Extra Large')">
+          Extra Large
+        </kds-button-wrapper>
+      </div>
+    </section>
+
+    <!-- Hierarchies -->
+    <section>
+      <h2>Button Hierarchies</h2>
+      <div class="button-group">
+        <kds-button-wrapper hierarchy="primary" (buttonClick)="handleClick('Primary')">
+          Primary
+        </kds-button-wrapper>
+        <kds-button-wrapper hierarchy="secondary-color" (buttonClick)="handleClick('Secondary Color')">
+          Secondary Color
+        </kds-button-wrapper>
+        <kds-button-wrapper hierarchy="secondary-gray" (buttonClick)="handleClick('Secondary Gray')">
+          Secondary Gray
+        </kds-button-wrapper>
+        <kds-button-wrapper hierarchy="tertiary-color" (buttonClick)="handleClick('Tertiary Color')">
+          Tertiary Color
+        </kds-button-wrapper>
+        <kds-button-wrapper hierarchy="tertiary-gray" (buttonClick)="handleClick('Tertiary Gray')">
+          Tertiary Gray
+        </kds-button-wrapper>
+        <kds-button-wrapper hierarchy="link-color" (buttonClick)="handleClick('Link Color')">
+          Link Color
+        </kds-button-wrapper>
+        <kds-button-wrapper hierarchy="link-gray" (buttonClick)="handleClick('Link Gray')">
+          Link Gray
+        </kds-button-wrapper>
+      </div>
+    </section>
+
+    <!-- Interactive Example -->
+    <section>
+      <h2>Interactive Counter</h2>
+      <div class="counter">
+        <p>Count: <strong>{{ count }}</strong></p>
+        <kds-button-wrapper
+          size="lg"
+          hierarchy="primary"
+          (buttonClick)="incrementCounter()">
+          Increment Counter
+        </kds-button-wrapper>
+      </div>
+    </section>
+
+    <!-- Async Action -->
+    <section>
+      <h2>Async Action</h2>
+      <kds-button-wrapper
+        hierarchy="secondary-color"
+        [disabled]="isLoading"
+        (buttonClick)="handleAsyncAction()">
+        {{ isLoading ? 'Loading...' : 'Start Async Action' }}
+      </kds-button-wrapper>
+    </section>
+
+    <!-- Destructive Action -->
+    <section>
+      <h2>Destructive Actions</h2>
+      <div class="button-group">
+        <kds-button-wrapper
+          hierarchy="primary"
+          [destructive]="true"
+          (buttonClick)="handleDelete()">
+          Delete Item
+        </kds-button-wrapper>
+        <kds-button-wrapper
+          hierarchy="secondary-color"
+          [destructive]="true"
+          (buttonClick)="handleDelete()">
+          Remove Account
+        </kds-button-wrapper>
+      </div>
+    </section>
+
+    <!-- Disabled States -->
+    <section>
+      <h2>Disabled States</h2>
+      <div class="button-group">
+        <kds-button-wrapper [disabled]="true">
+          Disabled Primary
+        </kds-button-wrapper>
+        <kds-button-wrapper hierarchy="secondary-color" [disabled]="true">
+          Disabled Secondary
+        </kds-button-wrapper>
+        <kds-button-wrapper hierarchy="link-color" [disabled]="true">
+          Disabled Link
+        </kds-button-wrapper>
+      </div>
+    </section>
+
+    <!-- Icon Buttons -->
+    <section>
+      <h2>Buttons with Icons</h2>
+      <div class="button-group">
+        <kds-button-wrapper
+          size="md"
+          hierarchy="primary"
+          iconPosition="leading"
+          (buttonClick)="handleClick('Add Item')">
+          <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" />
+          </svg>
+          Add Item
+        </kds-button-wrapper>
+
+        <kds-button-wrapper
+          size="md"
+          hierarchy="secondary-color"
+          iconPosition="trailing"
+          (buttonClick)="handleClick('Next')">
+          Next
+          <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </kds-button-wrapper>
+
+        <kds-button-wrapper
+          size="md"
+          hierarchy="tertiary-gray"
+          iconPosition="only"
+          ariaLabel="Settings"
+          (buttonClick)="handleClick('Settings')">
+          <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+          </svg>
+        </kds-button-wrapper>
+      </div>
+    </section>
+
+    <!-- Form Example -->
+    <section>
+      <h2>Form Submission</h2>
+      <form class="form-example" (ngSubmit)="handleSubmit()">
+        <input
+          type="text"
+          placeholder="Enter your name"
+          [(ngModel)]="formData.name"
+          name="name"
+          required />
+        <input
+          type="email"
+          placeholder="Enter your email"
+          [(ngModel)]="formData.email"
+          name="email"
+          required />
+        <div class="button-group">
+          <kds-button-wrapper type="submit" hierarchy="primary" size="lg">
+            Submit
+          </kds-button-wrapper>
+          <kds-button-wrapper type="button" hierarchy="secondary-gray" (buttonClick)="handleReset()">
+            Reset
+          </kds-button-wrapper>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with <strong>@kds/angular</strong> - Kapsch Design System</p>
+  </footer>
+</div>

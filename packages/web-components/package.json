@@ -1,0 +1,39 @@
+{
+  "name": "@kds/web-components",
+  "version": "0.1.0",
+  "description": "Web Components built with LIT for Kapsch Design System",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./tokens.css": "./src/tokens.css"
+  },
+  "files": [
+    "dist",
+    "custom-elements.json"
+  ],
+  "scripts": {
+    "copy:tokens": "cp ../tokens/dist/tokens.css src/tokens.css",
+    "dev": "npm run copy:tokens && vite",
+    "validate": "tsx ../../scripts/validate-button-contract.ts",
+    "validate:a11y": "tsx ../../scripts/validate-button-a11y.ts",
+    "validate:all": "npm run validate && npm run validate:a11y",
+    "build": "npm run copy:tokens && npm run validate:all && vite build && rm -f tsconfig.tsbuildinfo && tsc --emitDeclarationOnly --declarationDir dist",
+    "preview": "vite preview",
+    "analyze": "wca analyze 'src/**/*.ts' --outFile custom-elements.json"
+  },
+  "dependencies": {
+    "lit": "^3.1.2"
+  },
+  "devDependencies": {
+    "@kds/tokens": "*",
+    "tsx": "^4.21.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "web-component-analyzer": "^2.0.0"
+  }
+}

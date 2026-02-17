@@ -1,0 +1,250 @@
+@*
+    Blazor Example - KDS Button Integration
+
+    This example demonstrates how to integrate @kds/blazor in a Blazor application.
+*@
+
+@page "/"
+@using Kds.Blazor.Components
+
+<div class="app">
+    <header>
+        <h1>KDS Blazor Button Examples</h1>
+        <p>Kapsch Design System - Blazor Integration</p>
+    </header>
+
+    <main>
+        @* Basic Buttons *@
+        <section>
+            <h2>Button Sizes</h2>
+            <div class="button-group">
+                <KdsButton Size="sm" Hierarchy="primary" OnClick="@(() => HandleClick("Small"))">
+                    Small
+                </KdsButton>
+                <KdsButton Size="md" Hierarchy="primary" OnClick="@(() => HandleClick("Medium"))">
+                    Medium
+                </KdsButton>
+                <KdsButton Size="lg" Hierarchy="primary" OnClick="@(() => HandleClick("Large"))">
+                    Large
+                </KdsButton>
+                <KdsButton Size="xl" Hierarchy="primary" OnClick="@(() => HandleClick("Extra Large"))">
+                    Extra Large
+                </KdsButton>
+            </div>
+        </section>
+
+        @* Hierarchies *@
+        <section>
+            <h2>Button Hierarchies</h2>
+            <div class="button-group">
+                <KdsButton Hierarchy="primary" OnClick="@(() => HandleClick("Primary"))">
+                    Primary
+                </KdsButton>
+                <KdsButton Hierarchy="secondary-color" OnClick="@(() => HandleClick("Secondary Color"))">
+                    Secondary Color
+                </KdsButton>
+                <KdsButton Hierarchy="secondary-gray" OnClick="@(() => HandleClick("Secondary Gray"))">
+                    Secondary Gray
+                </KdsButton>
+                <KdsButton Hierarchy="tertiary-color" OnClick="@(() => HandleClick("Tertiary Color"))">
+                    Tertiary Color
+                </KdsButton>
+                <KdsButton Hierarchy="tertiary-gray" OnClick="@(() => HandleClick("Tertiary Gray"))">
+                    Tertiary Gray
+                </KdsButton>
+                <KdsButton Hierarchy="link-color" OnClick="@(() => HandleClick("Link Color"))">
+                    Link Color
+                </KdsButton>
+                <KdsButton Hierarchy="link-gray" OnClick="@(() => HandleClick("Link Gray"))">
+                    Link Gray
+                </KdsButton>
+            </div>
+        </section>
+
+        @* Interactive Example *@
+        <section>
+            <h2>Interactive Counter</h2>
+            <div class="counter">
+                <p>Count: <strong>@count</strong></p>
+                <KdsButton Size="lg" Hierarchy="primary" OnClick="@IncrementCounter">
+                    Increment Counter
+                </KdsButton>
+            </div>
+        </section>
+
+        @* Async Action *@
+        <section>
+            <h2>Async Action</h2>
+            <KdsButton
+                Hierarchy="secondary-color"
+                Disabled="@isLoading"
+                OnClick="@HandleAsyncAction">
+                @if (isLoading)
+                {
+                    <span>Loading...</span>
+                }
+                else
+                {
+                    <span>Start Async Action</span>
+                }
+            </KdsButton>
+        </section>
+
+        @* Destructive Action *@
+        <section>
+            <h2>Destructive Actions</h2>
+            <div class="button-group">
+                <KdsButton
+                    Hierarchy="primary"
+                    Destructive="true"
+                    OnClick="@HandleDelete">
+                    Delete Item
+                </KdsButton>
+                <KdsButton
+                    Hierarchy="secondary-color"
+                    Destructive="true"
+                    OnClick="@HandleDelete">
+                    Remove Account
+                </KdsButton>
+            </div>
+        </section>
+
+        @* Disabled States *@
+        <section>
+            <h2>Disabled States</h2>
+            <div class="button-group">
+                <KdsButton Disabled="true">
+                    Disabled Primary
+                </KdsButton>
+                <KdsButton Hierarchy="secondary-color" Disabled="true">
+                    Disabled Secondary
+                </KdsButton>
+                <KdsButton Hierarchy="link-color" Disabled="true">
+                    Disabled Link
+                </KdsButton>
+            </div>
+        </section>
+
+        @* Icon Buttons *@
+        <section>
+            <h2>Buttons with Icons</h2>
+            <div class="button-group">
+                <KdsButton
+                    Size="md"
+                    Hierarchy="primary"
+                    IconPosition="leading"
+                    OnClick="@(() => HandleClick("Add Item"))">
+                    <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" />
+                    </svg>
+                    Add Item
+                </KdsButton>
+
+                <KdsButton
+                    Size="md"
+                    Hierarchy="secondary-color"
+                    IconPosition="trailing"
+                    OnClick="@(() => HandleClick("Next"))">
+                    Next
+                    <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </KdsButton>
+
+                <KdsButton
+                    Size="md"
+                    Hierarchy="tertiary-gray"
+                    IconPosition="only"
+                    AriaLabel="Settings"
+                    OnClick="@(() => HandleClick("Settings"))">
+                    <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                    </svg>
+                </KdsButton>
+            </div>
+        </section>
+
+        @* Form Example *@
+        <section>
+            <h2>Form Submission</h2>
+            <EditForm Model="@formData" OnValidSubmit="@HandleSubmit" class="form-example">
+                <DataAnnotationsValidator />
+
+                <InputText @bind-Value="formData.Name" placeholder="Enter your name" />
+                <InputText @bind-Value="formData.Email" placeholder="Enter your email" type="email" />
+
+                <div class="button-group">
+                    <KdsButton Type="submit" Hierarchy="primary" Size="lg">
+                        Submit
+                    </KdsButton>
+                    <KdsButton Type="button" Hierarchy="secondary-gray" OnClick="@HandleReset">
+                        Reset
+                    </KdsButton>
+                </div>
+            </EditForm>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built with <strong>@("@kds/blazor")</strong> - Kapsch Design System</p>
+    </footer>
+</div>
+
+@code {
+    private int count = 0;
+    private bool isLoading = false;
+    private FormData formData = new();
+
+    private class FormData
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+    }
+
+    // Counter example
+    private void IncrementCounter()
+    {
+        count++;
+        Console.WriteLine($"Counter incremented: {count}");
+    }
+
+    // Async action example
+    private async Task HandleAsyncAction()
+    {
+        isLoading = true;
+        Console.WriteLine("Starting async action...");
+
+        // Simulate async operation
+        await Task.Delay(2000);
+
+        isLoading = false;
+        Console.WriteLine("Action completed!");
+    }
+
+    // Destructive action example
+    private void HandleDelete()
+    {
+        Console.WriteLine("Delete action triggered");
+        // In a real app, you'd use JS interop for confirm dialog
+        // For now, just log
+    }
+
+    // Form submission
+    private void HandleSubmit()
+    {
+        Console.WriteLine($"Form submitted - Name: {formData.Name}, Email: {formData.Email}");
+    }
+
+    // Form reset
+    private void HandleReset()
+    {
+        formData = new FormData();
+        Console.WriteLine("Form reset");
+    }
+
+    // Generic click handler
+    private void HandleClick(string label)
+    {
+        Console.WriteLine($"Button clicked: {label}");
+    }
+}

@@ -1,0 +1,135 @@
+@*
+    @package @kds/blazor
+    @component KdsToggle
+    @description Blazor component wrapper for kds-toggle web component
+*@
+
+@namespace Kds.Blazor.Components
+@inject IJSRuntime JS
+
+<kds-toggle
+    @ref="toggleElement"
+    size="@Size"
+    pressed="@(Pressed ? "" : null)"
+    disabled="@(Disabled ? "" : null)"
+    supporting-text="@SupportingText"
+    name="@Name"
+    value="@Value"
+    aria-label="@AriaLabel"
+    aria-describedby="@AriaDescribedBy">
+    @ChildContent
+</kds-toggle>
+
+@code {
+    private ElementReference toggleElement;
+    private DotNetObjectReference<KdsToggle>? objRef;
+
+    /// <summary>
+    /// Toggle size
+    /// </summary>
+    [Parameter]
+    public string Size { get; set; } = "sm";
+
+    /// <summary>
+    /// Whether the toggle is pressed (on)
+    /// </summary>
+    [Parameter]
+    public bool Pressed { get; set; } = false;
+
+    /// <summary>
+    /// Disabled state
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// Supporting/helper text below the label
+    /// </summary>
+    [Parameter]
+    public string? SupportingText { get; set; }
+
+    /// <summary>
+    /// Name attribute for form submission
+    /// </summary>
+    [Parameter]
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// Value attribute for form submission
+    /// </summary>
+    [Parameter]
+    public string Value { get; set; } = "on";
+
+    /// <summary>
+    /// ARIA label for accessibility
+    /// </summary>
+    [Parameter]
+    public string? AriaLabel { get; set; }
+
+    /// <summary>
+    /// ARIA described-by for help text
+    /// </summary>
+    [Parameter]
+    public string? AriaDescribedBy { get; set; }
+
+    /// <summary>
+    /// Child content (toggle label text)
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Event callback when toggle value changes
+    /// </summary>
+    [Parameter]
+    public EventCallback<bool> OnChange { get; set; }
+
+    /// <summary>
+    /// Event callback when toggle receives focus
+    /// </summary>
+    [Parameter]
+    public EventCallback OnFocus { get; set; }
+
+    /// <summary>
+    /// Event callback when toggle loses focus
+    /// </summary>
+    [Parameter]
+    public EventCallback OnBlur { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("KdsBlazor.attachToggleListener", toggleElement, objRef);
+        }
+    }
+
+    [JSInvokable]
+    public async Task HandleToggleChange(bool isPressed)
+    {
+        Pressed = isPressed;
+        await OnChange.InvokeAsync(isPressed);
+    }
+
+    [JSInvokable]
+    public async Task HandleToggleFocus()
+    {
+        await OnFocus.InvokeAsync();
+    }
+
+    [JSInvokable]
+    public async Task HandleToggleBlur()
+    {
+        await OnBlur.InvokeAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (objRef != null)
+        {
+            await JS.InvokeVoidAsync("KdsBlazor.detachToggleListener", toggleElement);
+            objRef.Dispose();
+        }
+    }
+}
