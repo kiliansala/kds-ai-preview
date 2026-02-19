@@ -237,11 +237,13 @@ function checkCodeBlocks(section: string): Result[] {
 function checkDesignTokensTab(section: string): Result[] {
   const results: Result[] = [];
 
-  const hasColors = has(section, '<h3>Colors</h3>');
+  // Accept any <h3> heading that contains "Color" (e.g. "Colors", "Track Colors", "Knob Colors")
+  const hasColors = has(section, '<h3>Colors</h3>') ||
+    countMatches(section, /<h3>[^<]*[Cc]olor[s]?[^<]*<\/h3>/) > 0;
   results.push({
     label: 'Design Tokens: Colors section',
     severity: hasColors ? 'pass' : 'error',
-    detail: hasColors ? undefined : 'Missing <h3>Colors</h3> in tokens tab',
+    detail: hasColors ? undefined : 'Missing <h3>Colors</h3> (or equivalent) in tokens tab',
   });
 
   const swatchCount = countMatches(section, 'docs-token-swatch');
@@ -336,7 +338,11 @@ function checkApiTab(section: string): Result[] {
   const results: Result[] = [];
 
   for (const table of REQUIRED_API_TABLES) {
-    const hasTable = has(section, `<h2>${table}</h2>`);
+    // "Properties" is special: accept any <h2> heading that precedes a table with <th>Property</th>
+    // (component-specific headings like "<h2>kds-button-group (Container)</h2>" are valid)
+    const hasTable = table === 'Properties'
+      ? (has(section, `<h2>${table}</h2>`) || has(section, '<th>Property</th>'))
+      : has(section, `<h2>${table}</h2>`);
     results.push({
       label: `API: "${table}" heading + table`,
       severity: hasTable ? 'pass' : 'error',

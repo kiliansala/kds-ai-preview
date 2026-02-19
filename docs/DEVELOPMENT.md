@@ -168,19 +168,25 @@ Update `packages/web-components/index.html` with:
 - Complete API (Properties, Events, Slots)
 - Accessibility (WCAG 2.1 AA)
 
-### 9. Validate Documentation Page
+### 9. Validate & Auto-fix Documentation Page
 
 Run the docs page validator to ensure the component's Vite page meets the Button standard.
+If errors are found, run the auto-fix script, then validate again.
 
 ```bash
-# Validate a specific component
+# 1. Validate
 npm run validate:docs:input-field --workspace=@kds/web-components
+# Or: tsx scripts/validate-docs-page.ts input-field
 
-# Or directly
-tsx scripts/validate-docs-page.ts input-field
+# 2. Auto-fix (if errors found)
+npm run fix:docs:input-field --workspace=@kds/web-components
+# Or: tsx scripts/fix-docs-page.ts input-field
+
+# 3. Validate again — fix any remaining errors manually
+npm run validate:docs:input-field --workspace=@kds/web-components
 ```
 
-**What it checks** (using Button as reference):
+**What the validator checks** (using Button as reference):
 
 | Group | Checks |
 |---|---|
@@ -188,11 +194,21 @@ tsx scripts/validate-docs-page.ts input-field
 | **[2] Tabs** | All 6 tabs: overview, variants, tokens, usage, api, accessibility |
 | **[3] Overview** | Quick Start section, Playground with `id="playground-{name}"`, dynamic `<code id="...">`, controls |
 | **[4] Code Blocks** | Every `.docs-code-block` has a `.docs-copy-button` with SVG icon; every `data-copy="X"` has matching `id="X"` |
-| **[5] Design Tokens** | `<h3>Colors</h3>` with `.docs-token-swatch` using CSS vars; Typography + Component-Specific sections |
+| **[5] Design Tokens** | `<h3>Colors</h3>` (or equivalent) with `.docs-token-swatch` using CSS vars; Typography + Component-Specific sections |
 | **[6] Usage** | 4 framework tabs (web-component, react, angular, blazor) each with Installation, Import, Basic Example |
 | **[7] API** | Properties (4 columns), Events, Slots, CSS Custom Properties tables |
-| **[8] Accessibility** | WCAG badges, Keyboard Navigation, Screen Reader, Color Contrast sections |
+| **[8] Accessibility** | WCAG badges, Keyboard Navigation, Screen Reader, Color Contrast, Touch Target Size, Disabled State, Best Practices, Testing, Resources |
 | **[9] Playground JS** | `init{Component}Playground()` and `update{Component}PlaygroundCode()` in `app.js` |
+
+**What the auto-fix script fixes automatically:**
+
+| Fix | What it does |
+|---|---|
+| Copy button SVG | Injects SVG icon into every `.docs-copy-button` missing one |
+| Contrast Ratio column | Adds `<th>Contrast Ratio</th>` to Color Contrast table in a11y tab |
+| Missing a11y sections | Generates template sections for: Keyboard Navigation, Touch Target Size, Disabled State, Best Practices, Testing, Resources |
+| Usage framework tabs | Renames `data-framework="wc"` → `"web-component"` |
+| Colors section skeleton | Adds placeholder `<h3>Colors</h3>` + swatch if tokens tab has no color section |
 
 **Exit codes**: `0` = all pass, `1` = errors found (warnings are non-blocking).
 
