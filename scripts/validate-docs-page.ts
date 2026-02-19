@@ -26,7 +26,6 @@ const JS_PATH = resolve(ROOT, 'packages/web-components/docs/app.js');
 const REQUIRED_TABS = ['overview', 'variants', 'tokens', 'usage', 'api', 'accessibility'];
 const REQUIRED_FRAMEWORKS = ['web-component', 'react', 'angular', 'blazor'];
 const REQUIRED_API_TABLES = ['Properties', 'Events', 'Slots', 'CSS Custom Properties'];
-const REQUIRED_A11Y_SECTIONS = ['WCAG', 'Keyboard Navigation', 'Screen Reader'];
 
 // ─── Utilities ───────────────────────────────────────────────────────────────
 
@@ -359,37 +358,283 @@ function checkApiTab(section: string): Result[] {
   return results;
 }
 
+/** Extract the accessibility tab block from the component section. */
+function extractA11yTab(section: string): string {
+  const marker = 'data-tab-content="accessibility"';
+  const start = section.indexOf(marker);
+  if (start === -1) return '';
+  // Find the end: next docs-tab-content or end of section
+  const afterStart = section.indexOf('data-tab-content="', start + marker.length);
+  return afterStart === -1 ? section.slice(start) : section.slice(start, afterStart);
+}
+
 function checkAccessibilityTab(section: string): Result[] {
   const results: Result[] = [];
+  const a11y = extractA11yTab(section);
 
-  const badgeCount = countMatches(section, 'docs-badge-success');
-  results.push({
-    label: `Accessibility: success badges (.docs-badge-success) present (${badgeCount} found)`,
-    severity: badgeCount >= 2 ? 'pass' : 'warning',
-    detail: badgeCount < 2 ? 'Expected at least 2 success badges (Keyboard, Screen Reader, WCAG)' : undefined,
-  });
-
-  for (const section_name of REQUIRED_A11Y_SECTIONS) {
-    const hasSection = has(section, section_name);
+  if (!a11y) {
     results.push({
-      label: `Accessibility: "${section_name}" section`,
-      severity: hasSection ? 'pass' : 'warning',
-      detail: hasSection ? undefined : `Missing "${section_name}" content in accessibility tab`,
+      label: 'Accessibility tab content block found',
+      severity: 'error',
+      detail: 'Missing <div data-tab-content="accessibility"> block',
     });
+    return results;
   }
 
-  const hasColorContrast = has(section, 'Color Contrast');
+  // ── 1. WCAG 2.1 AA Compliance ─────────────────────────────────────────────
+  const hasWcagH2 = has(a11y, '<h2>WCAG 2.1 AA Compliance</h2>');
   results.push({
-    label: 'Accessibility: Color Contrast section',
-    severity: hasColorContrast ? 'pass' : 'warning',
-    detail: hasColorContrast ? undefined : 'Missing "Color Contrast" section in accessibility tab',
+    label: 'A11y [1] WCAG 2.1 AA Compliance: <h2> heading',
+    severity: hasWcagH2 ? 'pass' : 'error',
+    detail: hasWcagH2 ? undefined : 'Missing <h2>WCAG 2.1 AA Compliance</h2>',
   });
 
-  const hasTouchTarget = has(section, 'Touch Target');
+  const wcagText = has(a11y, 'WCAG 2.1 Level AA');
   results.push({
-    label: 'Accessibility: Touch Target section',
-    severity: hasTouchTarget ? 'pass' : 'warning',
-    detail: hasTouchTarget ? undefined : 'Missing "Touch Target" section (WCAG 2.5.5)',
+    label: 'A11y [1] WCAG 2.1 AA Compliance: "WCAG 2.1 Level AA" text',
+    severity: wcagText ? 'pass' : 'error',
+    detail: wcagText ? undefined : 'Missing "WCAG 2.1 Level AA" descriptive text',
+  });
+
+  const wcagBadgeCount = countMatches(a11y, 'docs-badge-success');
+  results.push({
+    label: `A11y [1] WCAG 2.1 AA Compliance: status badges (${wcagBadgeCount} found, need ≥3)`,
+    severity: wcagBadgeCount >= 3 ? 'pass' : 'error',
+    detail: wcagBadgeCount < 3
+      ? `Expected ≥3 .docs-badge-success (Keyboard Accessible, Screen Reader Compatible, WCAG 2.1 AA)`
+      : undefined,
+  });
+
+  // ── 2. Keyboard Navigation ────────────────────────────────────────────────
+  const hasKbH2 = has(a11y, '<h2>Keyboard Navigation</h2>');
+  results.push({
+    label: 'A11y [2] Keyboard Navigation: <h2> heading',
+    severity: hasKbH2 ? 'pass' : 'error',
+    detail: hasKbH2 ? undefined : 'Missing <h2>Keyboard Navigation</h2>',
+  });
+
+  const hasKbTable = has(a11y, '<th>Key</th>') && has(a11y, '<th>Action</th>');
+  results.push({
+    label: 'A11y [2] Keyboard Navigation: Key/Action table',
+    severity: hasKbTable ? 'pass' : 'error',
+    detail: hasKbTable ? undefined : 'Missing keyboard table with <th>Key</th> and <th>Action</th>',
+  });
+
+  const hasFocusVisible = has(a11y, ':focus-visible');
+  results.push({
+    label: 'A11y [2] Keyboard Navigation: :focus-visible mention',
+    severity: hasFocusVisible ? 'pass' : 'error',
+    detail: hasFocusVisible ? undefined : 'Missing :focus-visible reference — focus indicator is required',
+  });
+
+  // ── 3. Screen Reader Support ──────────────────────────────────────────────
+  const hasSrH2 = has(a11y, '<h2>Screen Reader Support</h2>');
+  results.push({
+    label: 'A11y [3] Screen Reader Support: <h2> heading',
+    severity: hasSrH2 ? 'pass' : 'error',
+    detail: hasSrH2 ? undefined : 'Missing <h2>Screen Reader Support</h2>',
+  });
+
+  const hasSrList = has(a11y, 'Screen Reader Support</h2>') &&
+    (() => {
+      const idx = a11y.indexOf('Screen Reader Support</h2>');
+      const slice = a11y.slice(idx, idx + 2000);
+      return slice.includes('<ul>') && slice.includes('<li>');
+    })();
+  results.push({
+    label: 'A11y [3] Screen Reader Support: list of SR behaviors',
+    severity: hasSrList ? 'pass' : 'error',
+    detail: hasSrList ? undefined : 'Missing <ul><li> list of screen reader behaviors after heading',
+  });
+
+  const hasAriaRef = has(a11y, 'aria-') || has(a11y, 'role=');
+  results.push({
+    label: 'A11y [3] Screen Reader Support: ARIA/role references',
+    severity: hasAriaRef ? 'pass' : 'warning',
+    detail: hasAriaRef ? undefined : 'Missing ARIA attribute or role references in Screen Reader section',
+  });
+
+  // ── 4. Color Contrast ─────────────────────────────────────────────────────
+  const hasCcH2 = has(a11y, '<h2>Color Contrast</h2>');
+  results.push({
+    label: 'A11y [4] Color Contrast: <h2> heading',
+    severity: hasCcH2 ? 'pass' : 'error',
+    detail: hasCcH2 ? undefined : 'Missing <h2>Color Contrast</h2>',
+  });
+
+  const hasCcTable = has(a11y, '<th>Contrast Ratio</th>') && has(a11y, '<th>Status</th>');
+  results.push({
+    label: 'A11y [4] Color Contrast: table with Contrast Ratio + Status columns',
+    severity: hasCcTable ? 'pass' : 'error',
+    detail: hasCcTable ? undefined : 'Missing contrast table — need <th>Contrast Ratio</th> and <th>Status</th>',
+  });
+
+  const hasContrastRatio = has(a11y, '4.5:1') || has(a11y, '4.5');
+  results.push({
+    label: 'A11y [4] Color Contrast: 4.5:1 WCAG AA minimum ratio mentioned',
+    severity: hasContrastRatio ? 'pass' : 'warning',
+    detail: hasContrastRatio ? undefined : 'Missing reference to 4.5:1 minimum contrast ratio (WCAG 1.4.3)',
+  });
+
+  // ── 5. Touch Target Size ──────────────────────────────────────────────────
+  const hasTtH2 = has(a11y, '<h2>Touch Target Size</h2>');
+  results.push({
+    label: 'A11y [5] Touch Target Size: <h2> heading',
+    severity: hasTtH2 ? 'pass' : 'error',
+    detail: hasTtH2 ? undefined : 'Missing <h2>Touch Target Size</h2>',
+  });
+
+  const hasTtTable = has(a11y, 'Touch Target Size</h2>') &&
+    (() => {
+      const idx = a11y.indexOf('Touch Target Size</h2>');
+      const slice = a11y.slice(idx, idx + 2000);
+      return slice.includes('<th>') && slice.includes('<td>');
+    })();
+  results.push({
+    label: 'A11y [5] Touch Target Size: size table',
+    severity: hasTtTable ? 'pass' : 'error',
+    detail: hasTtTable ? undefined : 'Missing size table with pixel measurements after <h2>Touch Target Size</h2>',
+  });
+
+  const has44px = has(a11y, '44x44') || has(a11y, '44px') || has(a11y, 'WCAG 2.5.5') || has(a11y, '44 x 44');
+  results.push({
+    label: 'A11y [5] Touch Target Size: 44px WCAG minimum target mentioned',
+    severity: has44px ? 'pass' : 'warning',
+    detail: has44px ? undefined : 'Missing 44×44px WCAG 2.5.5 touch target reference',
+  });
+
+  // ── 6. Disabled State ─────────────────────────────────────────────────────
+  const hasDsH2 = has(a11y, '<h2>Disabled State</h2>');
+  results.push({
+    label: 'A11y [6] Disabled State: <h2> heading',
+    severity: hasDsH2 ? 'pass' : 'error',
+    detail: hasDsH2 ? undefined : 'Missing <h2>Disabled State</h2>',
+  });
+
+  const hasDsList = has(a11y, 'Disabled State</h2>') &&
+    (() => {
+      const idx = a11y.indexOf('Disabled State</h2>');
+      const slice = a11y.slice(idx, idx + 2000);
+      return slice.includes('<ul>') && slice.includes('<li>');
+    })();
+  results.push({
+    label: 'A11y [6] Disabled State: behavioral list',
+    severity: hasDsList ? 'pass' : 'error',
+    detail: hasDsList ? undefined : 'Missing <ul><li> list describing disabled state behavior',
+  });
+
+  const hasDsCodeBlock = has(a11y, 'Disabled State</h2>') &&
+    (() => {
+      const idx = a11y.indexOf('Disabled State</h2>');
+      const slice = a11y.slice(idx, idx + 2000);
+      return slice.includes('docs-code-block') && slice.includes('disabled');
+    })();
+  results.push({
+    label: 'A11y [6] Disabled State: code example with disabled attribute',
+    severity: hasDsCodeBlock ? 'pass' : 'error',
+    detail: hasDsCodeBlock ? undefined : 'Missing code block showing disabled usage in Disabled State section',
+  });
+
+  // ── 7. Best Practices ─────────────────────────────────────────────────────
+  const hasBpH2 = has(a11y, '<h2>Best Practices</h2>');
+  results.push({
+    label: 'A11y [7] Best Practices: <h2> heading',
+    severity: hasBpH2 ? 'pass' : 'error',
+    detail: hasBpH2 ? undefined : 'Missing <h2>Best Practices</h2>',
+  });
+
+  // Both Do and Don't subsections must exist inside Best Practices
+  const bpBlock = (() => {
+    const idx = a11y.indexOf('<h2>Best Practices</h2>');
+    if (idx === -1) return '';
+    const nextH2 = a11y.indexOf('<h2>', idx + 20);
+    return nextH2 === -1 ? a11y.slice(idx) : a11y.slice(idx, nextH2);
+  })();
+
+  const hasDo = has(bpBlock, 'Do') && (has(bpBlock, '<h3>') || has(bpBlock, '<h4>'));
+  results.push({
+    label: 'A11y [7] Best Practices: "Do" subsection',
+    severity: hasDo ? 'pass' : 'error',
+    detail: hasDo ? undefined : 'Missing "Do" subsection (h3/h4) inside Best Practices',
+  });
+
+  const hasDont = has(bpBlock, "Don't") || has(bpBlock, 'Dont') || has(bpBlock, "Don\u2019t");
+  results.push({
+    label: 'A11y [7] Best Practices: "Don\'t" subsection',
+    severity: hasDont ? 'pass' : 'error',
+    detail: hasDont ? undefined : "Missing \"Don't\" subsection inside Best Practices",
+  });
+
+  const doListCount = countMatches(bpBlock, '<ul>');
+  results.push({
+    label: `A11y [7] Best Practices: both Do/Don't have lists (${doListCount} <ul> found, need ≥2)`,
+    severity: doListCount >= 2 ? 'pass' : 'error',
+    detail: doListCount < 2 ? 'Each Do and Don\'t subsection must have its own <ul> list' : undefined,
+  });
+
+  // ── 8. Testing ────────────────────────────────────────────────────────────
+  const hasTstH2 = has(a11y, '<h2>Testing</h2>');
+  results.push({
+    label: 'A11y [8] Testing: <h2> heading',
+    severity: hasTstH2 ? 'pass' : 'error',
+    detail: hasTstH2 ? undefined : 'Missing <h2>Testing</h2>',
+  });
+
+  const hasTstCodeBlock = has(a11y, 'Testing</h2>') &&
+    (() => {
+      const idx = a11y.indexOf('Testing</h2>');
+      const slice = a11y.slice(idx, idx + 2000);
+      return slice.includes('docs-code-block');
+    })();
+  results.push({
+    label: 'A11y [8] Testing: code block with test commands',
+    severity: hasTstCodeBlock ? 'pass' : 'error',
+    detail: hasTstCodeBlock ? undefined : 'Missing code block with test commands in Testing section',
+  });
+
+  const hasValidateA11y = has(a11y, 'validate:a11y');
+  results.push({
+    label: 'A11y [8] Testing: npm run validate:a11y command present',
+    severity: hasValidateA11y ? 'pass' : 'error',
+    detail: hasValidateA11y ? undefined : 'Missing "npm run validate:a11y" command in Testing section',
+  });
+
+  const hasManualChecklist = has(a11y, 'VoiceOver') || has(a11y, 'NVDA') || has(a11y, 'screen reader');
+  results.push({
+    label: 'A11y [8] Testing: manual testing tools mentioned (VoiceOver/NVDA)',
+    severity: hasManualChecklist ? 'pass' : 'warning',
+    detail: hasManualChecklist ? undefined : 'Missing manual testing tool references (VoiceOver, NVDA) in Testing',
+  });
+
+  // ── 9. Resources ──────────────────────────────────────────────────────────
+  const hasResH2 = has(a11y, '<h2>Resources</h2>');
+  results.push({
+    label: 'A11y [9] Resources: <h2> heading',
+    severity: hasResH2 ? 'pass' : 'error',
+    detail: hasResH2 ? undefined : 'Missing <h2>Resources</h2>',
+  });
+
+  const externalLinkCount = countMatches(a11y, /href="https?:\/\//);
+  results.push({
+    label: `A11y [9] Resources: external links present (${externalLinkCount} found, need ≥2)`,
+    severity: externalLinkCount >= 2 ? 'pass' : 'error',
+    detail: externalLinkCount < 2
+      ? 'Expected ≥2 external links (ARIA spec, WebAIM, etc.) in Resources section'
+      : undefined,
+  });
+
+  const hasW3c = has(a11y, 'w3.org') || has(a11y, 'w3c.org') || has(a11y, 'ARIA');
+  results.push({
+    label: 'A11y [9] Resources: W3C/ARIA spec link',
+    severity: hasW3c ? 'pass' : 'warning',
+    detail: hasW3c ? undefined : 'Missing W3C ARIA specification link in Resources',
+  });
+
+  const hasContrastTool = has(a11y, 'webaim') || has(a11y, 'WebAIM') || has(a11y, 'contrast') && has(a11y, 'href');
+  results.push({
+    label: 'A11y [9] Resources: contrast checker tool link',
+    severity: hasContrastTool ? 'pass' : 'warning',
+    detail: hasContrastTool ? undefined : 'Missing contrast checker tool link (WebAIM) in Resources',
   });
 
   return results;
