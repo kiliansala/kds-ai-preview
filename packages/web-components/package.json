@@ -39,6 +39,7 @@
     "fix:docs:input-field": "tsx ../../scripts/fix-docs-page.ts input-field",
     "validate:all": "npm run validate && npm run validate:a11y",
     "build": "npm run copy:tokens && npm run validate:all && vite build && rm -f tsconfig.tsbuildinfo && tsc --emitDeclarationOnly --declarationDir dist",
+    "build:docs": "npm run copy:tokens && vite build --config vite.docs.config.ts",
     "preview": "vite preview",
     "analyze": "wca analyze 'src/**/*.ts' --outFile custom-elements.json"
   },
