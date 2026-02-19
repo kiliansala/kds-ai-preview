@@ -1,0 +1,82 @@
+@*
+    @package @kds/blazor
+    @component KdsBadge
+    @description Blazor component wrapper for kds-badge web component
+*@
+
+@namespace Kds.Blazor.Components
+@inject IJSRuntime JS
+
+<kds-badge
+    @ref="badgeElement"
+    size="@Size"
+    color="@Color"
+    icon="@Icon"
+    aria-label="@AriaLabel">
+    @ChildContent
+</kds-badge>
+
+@code {
+    private ElementReference badgeElement;
+    private DotNetObjectReference<KdsBadge>? objRef;
+
+    /// <summary>
+    /// Badge size
+    /// </summary>
+    [Parameter]
+    public string Size { get; set; } = "sm";
+
+    /// <summary>
+    /// Badge color variant
+    /// </summary>
+    [Parameter]
+    public string Color { get; set; } = "primary";
+
+    /// <summary>
+    /// Badge icon variant
+    /// </summary>
+    [Parameter]
+    public string Icon { get; set; } = "false";
+
+    /// <summary>
+    /// ARIA label for accessibility
+    /// </summary>
+    [Parameter]
+    public string? AriaLabel { get; set; }
+
+    /// <summary>
+    /// Child content (badge text)
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Event callback when badge dismiss button is clicked
+    /// </summary>
+    [Parameter]
+    public EventCallback OnDismiss { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("KdsBlazor.attachBadgeListener", badgeElement, objRef);
+        }
+    }
+
+    [JSInvokable]
+    public async Task HandleBadgeDismiss()
+    {
+        await OnDismiss.InvokeAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (objRef != null)
+        {
+            await JS.InvokeVoidAsync("KdsBlazor.detachBadgeListener", badgeElement);
+            objRef.Dispose();
+        }
+    }
+}

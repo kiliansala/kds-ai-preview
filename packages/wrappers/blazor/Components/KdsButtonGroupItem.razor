@@ -1,0 +1,89 @@
+@*
+    @package @kds/blazor
+    @component KdsButtonGroupItem
+    @description Blazor component wrapper for kds-button-group-item web component
+*@
+
+@namespace Kds.Blazor.Components
+@inject IJSRuntime JS
+
+<kds-button-group-item
+    @ref="itemElement"
+    selected="@(Selected ? "" : null)"
+    icon="@Icon"
+    disabled="@(Disabled ? "" : null)"
+    value="@Value"
+    aria-label="@AriaLabel">
+    @ChildContent
+</kds-button-group-item>
+
+@code {
+    private ElementReference itemElement;
+    private DotNetObjectReference<KdsButtonGroupItem>? objRef;
+
+    /// <summary>
+    /// Whether this item is selected
+    /// </summary>
+    [Parameter]
+    public bool Selected { get; set; } = false;
+
+    /// <summary>
+    /// Icon variant
+    /// </summary>
+    [Parameter]
+    public string Icon { get; set; } = "none";
+
+    /// <summary>
+    /// Whether the item is disabled
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    /// <summary>
+    /// Value for selection tracking
+    /// </summary>
+    [Parameter]
+    public string? Value { get; set; }
+
+    /// <summary>
+    /// ARIA label (required for icon-only)
+    /// </summary>
+    [Parameter]
+    public string? AriaLabel { get; set; }
+
+    /// <summary>
+    /// Child content
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Event callback when the item is clicked
+    /// </summary>
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("KdsBlazor.attachButtonGroupItemListener", itemElement, objRef);
+        }
+    }
+
+    [JSInvokable]
+    public async Task HandleButtonGroupItemClick()
+    {
+        await OnClick.InvokeAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (objRef != null)
+        {
+            await JS.InvokeVoidAsync("KdsBlazor.detachButtonGroupItemListener", itemElement);
+            objRef.Dispose();
+        }
+    }
+}

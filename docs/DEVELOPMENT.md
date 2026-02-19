@@ -1,53 +1,53 @@
 # Development Guide
 
-> Guía de desarrollo y tooling para KDS AI Preview
+> Development guide and tooling for KDS AI Preview
 
-## Filosofía
+## Philosophy
 
-Este proyecto usa **Figma como Single Source of Truth (SSOT)**. Los componentes LIT implementan exactamente las propiedades definidas en Figma mediante:
+This project uses **Figma as Single Source of Truth (SSOT)**. LIT components implement exactly the properties defined in Figma through:
 
-1. **Extracción vía Claude CLI** → Ver [.figma/README.md](../.figma/README.md)
-2. **Contratos de diseño** (JSON + TypeScript)
-3. **Validación automática** en build process
+1. **Extraction via Claude CLI** -> See [.figma/README.md](../.figma/README.md)
+2. **Design contracts** (JSON + TypeScript)
+3. **Automated validation** in the build process
 
 ---
 
 ## Quick Start
 
 ```bash
-# Instalar dependencias
+# Install dependencies
 npm install
 
 # Build all packages
 npm run build
 
-# Dev mode (documentación interactiva)
+# Dev mode (interactive documentation)
 npm run dev --workspace=@kds/web-components
-# Abre http://localhost:5173
+# Opens http://localhost:5173
 
-# Validaciones
+# Validations
 npm run validate:button
 npm run validate:checkbox
 ```
 
 ---
 
-## Workflow: Nuevo Componente
+## Workflow: New Component
 
-### 1. Extracción desde Figma
+### 1. Extraction from Figma
 
-Ver proceso completo en [.figma/README.md](../.figma/README.md)
+See full process in [.figma/README.md](../.figma/README.md)
 
-**Resumen**:
-1. Seleccionar componente en Figma Desktop (Dev Mode)
-2. Ejecutar en Claude CLI: `get_design_context`
-3. Pasar output a Claude Code
+**Summary**:
+1. Select component in Figma Desktop (Dev Mode)
+2. Run in Claude CLI: `get_design_context`
+3. Pass output to Claude Code
 
-### 2. Crear Contratos
+### 2. Create Contracts
 
-Crear dos archivos:
+Create two files:
 
-**`.figma/<component>.figma-contract.json`** - Schema JSON
+**`.figma/<component>.figma-contract.json`** - JSON Schema
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -61,7 +61,7 @@ Crear dos archivos:
 }
 ```
 
-**`.figma/<component>.figma-contract.ts`** - Tipos TypeScript
+**`.figma/<component>.figma-contract.ts`** - TypeScript Types
 ```typescript
 export type ComponentSize = 'sm' | 'md' | 'lg';
 
@@ -74,7 +74,7 @@ export const FIGMA_COMPONENT_CONTRACT = { ... };
 
 **Templates**: `.figma/button.figma-contract.{json,ts}`
 
-### 3. Implementar LIT Component
+### 3. Implement LIT Component
 
 ```typescript
 // packages/web-components/src/components/kds-component.ts
@@ -91,25 +91,25 @@ export class KdsComponent extends LitElement {
 }
 ```
 
-### 4. Crear Script de Validación
+### 4. Create Validation Script
 
 ```bash
-# Copiar template
+# Copy template
 cp scripts/validate-button-contract.ts scripts/validate-component-contract.ts
 
-# Actualizar imports y lógica específica
+# Update imports and component-specific logic
 ```
 
-### 5. Crear Script de Validación A11y
+### 5. Create A11y Validation Script
 
 ```bash
-# Copiar template
+# Copy template
 cp scripts/validate-button-a11y.ts scripts/validate-component-a11y.ts
 
-# Actualizar validaciones específicas
+# Update component-specific validations
 ```
 
-### 6. Integrar en Build
+### 6. Integrate in Build
 
 ```json
 // packages/web-components/package.json
@@ -159,18 +159,18 @@ export class KdsComponentComponent { }
 }
 ```
 
-### 8. Documentación Interactiva
+### 8. Interactive Documentation
 
-Actualizar `packages/web-components/index.html` con:
-- Playground con controles
-- Variants del componente
+Update `packages/web-components/index.html` with:
+- Playground with controls
+- Component variants
 - Usage (tabs: Web Component, React, Angular, Blazor)
-- API completa (Properties, Events, Slots)
-- Accesibilidad (WCAG 2.1 AA)
+- Complete API (Properties, Events, Slots)
+- Accessibility (WCAG 2.1 AA)
 
 ---
 
-## Scripts Disponibles
+## Available Scripts
 
 ### Build
 
@@ -185,24 +185,24 @@ npm run build --workspace=@kds/react
 npm run build --workspace=@kds/angular
 ```
 
-### Validación
+### Validation
 
 ```bash
-# Validar contrato
+# Validate contract
 npm run validate:button
 npm run validate:checkbox
 
-# Validar accesibilidad
+# Validate accessibility
 npm run validate:a11y --workspace=@kds/web-components
 
-# Validar todo
+# Validate all
 npm run validate:all --workspace=@kds/web-components
 ```
 
 ### Development
 
 ```bash
-# Dev mode con live reload
+# Dev mode with live reload
 npm run dev --workspace=@kds/web-components
 
 # Clean
@@ -211,18 +211,18 @@ npm run clean
 
 ---
 
-## Estructura de Archivos
+## File Structure
 
 ```
 /
 ├── .figma/
-│   ├── README.md                          # Proceso extracción Figma
-│   ├── {component}.figma-contract.json    # Schema de propiedades
-│   └── {component}.figma-contract.ts      # Tipos TypeScript
+│   ├── README.md                          # Figma extraction process
+│   ├── {component}.figma-contract.json    # Property schema
+│   └── {component}.figma-contract.ts      # TypeScript types
 │
 ├── scripts/
-│   ├── validate-{component}-contract.ts   # Validación Figma ↔ Código
-│   └── validate-{component}-a11y.ts       # Validación accesibilidad
+│   ├── validate-{component}-contract.ts   # Figma-to-Code validation
+│   └── validate-{component}-a11y.ts       # Accessibility validation
 │
 ├── packages/
 │   ├── tokens/                            # Design tokens (DTCG)
@@ -233,53 +233,53 @@ npm run clean
 │       └── blazor/                        # Blazor wrappers
 │
 └── examples/
-    ├── react/                             # Ejemplo React
-    ├── angular/                           # Ejemplo Angular
-    └── blazor/                            # Ejemplo Blazor
+    ├── react/                             # React example
+    ├── angular/                           # Angular example
+    └── blazor/                            # Blazor example
 ```
 
 ---
 
 ## Build Process
 
-**Orden de build** (automático con npm workspaces):
+**Build order** (automatic with npm workspaces):
 
 1. `@kds/tokens` - Design tokens
-2. `@kds/web-components` - LIT components (**incluye validaciones**)
+2. `@kds/web-components` - LIT components (**includes validations**)
 3. `@kds/react` - React wrappers
 4. `@kds/angular` - Angular wrappers
-5. `@kds/blazor` - Blazor wrappers (sin build)
+5. `@kds/blazor` - Blazor wrappers (no build)
 
-**Build de web-components ejecuta**:
+**Web-components build runs**:
 ```bash
-npm run validate      # Contrato Figma
-npm run validate:a11y # Accesibilidad
+npm run validate      # Figma contract
+npm run validate:a11y # Accessibility
 vite build           # Bundle
 tsc --emitDeclarationOnly # Types
 ```
 
-Si cualquier validación falla → build falla.
+If any validation fails -> build fails.
 
 ---
 
-## Validación de Contratos
+## Contract Validation
 
-### Propósito
+### Purpose
 
-Garantizar 100% fidelidad entre Figma (SSOT) y código.
+Guarantee 100% fidelity between Figma (SSOT) and code.
 
-### Qué valida
+### What It Validates
 
-- ✅ Todas las propiedades de Figma existen en el código
-- ✅ Valores permitidos coinciden exactamente
-- ✅ Valores por defecto son idénticos
-- ✅ Tipos de datos correctos
+- All Figma properties exist in the code
+- Allowed values match exactly
+- Default values are identical
+- Data types are correct
 
-### Propiedades Web-Specific
+### Web-Specific Properties
 
-Propiedades que **no existen en Figma** pero son necesarias para web (ej: `disabled`, `type`, `ariaLabel`) son **aceptables** y no causan errores.
+Properties that **don't exist in Figma** but are necessary for web (e.g.: `disabled`, `type`, `ariaLabel`) are **acceptable** and do not cause errors.
 
-Marcarlas claramente en el código:
+Mark them clearly in the code:
 
 ```typescript
 /**
@@ -291,24 +291,24 @@ type: 'button' | 'submit' | 'reset' = 'button';
 
 ---
 
-## Validación de Accesibilidad
+## Accessibility Validation
 
-Ver guía completa en [ACCESSIBILITY.md](ACCESSIBILITY.md)
+See full guide in [ACCESSIBILITY.md](ACCESSIBILITY.md)
 
-### Checks Automáticos
+### Automated Checks
 
-- ✅ Atributos ARIA correctos
-- ✅ Soporte de teclado (Enter, Space, Tab)
-- ✅ Indicadores de foco (:focus-visible)
-- ✅ Touch targets (mínimo 44x44px)
-- ✅ Estado disabled
-- ⚠️ Contraste de color (verificación manual)
+- Correct ARIA attributes
+- Keyboard support (Enter, Space, Tab)
+- Focus indicators (:focus-visible)
+- Touch targets (minimum 44x44px)
+- Disabled state
+- Color contrast (manual verification)
 
-### Testing Manual Requerido
+### Required Manual Testing
 
 1. **Screen readers** - VoiceOver (macOS) / NVDA (Windows)
-2. **Keyboard-only** - Probar sin mouse
-3. **Zoom** - Verificar a 200%
+2. **Keyboard-only** - Test without mouse
+3. **Zoom** - Verify at 200%
 4. **Contrast** - WebAIM Contrast Checker
 
 ---
@@ -326,14 +326,14 @@ npm run build
 ### Validation Failures
 
 ```bash
-# Ver detalles
+# See details
 tsx scripts/validate-component-contract.ts
 ```
 
-**Fixes comunes**:
-- Verificar nombres de propiedades coinciden con Figma
-- Verificar valores por defecto
-- Verificar valores permitidos
+**Common fixes**:
+- Verify property names match Figma
+- Verify default values
+- Verify allowed values
 
 ### TypeScript Declarations Missing
 
@@ -344,15 +344,15 @@ npx tsc --emitDeclarationOnly
 
 ---
 
-## Referencias
+## References
 
 - **Templates**: `.figma/button.figma-contract.{json,ts}`, `scripts/validate-button-*.ts`
-- **Ejemplos completos**: `examples/{react,angular,blazor}/`
-- **Extracción Figma**: [.figma/README.md](../.figma/README.md)
-- **Arquitectura**: [ARCHITECTURE.md](ARCHITECTURE.md)
-- **Accesibilidad**: [ACCESSIBILITY.md](ACCESSIBILITY.md)
-- **Progreso**: [../ROADMAP.md](../ROADMAP.md)
+- **Full examples**: `examples/{react,angular,blazor}/`
+- **Figma extraction**: [.figma/README.md](../.figma/README.md)
+- **Architecture**: [ARCHITECTURE.md](ARCHITECTURE.md)
+- **Accessibility**: [ACCESSIBILITY.md](ACCESSIBILITY.md)
+- **Progress**: [../ROADMAP.md](../ROADMAP.md)
 
 ---
 
-*Última actualización: 2026-02-11*
+*Last updated: 2026-02-11*

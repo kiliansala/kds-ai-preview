@@ -22,11 +22,14 @@ export { KdsButtonComponent } from './button.component';
 export { KdsCheckboxComponent } from './checkbox.component';
 export { KdsToggleComponent } from './toggle.component';
 export { KdsTooltipComponent } from './tooltip.component';
+export { KdsBadgeComponent } from './badge.component';
+export { KdsButtonGroupComponent, KdsButtonGroupItemComponent } from './button-group.component';
+export { KdsInputFieldComponent } from './input-field.component';
 
 // Export module (for non-standalone apps)
 export { KdsButtonModule } from './button.module';
 
 // Re-export types from web-components
-export type { ButtonSize, ButtonHierarchy, IconPosition, CheckboxSize, ToggleSize, TooltipTheme, TooltipArrow } from '@kds/web-components';
+export type { ButtonSize, ButtonHierarchy, IconPosition, CheckboxSize, ToggleSize, TooltipTheme, TooltipArrow, BadgeSize, BadgeColor, BadgeIcon, ButtonGroupItemIcon, InputFieldType } from '@kds/web-components';
 
 export const version = '0.1.0';

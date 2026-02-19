@@ -1,0 +1,158 @@
+{
+  "title": "Badge Component Contract",
+  "description": "Contract extracted from Figma Untitled UI Badge component. This defines all required properties that the LIT component must implement.",
+  "source": {
+    "figmaFileId": "CICp1MWc31lkvjX3jYo1rj",
+    "componentId": "1046:3819",
+    "componentName": "Badge",
+    "extractedAt": "2026-02-18T00:00:00Z",
+    "mcp": "figma-desktop",
+    "notes": "Extracted via Figma Desktop MCP get_metadata + get_variable_defs + get_screenshot on frame 1046:3819"
+  },
+  "properties": {
+    "size": {
+      "description": "Badge size variant",
+      "type": "enum",
+      "required": true,
+      "values": ["sm", "md", "lg"],
+      "default": "sm",
+      "figmaProperty": "Size",
+      "measurements": {
+        "sm": {
+          "height": "22px",
+          "font": "Text xs/Medium (12px/18px, weight 500)"
+        },
+        "md": {
+          "height": "24px",
+          "font": "Text sm/Medium (14px/20px, weight 500)"
+        },
+        "lg": {
+          "height": "28px",
+          "font": "Text sm/Medium (14px/20px, weight 500)"
+        }
+      },
+      "notes": "Size determines badge height, padding, and typography scale"
+    },
+    "color": {
+      "description": "Badge color variant",
+      "type": "enum",
+      "required": true,
+      "values": ["gray", "primary", "error", "warning", "success", "blue-gray", "blue-light", "blue", "indigo", "purple", "pink", "rose", "orange"],
+      "default": "primary",
+      "figmaProperty": "Color",
+      "notes": "Color determines background (/50 token), text (/700 token), and accent (/500 token for dot/icon-only)"
+    },
+    "icon": {
+      "description": "Icon variant of the badge",
+      "type": "enum",
+      "required": true,
+      "values": ["false", "dot", "country", "avatar", "x-close", "icon-right", "icon-left", "only"],
+      "default": "false",
+      "figmaProperty": "Icon",
+      "notes": "Controls what icon/element appears alongside or instead of the text label"
+    }
+  },
+  "mappings": {
+    "figmaToCode": {
+      "size": {
+        "sm": "sm",
+        "md": "md",
+        "lg": "lg"
+      },
+      "color": {
+        "Gray": "gray",
+        "Primary": "primary",
+        "Error": "error",
+        "Warning": "warning",
+        "Success": "success",
+        "Blue gray": "blue-gray",
+        "Blue light": "blue-light",
+        "Blue": "blue",
+        "Indigo": "indigo",
+        "Purple": "purple",
+        "Pink": "pink",
+        "Rosé": "rose",
+        "Orange": "orange"
+      },
+      "icon": {
+        "False": "false (text only)",
+        "Dot": "dot (colored circle indicator left of text)",
+        "Country": "country (flag icon left of text)",
+        "Avatar": "avatar (circular avatar left of text)",
+        "X close": "x-close (close button right of text)",
+        "Icon right": "icon-right (icon slot right of text)",
+        "Icon left": "icon-left (icon slot left of text)",
+        "Only": "only (icon only, no text)"
+      }
+    }
+  },
+  "designTokens": {
+    "colors": {
+      "gray": { "bg": "#F5F5F5", "text": "#414651", "accent": "#717680" },
+      "primary": { "bg": "#F9F5FF", "text": "#6941C6", "accent": "#9E77ED" },
+      "error": { "bg": "#FEF3F2", "text": "#B42318", "accent": "#F04438" },
+      "warning": { "bg": "#FFFAEB", "text": "#B54708", "accent": "#F79009" },
+      "success": { "bg": "#ECFDF3", "text": "#027A48", "accent": "#12B76A" },
+      "blue-gray": { "bg": "#F8F9FC", "text": "#363F72", "accent": "#4E5BA6" },
+      "blue-light": { "bg": "#F0F9FF", "text": "#026AA2", "accent": "#0BA5EC" },
+      "blue": { "bg": "#EFF8FF", "text": "#175CD3", "accent": "#2E90FA" },
+      "indigo": { "bg": "#EEF4FF", "text": "#3538CD", "accent": "#6172F3" },
+      "purple": { "bg": "#F4F3FF", "text": "#5925DC", "accent": "#7A5AF8" },
+      "pink": { "bg": "#FDF2FA", "text": "#C11574", "accent": "#EE46BC" },
+      "rose": { "bg": "#FFF1F3", "text": "#C01048", "accent": "#F63D68" },
+      "orange": { "bg": "#FFF6ED", "text": "#C4320A", "accent": "#EF6820" }
+    },
+    "typography": {
+      "sm": "Inter Medium, 12px/18px (weight 500)",
+      "md": "Inter Medium, 14px/20px (weight 500)",
+      "lg": "Inter Medium, 14px/20px (weight 500)"
+    },
+    "spacing": {
+      "sm": { "paddingX": "8px", "paddingY": "2px", "gap": "4px" },
+      "md": { "paddingX": "10px", "paddingY": "2px", "gap": "5px" },
+      "lg": { "paddingX": "12px", "paddingY": "4px", "gap": "6px" }
+    },
+    "borderRadius": "full (9999px)"
+  },
+  "validation": {
+    "requiredProps": ["size", "color", "icon"],
+    "optionalProps": ["dismissible", "ariaLabel"],
+    "notes": [
+      "Badge is primarily a display component (no interactive states like hover/focus in Figma)",
+      "The x-close variant adds a dismiss button, which is the only interactive element",
+      "Icon variants use slotted content for custom icons, country flags, and avatars",
+      "The 'only' icon variant renders just an icon without text",
+      "All Figma component properties must have corresponding LIT component @property decorators",
+      "Additional web-specific props (ariaLabel) are acceptable and not in Figma"
+    ]
+  },
+  "_extraction_status": {
+    "status": "COMPLETE",
+    "extractedAt": "2026-02-18T00:00:00Z",
+    "extractedBy": "Figma MCP Desktop Server",
+    "dataSource": "get_metadata + get_variable_defs + get_screenshot on frame 1046:3819",
+    "verified": true,
+    "variantsAnalyzed": [
+      "1046:3818 (Size=sm, Icon=False, Color=Primary)",
+      "1046:3820 (Size=md, Icon=False, Color=Primary)",
+      "1046:3826 (Size=lg, Icon=False, Color=Primary)",
+      "1046:3860 (Size=sm, Icon=Dot, Color=Primary)",
+      "1046:3974 (Size=sm, Icon=X close, Color=Primary)",
+      "1046:8483 (Size=sm, Icon=Icon right, Color=Primary)",
+      "1224:713 (Size=sm, Icon=Icon left, Color=Primary)",
+      "1240:163028 (Size=sm, Icon=Only, Color=Primary)",
+      "1046:4173 (Size=sm, Icon=False, Color=Gray)",
+      "1046:4365 (Size=sm, Icon=False, Color=Error)",
+      "1046:4559 (Size=sm, Icon=False, Color=Warning)",
+      "1046:4847 (Size=sm, Icon=False, Color=Success)"
+    ],
+    "notes": [
+      "All property values extracted from Figma metadata and variable definitions",
+      "13 color variants x 3 sizes x 8 icon variants = 312 total variants in Figma",
+      "Design tokens documented per color variant (bg /50, text /700, accent /500)",
+      "Typography specifications confirmed for all sizes",
+      "Pill shape with full border-radius confirmed via screenshots",
+      "Note: get_design_context returned empty for this component; extraction done via metadata + variable_defs + screenshots"
+    ]
+  }
+}

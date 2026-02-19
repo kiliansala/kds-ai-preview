@@ -1,0 +1,26 @@
+@*
+    @package @kds/blazor
+    @component KdsButtonGroup
+    @description Blazor component wrapper for kds-button-group web component
+*@
+
+@namespace Kds.Blazor.Components
+
+<kds-button-group
+    aria-label="@AriaLabel">
+    @ChildContent
+</kds-button-group>
+
+@code {
+    /// <summary>
+    /// ARIA label for the group
+    /// </summary>
+    [Parameter]
+    public string? AriaLabel { get; set; }
+
+    /// <summary>
+    /// Child content (KdsButtonGroupItem children)
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

@@ -1,115 +1,115 @@
 # KDS AI Preview - Architecture & Flow
 
-> Documentación completa del flujo end-to-end: Figma → Design System → Framework Wrappers
+> Complete end-to-end flow documentation: Figma -> Design System -> Framework Wrappers
 
-**Última actualización**: 2026-02-10
+**Last updated**: 2026-02-10
 
-## 📋 Índice
+## Table of Contents
 
 - [Overview](#overview)
-- [Arquitectura del Sistema](#arquitectura-del-sistema)
-- [Flujo de Trabajo](#flujo-de-trabajo)
-- [Componentes del Sistema](#componentes-del-sistema)
-- [Validación y Calidad](#validación-y-calidad)
+- [System Architecture](#system-architecture)
+- [Workflow](#workflow)
+- [System Components](#system-components)
+- [Validation and Quality](#validation-and-quality)
 - [Framework Wrappers](#framework-wrappers)
-- [Decisiones Técnicas](#decisiones-técnicas)
+- [Technical Decisions](#technical-decisions)
 
 ---
 
 ## Overview
 
-Este proyecto es un **Proof of Concept (PoC)** que demuestra cómo construir un Design System automatizado usando:
+This project is a **Proof of Concept (PoC)** demonstrating how to build an automated Design System using:
 
-- **Figma como Single Source of Truth (SSOT)**
-- **Model Context Protocol (MCP)** para extracción automática
-- **LIT 3.x** para web components
-- **DTCG** (Design Tokens Community Group) para tokens
-- **Framework wrappers** para React, Angular y Blazor
+- **Figma as Single Source of Truth (SSOT)**
+- **Model Context Protocol (MCP)** for automated extraction
+- **LIT 3.x** for web components
+- **DTCG** (Design Tokens Community Group) for tokens
+- **Framework wrappers** for React, Angular, and Blazor
 
-### Filosofía: Button-First
+### Philosophy: Button-First
 
-Completar **TODO** el flujo con el componente Button antes de escalar a otros componentes. El Button sirve como **template reutilizable** para Input, Checkbox, Radio, etc.
-
----
-
-## Arquitectura del Sistema
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         FIGMA (SSOT)                            │
-│                    Untitled UI v2.0 (FREE)                      │
-│                                                                 │
-│  • Component Properties (size, hierarchy, iconPosition)        │
-│  • Design Variables (colors, typography, shadows)              │
-│  • Visual Design (spacing, border-radius)                      │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         │ MCP (Model Context Protocol)
-                         │ • get_design_context
-                         │ • get_variable_defs
-                         │ • SSE Transport
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    EXTRACTION & CONTRACTS                       │
-│                                                                 │
-│  .figma/button.figma-contract.json                            │
-│  .figma/button.figma-contract.ts                              │
-│  scripts/validate-button-contract.ts                          │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         │ TypeScript Interfaces
-                         │ Contract Validation
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      DESIGN TOKENS                              │
-│                   packages/tokens/                              │
-│                                                                 │
-│  • tokens.json (DTCG format, 90+ tokens)                      │
-│  • tokens.css (CSS custom properties)                          │
-│  • index.ts (TypeScript exports)                               │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         │ CSS Variables
-                         │ Token Consumption
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    WEB COMPONENTS (LIT)                         │
-│                packages/web-components/                         │
-│                                                                 │
-│  kds-button.ts                                                 │
-│  • @customElement('kds-button')                                │
-│  • @property decorators                                        │
-│  • CSS with var(--kds-*)                                       │
-│  • Validated against Figma contract                            │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-           ┌─────────────┼─────────────┐
-           │             │             │
-           ▼             ▼             ▼
-┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-│   REACT      │ │   ANGULAR    │ │   BLAZOR     │
-│   WRAPPER    │ │   WRAPPER    │ │   WRAPPER    │
-│              │ │              │ │              │
-│ Button.tsx   │ │ button.comp. │ │ KdsButton.   │
-│              │ │              │ │ razor        │
-│ forwardRef   │ │ Standalone   │ │ JSInterop    │
-│ Events       │ │ Module       │ │ EventCallback│
-└──────────────┘ └──────────────┘ └──────────────┘
-```
+Complete the **entire** flow with the Button component before scaling to other components. Button serves as a **reusable template** for Input, Checkbox, Radio, etc.
 
 ---
 
-## Flujo de Trabajo
+## System Architecture
 
-### 1. Extracción desde Figma (MCP)
+```
++---------------------------------------------------------------+
+|                         FIGMA (SSOT)                           |
+|                    Untitled UI v2.0 (FREE)                     |
+|                                                                |
+|  - Component Properties (size, hierarchy, iconPosition)        |
+|  - Design Variables (colors, typography, shadows)              |
+|  - Visual Design (spacing, border-radius)                      |
++----------------------------+----------------------------------+
+                             |
+                             | MCP (Model Context Protocol)
+                             | - get_design_context
+                             | - get_variable_defs
+                             | - SSE Transport
+                             v
++---------------------------------------------------------------+
+|                    EXTRACTION & CONTRACTS                       |
+|                                                                |
+|  .figma/button.figma-contract.json                            |
+|  .figma/button.figma-contract.ts                              |
+|  scripts/validate-button-contract.ts                          |
++----------------------------+----------------------------------+
+                             |
+                             | TypeScript Interfaces
+                             | Contract Validation
+                             v
++---------------------------------------------------------------+
+|                      DESIGN TOKENS                             |
+|                   packages/tokens/                             |
+|                                                                |
+|  - tokens.json (DTCG format, 90+ tokens)                     |
+|  - tokens.css (CSS custom properties)                         |
+|  - index.ts (TypeScript exports)                              |
++----------------------------+----------------------------------+
+                             |
+                             | CSS Variables
+                             | Token Consumption
+                             v
++---------------------------------------------------------------+
+|                    WEB COMPONENTS (LIT)                        |
+|                packages/web-components/                        |
+|                                                                |
+|  kds-button.ts                                                |
+|  - @customElement('kds-button')                               |
+|  - @property decorators                                       |
+|  - CSS with var(--kds-*)                                      |
+|  - Validated against Figma contract                           |
++----------------------------+----------------------------------+
+                             |
+           +-----------------+-----------------+
+           |                 |                 |
+           v                 v                 v
++----------------+ +----------------+ +----------------+
+|   REACT        | |   ANGULAR      | |   BLAZOR       |
+|   WRAPPER      | |   WRAPPER      | |   WRAPPER      |
+|                | |                | |                |
+| Button.tsx     | | button.comp.   | | KdsButton.     |
+|                | |                | | razor          |
+| forwardRef     | | Standalone     | | JSInterop      |
+| Events         | | Module         | | EventCallback  |
++----------------+ +----------------+ +----------------+
+```
 
-**Herramientas MCP disponibles:**
-- `get_design_context` → Propiedades del componente
-- `get_variable_defs` → Variables de diseño (colors, typography, shadows)
-- `get_screenshot` → Capturas visuales
-- `get_code_connect_map` → Mapeo componente ↔ código
+---
 
-**Ejemplo de extracción:**
+## Workflow
+
+### 1. Extraction from Figma (MCP)
+
+**Available MCP tools:**
+- `get_design_context` -> Component properties
+- `get_variable_defs` -> Design variables (colors, typography, shadows)
+- `get_screenshot` -> Visual captures
+- `get_code_connect_map` -> Component-to-code mapping
+
+**Extraction example:**
 ```bash
 # MCP tool call
 mcp__figma-desktop__get_design_context({ nodeId: "1038:34411" })
@@ -119,27 +119,27 @@ mcp__figma-desktop__get_variable_defs({ nodeId: "1038:34411" })
 # Output: Colors, typography, shadows
 ```
 
-**Resultado:**
-- `.figma/button.figma-contract.json` (90 líneas, JSON schema)
-- `.figma/button.figma-contract.ts` (150 líneas, TypeScript interfaces)
+**Result:**
+- `.figma/button.figma-contract.json` (90 lines, JSON schema)
+- `.figma/button.figma-contract.ts` (150 lines, TypeScript interfaces)
 
-### 2. Validación de Contrato
+### 2. Contract Validation
 
 **Script:** `scripts/validate-button-contract.ts`
 
-Valida que el componente LIT implementa **100%** las propiedades del contrato Figma:
+Validates that the LIT component implements **100%** of the Figma contract properties:
 
 ```typescript
-// Extrae propiedades del componente LIT via regex
+// Extract LIT component properties via regex
 const componentProperties = extractComponentProperties('kds-button.ts');
 
-// Compara contra contrato Figma
+// Compare against Figma contract
 const errors = validateProperties(componentProperties, FIGMA_CONTRACT);
 
-// ✅ PASSED: Component matches Figma contract (SSOT)
+// PASSED: Component matches Figma contract (SSOT)
 ```
 
-**Integrado en build:**
+**Integrated in build:**
 ```json
 "scripts": {
   "build": "npm run validate && vite build && tsc --emitDeclarationOnly"
@@ -148,15 +148,15 @@ const errors = validateProperties(componentProperties, FIGMA_CONTRACT);
 
 ### 3. Design Tokens (DTCG)
 
-**Extracción:** Variables de Figma → `tokens.json`
+**Extraction:** Figma variables -> `tokens.json`
 
-**Organización por categorías:**
-- `color`: Brand, Error, Gray, Success (90+ valores)
+**Organization by category:**
+- `color`: Brand, Error, Gray, Success (90+ values)
 - `typography`: Font family, size, weight, line-height
 - `shadow`: Base shadows + focus rings
 - `component.button`: Spacing, border-radius, heights
 
-**Generación de CSS:**
+**CSS generation:**
 ```css
 :root {
   --kds-color-brand-600: #7F56D9;
@@ -165,7 +165,7 @@ const errors = validateProperties(componentProperties, FIGMA_CONTRACT);
 }
 ```
 
-**Consumo en LIT:**
+**Consumption in LIT:**
 ```css
 button {
   background-color: var(--kds-color-brand-600, #7F56D9);
@@ -175,16 +175,16 @@ button {
 
 ### 4. Web Component (LIT)
 
-**Archivo:** `packages/web-components/src/components/kds-button.ts`
+**File:** `packages/web-components/src/components/kds-button.ts`
 
-**Características:**
+**Features:**
 - Custom element: `<kds-button>`
-- Propiedades reactivas con `@property`
-- Tipos TypeScript: `ButtonSize`, `ButtonHierarchy`, `IconPosition`
-- Eventos custom: `kds-button-click`
-- Slots para contenido: `<slot>`, `<slot name="icon">`
+- Reactive properties with `@property`
+- TypeScript types: `ButtonSize`, `ButtonHierarchy`, `IconPosition`
+- Custom events: `kds-button-click`
+- Slots for content: `<slot>`, `<slot name="icon">`
 
-**Ejemplo:**
+**Example:**
 ```html
 <kds-button
   size="lg"
@@ -200,12 +200,12 @@ button {
 ### 5. Framework Wrappers
 
 #### React Wrapper
-**Archivo:** `packages/wrappers/react/src/Button.tsx`
+**File:** `packages/wrappers/react/src/Button.tsx`
 
-- `forwardRef` para refs
-- `useEffect` para event listeners
-- Props idiomáticas React
-- TypeScript completo
+- `forwardRef` for refs
+- `useEffect` for event listeners
+- Idiomatic React props
+- Full TypeScript support
 
 ```tsx
 <Button
@@ -218,12 +218,12 @@ button {
 ```
 
 #### Angular Wrapper
-**Archivos:**
+**Files:**
 - `packages/wrappers/angular/src/button.component.ts` (Standalone)
 - `packages/wrappers/angular/src/button.module.ts` (Module)
 
 - `CUSTOM_ELEMENTS_SCHEMA`
-- `@ViewChild` para elemento nativo
+- `@ViewChild` for native element
 - `@Input`/`@Output` decorators
 - Lifecycle hooks
 
@@ -237,14 +237,14 @@ button {
 ```
 
 #### Blazor Wrapper
-**Archivos:**
+**Files:**
 - `packages/wrappers/blazor/Components/KdsButton.razor`
 - `packages/wrappers/blazor/wwwroot/kds-blazor.js`
 
 - JavaScript Interop (`IJSRuntime`)
-- `DotNetObjectReference` para callbacks
-- `IAsyncDisposable` para cleanup
-- `[Parameter]` y `EventCallback`
+- `DotNetObjectReference` for callbacks
+- `IAsyncDisposable` for cleanup
+- `[Parameter]` and `EventCallback`
 
 ```razor
 <KdsButton
@@ -257,12 +257,12 @@ button {
 
 ---
 
-## Componentes del Sistema
+## System Components
 
 ### Packages
 
 #### 1. `@kds/tokens`
-**Propósito:** Design tokens en formato DTCG
+**Purpose:** Design tokens in DTCG format
 
 **Output:**
 - `dist/tokens.json` (6KB)
@@ -276,21 +276,21 @@ import '@kds/tokens/css'; // CSS import
 ```
 
 #### 2. `@kds/web-components`
-**Propósito:** Web components con LIT
+**Purpose:** Web components with LIT
 
 **Output:**
 - `dist/index.js` (31KB)
 - `dist/index.d.ts` (TypeScript declarations)
-- Exports: `KdsButton`, tipos
+- Exports: `KdsButton`, types
 
-**Consumo:**
+**Usage:**
 ```typescript
 import { KdsButton } from '@kds/web-components';
 import '@kds/web-components/tokens.css';
 ```
 
 #### 3. `@kds/react`
-**Propósito:** React wrappers
+**Purpose:** React wrappers
 
 **Output:**
 - `dist/Button.js` + `.d.ts`
@@ -301,7 +301,7 @@ import '@kds/web-components/tokens.css';
 - Peer: `react@^18`, `react-dom@^18`
 
 #### 4. `@kds/angular`
-**Propósito:** Angular wrappers
+**Purpose:** Angular wrappers
 
 **Output:**
 - `dist/button.component.js` + `.d.ts`
@@ -313,57 +313,57 @@ import '@kds/web-components/tokens.css';
 - Peer: `@angular/core@^17`, `@angular/common@^17`
 
 #### 5. `@kds/blazor`
-**Propósito:** Blazor wrappers
+**Purpose:** Blazor wrappers
 
-**Contenido:**
+**Contents:**
 - `Components/KdsButton.razor`
 - `wwwroot/kds-blazor.js`
 - `README.md`
 
 ---
 
-## Validación y Calidad
+## Validation and Quality
 
 ### Contract Validation System
 
-**Objetivo:** Garantizar que el código implementa 100% el diseño de Figma.
+**Objective:** Guarantee that code implements 100% of the Figma design.
 
-**Flujo:**
-1. Extracción de propiedades desde Figma → Contract (JSON + TS)
-2. Parsing del componente LIT → Propiedades implementadas
-3. Comparación: Contract vs Implementation
-4. Build fails si hay discrepancias ❌
+**Flow:**
+1. Extract properties from Figma -> Contract (JSON + TS)
+2. Parse LIT component -> Implemented properties
+3. Comparison: Contract vs Implementation
+4. Build fails if there are discrepancies
 
-**Validaciones:**
-- ✅ Todas las propiedades requeridas presentes
-- ✅ Valores por defecto coinciden
-- ✅ Tipos correctos (ButtonSize, ButtonHierarchy, etc.)
-- ✅ Valores permitidos (enums) respetados
+**Validations:**
+- All required properties present
+- Default values match
+- Correct types (ButtonSize, ButtonHierarchy, etc.)
+- Allowed values (enums) respected
 
-**Output del build:**
+**Build output:**
 ```bash
-╔════════════════════════════════════════════════╗
-║  Button Component Contract Validation         ║
-╚════════════════════════════════════════════════╝
++================================================+
+|  Button Component Contract Validation          |
++================================================+
 
-✅ Checking required properties from Figma contract:
-  ✓ size: ButtonSize (default: md)
-  ✓ hierarchy: ButtonHierarchy (default: primary)
-  ✓ iconPosition: IconPosition (default: none)
-  ✓ destructive: inferred (default: false)
+Checking required properties from Figma contract:
+  - size: ButtonSize (default: md)
+  - hierarchy: ButtonHierarchy (default: primary)
+  - iconPosition: IconPosition (default: none)
+  - destructive: inferred (default: false)
 
-✅ VALIDATION PASSED
-╔════════════════════════════════════════════════╗
-║  SUCCESS: Component matches Figma contract ✓  ║
-╚════════════════════════════════════════════════╝
+VALIDATION PASSED
++================================================+
+|  SUCCESS: Component matches Figma contract     |
++================================================+
 ```
 
-### Tooling Reutilizable
+### Reusable Tooling
 
-**Scripts disponibles:**
+**Available scripts:**
 
 #### `extract-figma-contract.ts`
-Template para extraer contratos de nuevos componentes.
+Template for extracting contracts from new components.
 
 ```bash
 tsx scripts/extract-figma-contract.ts <component-name> <node-id>
@@ -371,7 +371,7 @@ tsx scripts/extract-figma-contract.ts <component-name> <node-id>
 ```
 
 #### `validate-button-contract.ts`
-Validación específica para Button (production-ready).
+Button-specific validation (production-ready).
 
 ```bash
 tsx scripts/validate-button-contract.ts
@@ -379,9 +379,9 @@ tsx scripts/validate-button-contract.ts
 ```
 
 #### `validate-component-contract.ts`
-Template genérico para validación (reference).
+Generic validation template (reference).
 
-**Documentación:** `.figma/TOOLING-GUIDE.md` (500+ líneas)
+**Documentation:** `.figma/TOOLING-GUIDE.md` (500+ lines)
 
 ---
 
@@ -391,97 +391,97 @@ Template genérico para validación (reference).
 
 **Approach:** HOC with `forwardRef`
 
-**Características:**
+**Features:**
 - Refs forwarding
 - Event handling via `addEventListener`
-- Props mapping 1:1
+- 1:1 props mapping
 - TypeScript types re-exported
 
 **Trade-offs:**
-- ✅ Idiomático para React
-- ✅ TypeScript completo
-- ⚠️ Necesita ref forwarding manual
+- Idiomatic for React
+- Full TypeScript support
+- Requires manual ref forwarding
 
 ### Angular
 
 **Approach:** Standalone Component + NgModule
 
-**Características:**
-- `CUSTOM_ELEMENTS_SCHEMA` para web components
-- `@ViewChild` para acceso al elemento
+**Features:**
+- `CUSTOM_ELEMENTS_SCHEMA` for web components
+- `@ViewChild` for element access
 - Property binding via `[attr.*]`
 - Event binding via `@Output`
 
 **Trade-offs:**
-- ✅ Soporta apps standalone y module-based
-- ✅ Lifecycle hooks para cleanup
-- ⚠️ Atributos string-based (no type-safety nativo)
+- Supports both standalone and module-based apps
+- Lifecycle hooks for cleanup
+- String-based attributes (no native type-safety)
 
 ### Blazor
 
 **Approach:** Razor Component + JS Interop
 
-**Características:**
-- JavaScript Interop para eventos
-- `DotNetObjectReference` para callbacks
-- `IAsyncDisposable` para cleanup
-- `[Parameter]` para props
+**Features:**
+- JavaScript Interop for events
+- `DotNetObjectReference` for callbacks
+- `IAsyncDisposable` for cleanup
+- `[Parameter]` for props
 
 **Trade-offs:**
-- ✅ API C# idiomática
-- ✅ EventCallback async
-- ⚠️ Requiere setup de JS module
+- Idiomatic C# API
+- Async EventCallback
+- Requires JS module setup
 
 ---
 
-## Decisiones Técnicas
+## Technical Decisions
 
-### 1. Figma como SSOT ✅
-**Razón:** Single source of truth garantiza consistencia diseño ↔ código.
+### 1. Figma as SSOT
+**Reason:** Single source of truth guarantees design-to-code consistency.
 
-**Alternativas consideradas:**
-- ❌ REST API: Rechazado (user requirement: "solo MCP")
-- ❌ Manual extraction: No escalable
+**Alternatives considered:**
+- REST API: Rejected (user requirement: "MCP only")
+- Manual extraction: Not scalable
 
-### 2. MCP para Extracción ✅
-**Razón:** Protocol estándar, soporte oficial Figma Desktop.
+### 2. MCP for Extraction
+**Reason:** Standard protocol, official Figma Desktop support.
 
-**Ventajas:**
+**Advantages:**
 - Server-Sent Events (SSE) transport
-- Tools tipados (TypeScript)
-- Integrado en Claude Code
+- Typed tools (TypeScript)
+- Integrated in Claude Code
 
-### 3. LIT para Web Components ✅
-**Razón:** Liviano, estándar, framework-agnostic.
+### 3. LIT for Web Components
+**Reason:** Lightweight, standards-based, framework-agnostic.
 
-**Alternativas consideradas:**
-- ❌ Stencil: Más pesado, build complejo
-- ❌ Native Custom Elements: Sin reactivity
+**Alternatives considered:**
+- Stencil: Heavier, complex build
+- Native Custom Elements: No reactivity
 
-### 4. DTCG para Tokens ✅
-**Razón:** Especificación estándar, JSON + CSS generation.
+### 4. DTCG for Tokens
+**Reason:** Standard specification, JSON + CSS generation.
 
-**Ventajas:**
-- Format community-driven
+**Advantages:**
+- Community-driven format
 - Tooling ecosystem
-- JSON Schema validation (opcional)
+- JSON Schema validation (optional)
 
-### 5. Button-First Strategy ✅
-**Razón:** Template completo antes de escalar.
+### 5. Button-First Strategy
+**Reason:** Complete template before scaling.
 
-**Ventajas:**
-- Todas las decisiones técnicas tomadas
-- Tooling probado y documentado
-- Copy-paste approach para nuevos componentes
+**Advantages:**
+- All technical decisions made
+- Tooling tested and documented
+- Copy-paste approach for new components
 
 ---
 
-## Métricas del Proyecto
+## Project Metrics
 
-### Líneas de Código
+### Lines of Code
 
-| Package | Archivos | LOC (aprox) |
-|---------|----------|-------------|
+| Package | Files | LOC (approx) |
+|---------|-------|---------------|
 | tokens | 4 | 250 |
 | web-components | 3 | 450 |
 | react wrapper | 3 | 200 |
@@ -490,12 +490,12 @@ Template genérico para validación (reference).
 | scripts | 3 | 700 |
 | **Total** | **21** | **~2000** |
 
-### Tokens Extraídos
+### Extracted Tokens
 
-- Colors: 35 valores (Brand, Error, Gray, Success)
+- Colors: 35 values (Brand, Error, Gray, Success)
 - Typography: 2 text styles (sm, md)
-- Shadows: 4 definiciones
-- Component tokens: 15 valores (Button-specific)
+- Shadows: 4 definitions
+- Component tokens: 15 values (Button-specific)
 
 **Total: 90+ tokens**
 
@@ -506,38 +506,38 @@ Template genérico para validación (reference).
 - `@kds/react/dist`: 10KB (JS + declarations)
 - `@kds/angular/dist`: 13KB (JS + declarations)
 
-**Total: ~120KB** (sin comprimir, con source maps)
+**Total: ~120KB** (uncompressed, with source maps)
 
 ---
 
-## Próximos Pasos (Post-PoC)
+## Next Steps (Post-PoC)
 
-### Escalado a Más Componentes
+### Scaling to More Components
 
 1. **Input component**
-   - Copiar tooling de Button
-   - Extraer contract via MCP
-   - Implementar en LIT
-   - Crear wrappers
+   - Copy Button tooling
+   - Extract contract via MCP
+   - Implement in LIT
+   - Create wrappers
 
 2. **Checkbox, Radio**
-   - Mismo flujo
-   - Reutilizar validation scripts
+   - Same flow
+   - Reuse validation scripts
 
 3. **Select, Modal, etc.**
-   - Componentes más complejos
-   - Ajustar tooling según necesidad
+   - More complex components
+   - Adjust tooling as needed
 
-### Mejoras al Sistema
+### System Improvements
 
-- **Automatización completa:** Script que ejecute todo el flujo
-- **Visual regression testing:** Comparar capturas Figma vs rendered
-- **Storybook:** Documentación interactiva
-- **CI/CD:** Validación automática en PRs
+- **Full automation:** Script that executes the entire flow
+- **Visual regression testing:** Compare Figma captures vs rendered
+- **Storybook:** Interactive documentation
+- **CI/CD:** Automated validation in PRs
 
 ---
 
-## Referencias
+## References
 
 - **Figma Source:** Untitled UI v2.0 (FREE)
 - **MCP Server:** Figma Desktop (http://127.0.0.1:3845/mcp)
@@ -547,4 +547,4 @@ Template genérico para validación (reference).
 
 ---
 
-*Última revisión: 2026-02-10 | Mantenido por: Kilian Sala*
+*Last revision: 2026-02-10 | Maintained by: Kilian Sala*

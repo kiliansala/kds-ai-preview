@@ -409,6 +409,32 @@ body {
   box-shadow: var(--kds-shadow-focus-ring-brand, 0 0 0 4px rgba(127, 86, 217, 0.12));
 }
 
+.docs-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--kds-color-gray-300, #D0D5DD);
+  border-radius: 8px;
+  background: white;
+  font-size: var(--kds-typography-fontSize-sm, 14px);
+  color: var(--kds-color-gray-900, #101828);
+  transition: border-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.docs-input::placeholder {
+  color: var(--kds-color-gray-400, #98A2B3);
+}
+
+.docs-input:hover {
+  border-color: var(--kds-color-gray-400, #98A2B3);
+}
+
+.docs-input:focus {
+  outline: none;
+  border-color: var(--kds-color-brand-600, #7F56D9);
+  box-shadow: var(--kds-shadow-focus-ring-brand, 0 0 0 4px rgba(127, 86, 217, 0.12));
+}
+
 .docs-checkbox {
   display: flex;
   align-items: center;

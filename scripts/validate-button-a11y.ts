@@ -126,8 +126,8 @@ function checkColorContrast(): void {
     return;
   }
 
-  const tokensContent = fs.readFileSync(tokensPath, 'utf-8');
-  const tokens = JSON.parse(tokensContent);
+  // Verify tokens file is parseable
+  JSON.parse(fs.readFileSync(tokensPath, 'utf-8'));
 
   // Manual contrast checks based on WCAG 2.1 AA (4.5:1 for normal text, 3:1 for large text)
   console.log('  ℹ️  Color combinations to verify manually:');

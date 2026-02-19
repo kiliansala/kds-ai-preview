@@ -16,6 +16,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "experimentalDecorators": true,
+    "jsx": "react-jsx",
     "useDefineForClassFields": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

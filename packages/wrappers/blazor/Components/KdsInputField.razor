@@ -1,0 +1,140 @@
+@*
+    @package @kds/blazor
+    @component KdsInputField
+    @description Blazor component wrapper for kds-input-field web component
+*@
+
+@namespace Kds.Blazor.Components
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<kds-input-field
+    @ref="inputFieldElement"
+    type="@Type"
+    label="@Label"
+    hint="@Hint"
+    placeholder="@Placeholder"
+    name="@Name"
+    input-type="@InputType"
+    leading-text="@LeadingText"
+    destructive="@(Destructive ? "" : null)"
+    disabled="@(Disabled ? "" : null)"
+    leading-icon="@(LeadingIcon ? "" : null)"
+    help-icon="@(HelpIcon ? "" : null)"
+    required="@(Required ? "" : null)">
+    @LeadingIconContent
+    @LeadingDropdownContent
+    @TrailingDropdownContent
+</kds-input-field>
+
+@code {
+    private ElementReference inputFieldElement;
+    private DotNetObjectReference<KdsInputField>? objRef;
+
+    /// <summary>Visual variant. Default: "default".</summary>
+    [Parameter] public string Type { get; set; } = "default";
+
+    /// <summary>Label text above the input.</summary>
+    [Parameter] public string Label { get; set; } = "";
+
+    /// <summary>Helper/hint text below. In destructive state, styled as error message.</summary>
+    [Parameter] public string Hint { get; set; } = "";
+
+    /// <summary>Placeholder text for the native input.</summary>
+    [Parameter] public string Placeholder { get; set; } = "";
+
+    /// <summary>Current value (for programmatic updates).</summary>
+    [Parameter] public string Value { get; set; } = "";
+
+    /// <summary>HTML name attribute.</summary>
+    [Parameter] public string Name { get; set; } = "";
+
+    /// <summary>HTML input type (text, email, password, number…).</summary>
+    [Parameter] public string InputType { get; set; } = "text";
+
+    /// <summary>Text prefix for type="leading-text". E.g. "http://", "$".</summary>
+    [Parameter] public string LeadingText { get; set; } = "";
+
+    /// <summary>Error/destructive state. Red border + alert icon.</summary>
+    [Parameter] public bool Destructive { get; set; } = false;
+
+    /// <summary>Disabled state.</summary>
+    [Parameter] public bool Disabled { get; set; } = false;
+
+    /// <summary>Show leading icon slot.</summary>
+    [Parameter] public bool LeadingIcon { get; set; } = false;
+
+    /// <summary>Show help icon button on the right.</summary>
+    [Parameter] public bool HelpIcon { get; set; } = false;
+
+    /// <summary>HTML required attribute.</summary>
+    [Parameter] public bool Required { get; set; } = false;
+
+    /// <summary>Leading icon content (slot="leading-icon").</summary>
+    [Parameter] public RenderFragment? LeadingIconContent { get; set; }
+
+    /// <summary>Leading dropdown content (slot="leading-dropdown").</summary>
+    [Parameter] public RenderFragment? LeadingDropdownContent { get; set; }
+
+    /// <summary>Trailing dropdown content (slot="trailing-dropdown").</summary>
+    [Parameter] public RenderFragment? TrailingDropdownContent { get; set; }
+
+    /// <summary>Fired on every keystroke. Receives the new value.</summary>
+    [Parameter] public EventCallback<string> OnInput { get; set; }
+
+    /// <summary>Fired on blur after value change. Receives the new value.</summary>
+    [Parameter] public EventCallback<string> OnChange { get; set; }
+
+    /// <summary>Fired when the help icon is clicked.</summary>
+    [Parameter] public EventCallback OnHelpClick { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("KdsBlazor.attachInputFieldListeners", inputFieldElement, objRef);
+
+            if (!string.IsNullOrEmpty(Value))
+            {
+                await JS.InvokeVoidAsync("KdsBlazor.setInputFieldValue", inputFieldElement, Value);
+            }
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // Sync value changes after first render
+        if (objRef != null)
+        {
+            await JS.InvokeVoidAsync("KdsBlazor.setInputFieldValue", inputFieldElement, Value);
+        }
+    }
+
+    [JSInvokable]
+    public async Task HandleInput(string value)
+    {
+        await OnInput.InvokeAsync(value);
+    }
+
+    [JSInvokable]
+    public async Task HandleChange(string value)
+    {
+        await OnChange.InvokeAsync(value);
+    }
+
+    [JSInvokable]
+    public async Task HandleHelpClick()
+    {
+        await OnHelpClick.InvokeAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (objRef != null)
+        {
+            await JS.InvokeVoidAsync("KdsBlazor.detachInputFieldListeners", inputFieldElement);
+            objRef.Dispose();
+        }
+    }
+}

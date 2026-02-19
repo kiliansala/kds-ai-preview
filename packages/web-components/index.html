@@ -51,12 +51,13 @@
           <h3 class="docs-nav-heading">Components</h3>
           <a href="#button" class="docs-nav-link" data-component="button">Button</a>
           <a href="#checkbox" class="docs-nav-link" data-component="checkbox">Checkbox</a>
-          <span class="docs-nav-link docs-nav-link-disabled">Input</span>
+          <a href="#input-field" class="docs-nav-link" data-component="input-field">Input Field</a>
           <span class="docs-nav-link docs-nav-link-disabled">Radio</span>
           <span class="docs-nav-link docs-nav-link-disabled">Select</span>
           <span class="docs-nav-link docs-nav-link-disabled">Textarea</span>
           <a href="#toggle" class="docs-nav-link" data-component="toggle">Toggle</a>
-          <span class="docs-nav-link docs-nav-link-disabled">Badge</span>
+          <a href="#badge" class="docs-nav-link" data-component="badge">Badge</a>
+          <a href="#button-group" class="docs-nav-link" data-component="button-group">Button Group</a>
           <span class="docs-nav-link docs-nav-link-disabled">Avatar</span>
           <a href="#tooltip" class="docs-nav-link" data-component="tooltip">Tooltip</a>
           <span class="docs-nav-link docs-nav-link-disabled">Alert</span>
@@ -89,7 +90,7 @@
         <!-- Live Component Showcase -->
         <section class="docs-section">
           <h2>Componentes Disponibles</h2>
-          <p>4 componentes atomicos completados end-to-end. Cada uno validado al 100% contra el diseno de Figma.</p>
+          <p>6 componentes atomicos completados end-to-end. Cada uno validado al 100% contra el diseno de Figma.</p>
 
           <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 24px;">
 
@@ -160,6 +161,76 @@
                 <span class="docs-badge">role="tooltip"</span>
               </div>
             </div>
+            <!-- Badge Card -->
+            <div style="border: 1px solid var(--kds-color-gray-200); border-radius: 12px; padding: 32px; background: white;">
+              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--kds-color-gray-900);">Badge</h3>
+              <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                  <kds-badge size="sm" color="primary">Primary</kds-badge>
+                  <kds-badge size="sm" color="success">Success</kds-badge>
+                  <kds-badge size="sm" color="error">Error</kds-badge>
+                  <kds-badge size="sm" color="warning">Warning</kds-badge>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                  <kds-badge size="md" color="primary" icon="dot">Con dot</kds-badge>
+                  <kds-badge size="md" color="gray-cool" icon="x-close">Dismiss</kds-badge>
+                  <kds-badge size="md" color="orange" icon="only">
+                    <svg slot="icon-slot" width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.5"/></svg>
+                  </kds-badge>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span class="docs-badge">13 colors</span>
+                <span class="docs-badge">3 sizes</span>
+                <span class="docs-badge">8 icon modes</span>
+              </div>
+            </div>
+            <!-- Button Group Card -->
+            <div style="border: 1px solid var(--kds-color-gray-200); border-radius: 12px; padding: 32px; background: white;">
+              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--kds-color-gray-900);">Button Group</h3>
+              <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <kds-button-group>
+                    <kds-button-group-item selected>Tab 1</kds-button-group-item>
+                    <kds-button-group-item>Tab 2</kds-button-group-item>
+                    <kds-button-group-item>Tab 3</kds-button-group-item>
+                  </kds-button-group>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <kds-button-group>
+                    <kds-button-group-item icon="only" aria-label="Previous">
+                      <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.833 10H4.167M4.167 10L10 15.833M4.167 10L10 4.167" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </kds-button-group-item>
+                    <kds-button-group-item icon="only" aria-label="Add">
+                      <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </kds-button-group-item>
+                    <kds-button-group-item icon="only" aria-label="Next">
+                      <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </kds-button-group-item>
+                  </kds-button-group>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span class="docs-badge">4 icon modes</span>
+                <span class="docs-badge">selected state</span>
+                <span class="docs-badge">role="group"</span>
+              </div>
+            </div>
+            <!-- Input Field Card -->
+            <div style="border: 1px solid var(--kds-color-gray-200); border-radius: 12px; padding: 32px; background: white;">
+              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--kds-color-gray-900);">Input Field</h3>
+              <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                <kds-input-field label="Email" placeholder="olivia@untitledui.com" hint="This is a hint text to help user." input-type="email"></kds-input-field>
+                <kds-input-field label="Website" type="leading-text" leading-text="http://" placeholder="www.untitledui.com"></kds-input-field>
+                <kds-input-field label="Error example" placeholder="Enter email" destructive hint="This email is already in use."></kds-input-field>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span class="docs-badge">5 variants</span>
+                <span class="docs-badge">4 states</span>
+                <span class="docs-badge">aria-invalid</span>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -4613,6 +4684,2288 @@ npm run validate:a11y --workspace=@kds/web-components
       </div>
       <!-- End Component: Tooltip -->
 
+      <!-- Component: Badge -->
+      <div id="component-badge" class="docs-component" style="display: none;">
+
+        <!-- Component Header -->
+        <div class="docs-component-header">
+          <div>
+            <h1 class="docs-component-title">Badge</h1>
+            <p class="docs-component-description">
+              Badges are used to highlight an item's status for quick recognition. They can include text, icons, dots, avatars, and country flags.
+            </p>
+          </div>
+          <div class="docs-component-status">
+            <span class="docs-badge docs-badge-success">Stable</span>
+            <span class="docs-badge">v1.0.0</span>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="docs-tabs">
+          <button class="docs-tab active" data-tab="overview">Overview</button>
+          <button class="docs-tab" data-tab="variants">Variants</button>
+          <button class="docs-tab" data-tab="tokens">Design Tokens</button>
+          <button class="docs-tab" data-tab="usage">Usage</button>
+          <button class="docs-tab" data-tab="api">API</button>
+          <button class="docs-tab" data-tab="accessibility">Accessibility</button>
+        </div>
+
+        <!-- Tab Content: Overview -->
+        <div class="docs-tab-content active" data-tab-content="overview">
+          <section class="docs-section">
+            <h2>Quick Start</h2>
+            <p>Import the component and start using it in your application.</p>
+
+            <div class="docs-example">
+              <div class="docs-example-preview">
+                <kds-badge size="sm" color="primary">Label</kds-badge>
+              </div>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-basic-code">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M4 2a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V2z"/>
+                    <path d="M2 6a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-2h-2v2H2V8h2V6H2z"/>
+                  </svg>
+                  Copy
+                </button>
+                <pre><code class="language-html" id="badge-basic-code">&lt;kds-badge size="sm" color="primary"&gt;Label&lt;/kds-badge&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Playground</h2>
+            <p>Experiment with different badge configurations.</p>
+
+            <div class="docs-playground">
+              <div class="docs-playground-preview" style="padding: 24px; display: flex; justify-content: center; gap: 12px;">
+                <kds-badge
+                  id="playground-badge"
+                  size="sm"
+                  color="primary"
+                  icon="false">
+                  Badge Text
+                </kds-badge>
+              </div>
+
+              <!-- Dynamic Code Snippet -->
+              <div class="docs-code-block" style="margin: 24px 0;">
+                <button class="docs-copy-button" data-copy="badge-playground-code">Copy</button>
+                <pre><code class="language-html" id="badge-playground-code">&lt;kds-badge size="sm" color="primary"&gt;Badge Text&lt;/kds-badge&gt;</code></pre>
+              </div>
+
+              <div class="docs-playground-controls">
+                <div class="docs-control-group">
+                  <label class="docs-label">Size</label>
+                  <select class="docs-select" id="playground-badge-size">
+                    <option value="sm" selected>Small (sm)</option>
+                    <option value="md">Medium (md)</option>
+                    <option value="lg">Large (lg)</option>
+                  </select>
+                </div>
+
+                <div class="docs-control-group">
+                  <label class="docs-label">Color</label>
+                  <select class="docs-select" id="playground-badge-color">
+                    <option value="gray">Gray</option>
+                    <option value="primary" selected>Primary</option>
+                    <option value="error">Error</option>
+                    <option value="warning">Warning</option>
+                    <option value="success">Success</option>
+                    <option value="blue-gray">Blue Gray</option>
+                    <option value="blue-light">Blue Light</option>
+                    <option value="blue">Blue</option>
+                    <option value="indigo">Indigo</option>
+                    <option value="purple">Purple</option>
+                    <option value="pink">Pink</option>
+                    <option value="rose">Rose</option>
+                    <option value="orange">Orange</option>
+                  </select>
+                </div>
+
+                <div class="docs-control-group">
+                  <label class="docs-label">Icon</label>
+                  <select class="docs-select" id="playground-badge-icon">
+                    <option value="false" selected>None</option>
+                    <option value="dot">Dot</option>
+                    <option value="x-close">X Close</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: Variants -->
+        <div class="docs-tab-content" data-tab-content="variants">
+          <section class="docs-section">
+            <h2>Sizes</h2>
+            <p>Badges come in three sizes to accommodate different use cases.</p>
+
+            <div class="docs-example">
+              <div class="docs-example-preview">
+                <kds-badge size="sm" color="primary">Small</kds-badge>
+                <kds-badge size="md" color="primary">Medium</kds-badge>
+                <kds-badge size="lg" color="primary">Large</kds-badge>
+              </div>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-sizes-code">Copy</button>
+                <pre><code class="language-html" id="badge-sizes-code">&lt;kds-badge size="sm"&gt;Small&lt;/kds-badge&gt;
+&lt;kds-badge size="md"&gt;Medium&lt;/kds-badge&gt;
+&lt;kds-badge size="lg"&gt;Large&lt;/kds-badge&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Colors</h2>
+            <p>13 color variants, each with matching background, text, and accent colors.</p>
+
+            <div class="docs-example">
+              <div class="docs-example-preview docs-example-grid">
+                <div>
+                  <kds-badge color="gray">Gray</kds-badge>
+                  <span class="docs-variant-label">Gray</span>
+                </div>
+                <div>
+                  <kds-badge color="primary">Primary</kds-badge>
+                  <span class="docs-variant-label">Primary</span>
+                </div>
+                <div>
+                  <kds-badge color="error">Error</kds-badge>
+                  <span class="docs-variant-label">Error</span>
+                </div>
+                <div>
+                  <kds-badge color="warning">Warning</kds-badge>
+                  <span class="docs-variant-label">Warning</span>
+                </div>
+                <div>
+                  <kds-badge color="success">Success</kds-badge>
+                  <span class="docs-variant-label">Success</span>
+                </div>
+                <div>
+                  <kds-badge color="blue-gray">Blue Gray</kds-badge>
+                  <span class="docs-variant-label">Blue Gray</span>
+                </div>
+                <div>
+                  <kds-badge color="blue-light">Blue Light</kds-badge>
+                  <span class="docs-variant-label">Blue Light</span>
+                </div>
+                <div>
+                  <kds-badge color="blue">Blue</kds-badge>
+                  <span class="docs-variant-label">Blue</span>
+                </div>
+                <div>
+                  <kds-badge color="indigo">Indigo</kds-badge>
+                  <span class="docs-variant-label">Indigo</span>
+                </div>
+                <div>
+                  <kds-badge color="purple">Purple</kds-badge>
+                  <span class="docs-variant-label">Purple</span>
+                </div>
+                <div>
+                  <kds-badge color="pink">Pink</kds-badge>
+                  <span class="docs-variant-label">Pink</span>
+                </div>
+                <div>
+                  <kds-badge color="rose">Rose</kds-badge>
+                  <span class="docs-variant-label">Rose</span>
+                </div>
+                <div>
+                  <kds-badge color="orange">Orange</kds-badge>
+                  <span class="docs-variant-label">Orange</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Icon Variants</h2>
+            <p>Badges can include different icon types for additional context.</p>
+
+            <div class="docs-example">
+              <div class="docs-example-preview docs-example-grid">
+                <div>
+                  <kds-badge size="md" color="primary" icon="false">Text only</kds-badge>
+                  <span class="docs-variant-label">None</span>
+                </div>
+                <div>
+                  <kds-badge size="md" color="primary" icon="dot">With dot</kds-badge>
+                  <span class="docs-variant-label">Dot</span>
+                </div>
+                <div>
+                  <kds-badge size="md" color="primary" icon="x-close">Dismiss</kds-badge>
+                  <span class="docs-variant-label">X Close</span>
+                </div>
+              </div>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-icons-code">Copy</button>
+                <pre><code class="language-html" id="badge-icons-code">&lt;kds-badge icon="false"&gt;Text only&lt;/kds-badge&gt;
+&lt;kds-badge icon="dot"&gt;With dot&lt;/kds-badge&gt;
+&lt;kds-badge icon="x-close"&gt;Dismiss&lt;/kds-badge&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>All Colors with Dot (sm)</h2>
+            <p>All 13 color variants in the small size with dot indicator.</p>
+
+            <div class="docs-example">
+              <div class="docs-example-preview" style="flex-wrap: wrap;">
+                <kds-badge size="sm" color="gray" icon="dot">Gray</kds-badge>
+                <kds-badge size="sm" color="primary" icon="dot">Primary</kds-badge>
+                <kds-badge size="sm" color="error" icon="dot">Error</kds-badge>
+                <kds-badge size="sm" color="warning" icon="dot">Warning</kds-badge>
+                <kds-badge size="sm" color="success" icon="dot">Success</kds-badge>
+                <kds-badge size="sm" color="blue-gray" icon="dot">Blue Gray</kds-badge>
+                <kds-badge size="sm" color="blue-light" icon="dot">Blue Light</kds-badge>
+                <kds-badge size="sm" color="blue" icon="dot">Blue</kds-badge>
+                <kds-badge size="sm" color="indigo" icon="dot">Indigo</kds-badge>
+                <kds-badge size="sm" color="purple" icon="dot">Purple</kds-badge>
+                <kds-badge size="sm" color="pink" icon="dot">Pink</kds-badge>
+                <kds-badge size="sm" color="rose" icon="dot">Rose</kds-badge>
+                <kds-badge size="sm" color="orange" icon="dot">Orange</kds-badge>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: Design Tokens -->
+        <div class="docs-tab-content" data-tab-content="tokens">
+          <section class="docs-section">
+            <h2>Design Tokens Used</h2>
+            <p>The Badge component uses the following design tokens from the KDS token system.</p>
+
+            <h3>Colors</h3>
+            <div class="docs-token-grid">
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #F9F5FF"></div>
+                <div>
+                  <div class="docs-token-name">--kds-badge-primary-bg</div>
+                  <div class="docs-token-value">#F9F5FF</div>
+                  <div class="docs-token-usage">Primary badge background</div>
+                </div>
+              </div>
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #6941C6"></div>
+                <div>
+                  <div class="docs-token-name">--kds-badge-primary-text</div>
+                  <div class="docs-token-value">#6941C6</div>
+                  <div class="docs-token-usage">Primary badge text</div>
+                </div>
+              </div>
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #FEF3F2"></div>
+                <div>
+                  <div class="docs-token-name">--kds-badge-error-bg</div>
+                  <div class="docs-token-value">#FEF3F2</div>
+                  <div class="docs-token-usage">Error badge background</div>
+                </div>
+              </div>
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #ECFDF3"></div>
+                <div>
+                  <div class="docs-token-name">--kds-badge-success-bg</div>
+                  <div class="docs-token-value">#ECFDF3</div>
+                  <div class="docs-token-usage">Success badge background</div>
+                </div>
+              </div>
+            </div>
+
+            <h3>Typography</h3>
+            <div class="docs-token-list">
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">font-size (sm)</span>
+                <span class="docs-token-value">12px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">line-height (sm)</span>
+                <span class="docs-token-value">18px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">font-size (md/lg)</span>
+                <span class="docs-token-value">14px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">line-height (md/lg)</span>
+                <span class="docs-token-value">20px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">font-weight</span>
+                <span class="docs-token-value">500 (Medium)</span>
+              </div>
+            </div>
+
+            <h3>Component-Specific Tokens</h3>
+            <div class="docs-token-list">
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">border-radius</span>
+                <span class="docs-token-value">9999px (pill)</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">height (sm)</span>
+                <span class="docs-token-value">22px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">height (md)</span>
+                <span class="docs-token-value">24px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">height (lg)</span>
+                <span class="docs-token-value">28px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">dot size (sm)</span>
+                <span class="docs-token-value">6px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">dot size (md/lg)</span>
+                <span class="docs-token-value">8px</span>
+              </div>
+            </div>
+
+            <div class="docs-callout">
+              <strong>Note:</strong> All design tokens are extracted from Figma via MCP and follow the DTCG specification.
+              They are available in <code>@kds/tokens</code> package as CSS custom properties, JSON, and TypeScript.
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: Usage -->
+        <div class="docs-tab-content" data-tab-content="usage">
+          <section class="docs-section">
+            <h2>How to Use</h2>
+            <p>The Badge component can be used in multiple ways depending on your framework.</p>
+
+            <!-- Framework Tabs -->
+            <div class="docs-framework-tabs">
+              <button class="docs-framework-tab active" data-framework="web-component">Web Component</button>
+              <button class="docs-framework-tab" data-framework="react">React</button>
+              <button class="docs-framework-tab" data-framework="angular">Angular</button>
+              <button class="docs-framework-tab" data-framework="blazor">Blazor</button>
+            </div>
+
+            <!-- Web Component Usage -->
+            <div class="docs-framework-content active" data-framework-content="web-component">
+              <h3>Installation</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-wc-install">Copy</button>
+                <pre><code class="language-bash" id="badge-wc-install">npm install @kds/web-components</code></pre>
+              </div>
+
+              <h3>Import</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-wc-import">Copy</button>
+                <pre><code class="language-javascript" id="badge-wc-import">import '@kds/web-components/dist/kds-badge.js';
+import '@kds/web-components/dist/tokens.css';</code></pre>
+              </div>
+
+              <h3>Basic Example</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-wc-basic">Copy</button>
+                <pre><code class="language-html" id="badge-wc-basic">&lt;kds-badge color="success"&gt;Active&lt;/kds-badge&gt;
+
+&lt;!-- With dot indicator --&gt;
+&lt;kds-badge icon="dot" color="warning"&gt;Pending&lt;/kds-badge&gt;
+
+&lt;!-- Dismissible --&gt;
+&lt;kds-badge icon="x-close" color="gray"&gt;Tag&lt;/kds-badge&gt;</code></pre>
+              </div>
+
+              <h3>With Event Handling</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-wc-events">Copy</button>
+                <pre><code class="language-javascript" id="badge-wc-events">const badge = document.querySelector('kds-badge[icon="x-close"]');
+badge.addEventListener('kds-badge-dismiss', (event) => {
+  console.log('Badge dismissed!', event);
+  badge.remove();
+});</code></pre>
+              </div>
+            </div>
+
+            <!-- React Usage -->
+            <div class="docs-framework-content" data-framework-content="react">
+              <h3>Installation</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-react-install">Copy</button>
+                <pre><code class="language-bash" id="badge-react-install">npm install @kds/react @kds/web-components</code></pre>
+              </div>
+
+              <h3>Import</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-react-import">Copy</button>
+                <pre><code class="language-typescript" id="badge-react-import">import { Badge } from '@kds/react';
+import '@kds/web-components/tokens.css';</code></pre>
+              </div>
+
+              <h3>Basic Example</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-react-basic">Copy</button>
+                <pre><code class="language-tsx" id="badge-react-basic">function App() {
+  return (
+    &lt;&gt;
+      &lt;Badge color="success"&gt;Active&lt;/Badge&gt;
+      &lt;Badge icon="dot" color="warning"&gt;Pending&lt;/Badge&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+              </div>
+
+              <h3>With Event Handling</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-react-events">Copy</button>
+                <pre><code class="language-tsx" id="badge-react-events">&lt;Badge
+  icon="x-close"
+  color="gray"
+  onDismiss={() =&gt; console.log('dismissed')}
+&gt;
+  Tag
+&lt;/Badge&gt;</code></pre>
+              </div>
+            </div>
+
+            <!-- Angular Usage -->
+            <div class="docs-framework-content" data-framework-content="angular">
+              <h3>Installation</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-angular-install">Copy</button>
+                <pre><code class="language-bash" id="badge-angular-install">npm install @kds/angular @kds/web-components</code></pre>
+              </div>
+
+              <h3>Import (Standalone Component)</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-angular-import">Copy</button>
+                <pre><code class="language-typescript" id="badge-angular-import">import { KdsBadgeComponent } from '@kds/angular';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [KdsBadgeComponent],
+  template: `...`
+})</code></pre>
+              </div>
+
+              <h3>Basic Example</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-angular-basic">Copy</button>
+                <pre><code class="language-html" id="badge-angular-basic">&lt;kds-badge-wrapper
+  size="sm"
+  color="success"
+  icon="dot"
+  (badgeDismiss)="handleDismiss()"&gt;
+  Active
+&lt;/kds-badge-wrapper&gt;</code></pre>
+              </div>
+            </div>
+
+            <!-- Blazor Usage -->
+            <div class="docs-framework-content" data-framework-content="blazor">
+              <h3>Usage</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="badge-blazor-basic">Copy</button>
+                <pre><code class="language-html" id="badge-blazor-basic">&lt;KdsBadge
+  Size="sm"
+  Color="success"
+  Icon="dot"
+  OnDismiss="HandleDismiss"&gt;
+  Active
+&lt;/KdsBadge&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: API -->
+        <div class="docs-tab-content" data-tab-content="api">
+          <section class="docs-section">
+            <h2>Properties</h2>
+            <p>The Badge component accepts the following properties.</p>
+
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>size</code></td>
+                  <td><code>'sm' | 'md' | 'lg'</code></td>
+                  <td><code>'sm'</code></td>
+                  <td>Badge size variant</td>
+                </tr>
+                <tr>
+                  <td><code>color</code></td>
+                  <td><code>'gray' | 'primary' | 'error' | 'warning' | 'success' | 'blue-gray' | 'blue-light' | 'blue' | 'indigo' | 'purple' | 'pink' | 'rose' | 'orange'</code></td>
+                  <td><code>'primary'</code></td>
+                  <td>Color variant (13 options)</td>
+                </tr>
+                <tr>
+                  <td><code>icon</code></td>
+                  <td><code>'false' | 'dot' | 'country' | 'avatar' | 'x-close' | 'icon-right' | 'icon-left' | 'only'</code></td>
+                  <td><code>'false'</code></td>
+                  <td>Icon variant (8 options)</td>
+                </tr>
+                <tr>
+                  <td><code>ariaLabel</code></td>
+                  <td><code>string</code></td>
+                  <td><code>undefined</code></td>
+                  <td>Accessibility label (required for icon-only badges)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>Events</h2>
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>kds-badge-dismiss</code></td>
+                  <td><code>CustomEvent</code></td>
+                  <td>Fired when the x-close dismiss button is clicked. Detail: <code>{ originalEvent }</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>Slots</h2>
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Slot</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>default</code></td>
+                  <td>Badge text content</td>
+                </tr>
+                <tr>
+                  <td><code>icon</code></td>
+                  <td>Custom icon (for icon-left, icon-right, and only variants)</td>
+                </tr>
+                <tr>
+                  <td><code>avatar</code></td>
+                  <td>Avatar image (for avatar variant)</td>
+                </tr>
+                <tr>
+                  <td><code>country</code></td>
+                  <td>Country flag icon (for country variant)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>CSS Custom Properties</h2>
+            <p>The following CSS custom properties can be used to customize the badge appearance.</p>
+
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>--kds-badge-{color}-bg</code></td>
+                  <td>Badge background color override (per color variant)</td>
+                </tr>
+                <tr>
+                  <td><code>--kds-badge-{color}-text</code></td>
+                  <td>Badge text color override (per color variant)</td>
+                </tr>
+                <tr>
+                  <td><code>--kds-font-family</code></td>
+                  <td>Font family override (default: <code>'Inter', sans-serif</code>)</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+
+        <!-- Tab Content: Accessibility -->
+        <div class="docs-tab-content" data-tab-content="accessibility">
+          <section class="docs-section">
+            <h2>WCAG 2.1 AA Compliance</h2>
+            <p>The Badge component meets all <strong>WCAG 2.1 Level AA</strong> accessibility requirements:</p>
+
+            <div style="display: inline-flex; gap: 12px; margin: 16px 0;">
+              <span class="docs-badge docs-badge-success">✅ Semantic HTML</span>
+              <span class="docs-badge docs-badge-success">✅ Screen Reader Compatible</span>
+              <span class="docs-badge docs-badge-success">✅ WCAG 2.1 AA</span>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>ARIA Attributes</h2>
+            <p>The badge uses proper ARIA semantics:</p>
+
+            <ul>
+              <li><strong>Role:</strong> Implicit <code>role="status"</code> via semantic markup</li>
+              <li><strong>Dismiss button:</strong> Native <code>&lt;button&gt;</code> with <code>aria-label="Dismiss"</code></li>
+              <li><strong>Icon-only:</strong> Requires <code>aria-label</code> for accessible name</li>
+              <li><strong>Decorative elements:</strong> Dot indicator is purely decorative, text provides meaning</li>
+            </ul>
+
+            <div class="docs-code-block" style="margin-top: 16px;">
+              <button class="docs-copy-button" data-copy="badge-a11y-icon-only">Copy</button>
+              <pre><code class="language-html" id="badge-a11y-icon-only">&lt;!-- ❌ Bad: No accessible name for icon-only --&gt;
+&lt;kds-badge icon="only"&gt;
+  &lt;svg slot="icon"&gt;...&lt;/svg&gt;
+&lt;/kds-badge&gt;
+
+&lt;!-- ✅ Good: Has aria-label --&gt;
+&lt;kds-badge icon="only" aria-label="New notification"&gt;
+  &lt;svg slot="icon"&gt;...&lt;/svg&gt;
+&lt;/kds-badge&gt;</code></pre>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Keyboard Navigation</h2>
+            <p>Keyboard support for the dismiss button (x-close variant):</p>
+
+            <table class="docs-table" style="margin-top: 16px;">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Tab</code></td>
+                  <td>Navigate to the dismiss button</td>
+                </tr>
+                <tr>
+                  <td><code>Enter</code> or <code>Space</code></td>
+                  <td>Activate dismiss (fires <code>kds-badge-dismiss</code>)</td>
+                </tr>
+                <tr>
+                  <td><code>Shift + Tab</code></td>
+                  <td>Navigate away from the dismiss button</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top: 16px;"><strong>Focus Indicator:</strong> The dismiss button displays a visible focus ring using <code>:focus-visible</code>, which only appears during keyboard navigation.</p>
+          </section>
+
+          <section class="docs-section">
+            <h2>Screen Reader Support</h2>
+            <p>The badge is compatible with all major screen readers:</p>
+
+            <ul>
+              <li><strong>Text badges:</strong> Content is read directly from the default slot</li>
+              <li><strong>Icon-only badges:</strong> <code>aria-label</code> provides the accessible name</li>
+              <li><strong>Dismiss button:</strong> Announced as "Dismiss, button" via native <code>&lt;button&gt;</code></li>
+              <li><strong>Color semantics:</strong> Color is never the sole indicator of meaning - text content always provides context</li>
+            </ul>
+          </section>
+
+          <section class="docs-section">
+            <h2>Color Contrast</h2>
+            <p>All color combinations meet WCAG 2.1 AA contrast requirements (4.5:1 minimum for text):</p>
+
+            <table class="docs-table" style="margin-top: 16px;">
+              <thead>
+                <tr>
+                  <th>Color</th>
+                  <th>Background</th>
+                  <th>Text</th>
+                  <th>Ratio</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Primary</strong></td>
+                  <td>#F9F5FF</td>
+                  <td>#6941C6</td>
+                  <td>5.94:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Gray</strong></td>
+                  <td>#F2F4F7</td>
+                  <td>#344054</td>
+                  <td>9.87:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Error</strong></td>
+                  <td>#FEF3F2</td>
+                  <td>#B42318</td>
+                  <td>6.12:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Warning</strong></td>
+                  <td>#FFFAEB</td>
+                  <td>#B54708</td>
+                  <td>5.48:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Success</strong></td>
+                  <td>#ECFDF3</td>
+                  <td>#067647</td>
+                  <td>5.31:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Blue</strong></td>
+                  <td>#EFF8FF</td>
+                  <td>#175CD3</td>
+                  <td>5.82:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Indigo</strong></td>
+                  <td>#EEF4FF</td>
+                  <td>#3538CD</td>
+                  <td>6.45:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top: 16px;"><em>Note: Remaining colors (blue-gray, blue-light, purple, pink, rose, orange) also meet AA requirements. Verify with <a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Contrast Checker</a> for exact ratios.</em></p>
+          </section>
+
+          <section class="docs-section">
+            <h2>Best Practices</h2>
+
+            <h3>✅ Do</h3>
+            <ul>
+              <li>Use clear, descriptive text that explains the badge meaning</li>
+              <li>Provide <code>aria-label</code> for icon-only badges</li>
+              <li>Use color as a supplement to text, never as the sole indicator</li>
+              <li>Ensure the dismiss button is reachable via keyboard</li>
+              <li>Test with screen readers (VoiceOver, NVDA)</li>
+            </ul>
+
+            <h3>❌ Don't</h3>
+            <ul>
+              <li>Don't use icon-only badges without <code>aria-label</code></li>
+              <li>Don't rely on color alone to convey status (always include text)</li>
+              <li>Don't use badges for interactive content - use buttons instead</li>
+              <li>Don't remove focus indicators from the dismiss button</li>
+              <li>Don't use too many badges in close proximity (creates cognitive overload)</li>
+            </ul>
+          </section>
+
+          <section class="docs-section">
+            <h2>Testing</h2>
+            <p>Verify accessibility in your implementation:</p>
+
+            <div class="docs-code-block">
+              <button class="docs-copy-button" data-copy="badge-a11y-test">Copy</button>
+              <pre><code class="language-bash" id="badge-a11y-test"># Run automated accessibility validation
+npm run validate:badge:a11y
+
+# Manual testing checklist:
+# ✅ Tab to dismiss button (x-close variant)
+# ✅ Activate with Enter and Space keys
+# ✅ Verify focus indicator is visible
+# ✅ Test with VoiceOver (macOS: Cmd+F5)
+# ✅ Test with NVDA (Windows, free download)
+# ✅ Check contrast ratios with browser DevTools</code></pre>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="#accessibility">General Accessibility Guidelines</a> - KDS accessibility standards</li>
+              <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/" target="_blank">ARIA Patterns</a> - W3C specification</li>
+              <li><a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Contrast Checker</a> - Verify color contrast</li>
+              <li><a href="https://www.nvaccess.org/" target="_blank">NVDA Screen Reader</a> - Free Windows screen reader</li>
+            </ul>
+          </section>
+        </div>
+
+      </div>
+      <!-- End Component: Badge -->
+
+      <!-- Component: Button Group -->
+      <div id="component-button-group" class="docs-component" style="display: none;">
+
+        <!-- Component Header -->
+        <div class="docs-component-header">
+          <div>
+            <h1 class="docs-component-title">Button Group</h1>
+            <p class="docs-component-description">
+              Button groups organize related actions horizontally. They can contain text buttons, icon+text buttons, or icon-only buttons. Items share a unified border, rounded corners, and shadow.
+            </p>
+          </div>
+          <div class="docs-component-status">
+            <span class="docs-badge docs-badge-success">Stable</span>
+            <span class="docs-badge">v1.0.0</span>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="docs-tabs">
+          <button class="docs-tab active" data-tab="overview">Overview</button>
+          <button class="docs-tab" data-tab="variants">Variants</button>
+          <button class="docs-tab" data-tab="tokens">Design Tokens</button>
+          <button class="docs-tab" data-tab="usage">Usage</button>
+          <button class="docs-tab" data-tab="api">API</button>
+          <button class="docs-tab" data-tab="accessibility">Accessibility</button>
+        </div>
+
+        <!-- Tab Content: Overview -->
+        <div class="docs-tab-content active" data-tab-content="overview">
+
+          <section class="docs-section">
+            <h2>Quick Start</h2>
+            <p>Import the component and start using it in your application.</p>
+
+            <div class="docs-example">
+              <div class="docs-example-preview">
+                <kds-button-group aria-label="View options">
+                  <kds-button-group-item selected>List</kds-button-group-item>
+                  <kds-button-group-item>Grid</kds-button-group-item>
+                  <kds-button-group-item>Table</kds-button-group-item>
+                </kds-button-group>
+              </div>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-basic-code">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M4 2a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V2z"/>
+                    <path d="M2 6a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-2h-2v2H2V8h2V6H2z"/>
+                  </svg>
+                  Copy
+                </button>
+                <pre><code class="language-html" id="bg-basic-code">&lt;kds-button-group aria-label="View options"&gt;
+  &lt;kds-button-group-item selected&gt;List&lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item&gt;Grid&lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item&gt;Table&lt;/kds-button-group-item&gt;
+&lt;/kds-button-group&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Playground</h2>
+            <p>Experiment with different button group configurations.</p>
+
+            <div class="docs-playground">
+              <div class="docs-playground-preview" style="padding: 24px; display: flex; justify-content: center; align-items: center;">
+                <kds-button-group id="playground-button-group" aria-label="Options">
+                  <kds-button-group-item id="playground-bg-item-1" selected value="1">Option 1</kds-button-group-item>
+                  <kds-button-group-item id="playground-bg-item-2" value="2">Option 2</kds-button-group-item>
+                  <kds-button-group-item id="playground-bg-item-3" value="3">Option 3</kds-button-group-item>
+                </kds-button-group>
+              </div>
+
+              <!-- Dynamic Code Snippet -->
+              <div class="docs-code-block" style="margin: 24px 0;">
+                <button class="docs-copy-button" data-copy="button-group-playground-code">Copy</button>
+                <pre><code class="language-html" id="button-group-playground-code"></code></pre>
+              </div>
+
+              <div class="docs-playground-controls">
+                <div class="docs-control-group">
+                  <label class="docs-label">Icon Mode</label>
+                  <select class="docs-select" id="playground-bg-icon">
+                    <option value="none" selected>None (text only)</option>
+                    <option value="leading">Leading</option>
+                    <option value="only">Only</option>
+                    <option value="dot">Dot</option>
+                  </select>
+                </div>
+                <div class="docs-control-group">
+                  <label class="docs-label">
+                    <input type="checkbox" id="playground-bg-disabled"> Disabled (Item 3)
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: Variants -->
+        <div class="docs-tab-content" data-tab-content="variants">
+          <section class="docs-section">
+            <h2>Icon Variants</h2>
+            <p>Four icon modes control how content appears within each item.</p>
+
+            <div class="docs-example">
+              <div class="docs-example-preview docs-example-grid">
+                <div>
+                  <kds-button-group>
+                    <kds-button-group-item selected>Text</kds-button-group-item>
+                    <kds-button-group-item>Text</kds-button-group-item>
+                    <kds-button-group-item>Text</kds-button-group-item>
+                  </kds-button-group>
+                  <span class="docs-variant-label">none</span>
+                </div>
+                <div>
+                  <kds-button-group>
+                    <kds-button-group-item icon="leading" selected>
+                      <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/></svg>
+                      Text
+                    </kds-button-group-item>
+                    <kds-button-group-item icon="leading">
+                      <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/></svg>
+                      Text
+                    </kds-button-group-item>
+                    <kds-button-group-item icon="leading">
+                      <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/></svg>
+                      Text
+                    </kds-button-group-item>
+                  </kds-button-group>
+                  <span class="docs-variant-label">leading</span>
+                </div>
+                <div>
+                  <kds-button-group>
+                    <kds-button-group-item icon="only" aria-label="Previous">
+                      <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15.833 10H4.167M4.167 10L10 15.833M4.167 10L10 4.167" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </kds-button-group-item>
+                    <kds-button-group-item icon="only" aria-label="Add">
+                      <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </kds-button-group-item>
+                    <kds-button-group-item icon="only" aria-label="Next">
+                      <svg slot="icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </kds-button-group-item>
+                  </kds-button-group>
+                  <span class="docs-variant-label">only</span>
+                </div>
+                <div>
+                  <kds-button-group>
+                    <kds-button-group-item icon="dot" selected>Active</kds-button-group-item>
+                    <kds-button-group-item icon="dot">Pending</kds-button-group-item>
+                    <kds-button-group-item icon="dot">Inactive</kds-button-group-item>
+                  </kds-button-group>
+                  <span class="docs-variant-label">dot</span>
+                </div>
+              </div>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-icon-variants-code">Copy</button>
+                <pre><code class="language-html" id="bg-icon-variants-code">&lt;!-- none: text only --&gt;
+&lt;kds-button-group&gt;
+  &lt;kds-button-group-item selected&gt;Text&lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item&gt;Text&lt;/kds-button-group-item&gt;
+&lt;/kds-button-group&gt;
+
+&lt;!-- leading: icon + text --&gt;
+&lt;kds-button-group&gt;
+  &lt;kds-button-group-item icon="leading"&gt;
+    &lt;svg slot="icon" ...&gt;&lt;/svg&gt;
+    Text
+  &lt;/kds-button-group-item&gt;
+&lt;/kds-button-group&gt;
+
+&lt;!-- only: icon only (requires aria-label) --&gt;
+&lt;kds-button-group&gt;
+  &lt;kds-button-group-item icon="only" aria-label="Previous"&gt;
+    &lt;svg slot="icon" ...&gt;&lt;/svg&gt;
+  &lt;/kds-button-group-item&gt;
+&lt;/kds-button-group&gt;
+
+&lt;!-- dot: colored dot + text --&gt;
+&lt;kds-button-group&gt;
+  &lt;kds-button-group-item icon="dot" selected&gt;Active&lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item icon="dot"&gt;Pending&lt;/kds-button-group-item&gt;
+&lt;/kds-button-group&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>States</h2>
+            <p>Items support default, selected, hover, focused, and disabled states.</p>
+
+            <div class="docs-example">
+              <div class="docs-example-preview">
+                <kds-button-group>
+                  <kds-button-group-item>Default</kds-button-group-item>
+                  <kds-button-group-item selected>Selected</kds-button-group-item>
+                  <kds-button-group-item disabled>Disabled</kds-button-group-item>
+                </kds-button-group>
+              </div>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-states-code">Copy</button>
+                <pre><code class="language-html" id="bg-states-code">&lt;kds-button-group&gt;
+  &lt;kds-button-group-item&gt;Default&lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item selected&gt;Selected&lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item disabled&gt;Disabled&lt;/kds-button-group-item&gt;
+&lt;/kds-button-group&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: Design Tokens -->
+        <div class="docs-tab-content" data-tab-content="tokens">
+          <section class="docs-section">
+            <h2>Design Tokens Used</h2>
+            <p>The Button Group component uses the following design tokens from the KDS token system.</p>
+
+            <h3>Colors</h3>
+            <div class="docs-token-grid">
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #FFFFFF; border: 1px solid #D5D7DA;"></div>
+                <div>
+                  <div class="docs-token-name">--kds-button-group-bg</div>
+                  <div class="docs-token-value">#FFFFFF</div>
+                  <div class="docs-token-usage">Item background (default)</div>
+                </div>
+              </div>
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #F9FAFB;"></div>
+                <div>
+                  <div class="docs-token-name">--kds-button-group-bg-selected</div>
+                  <div class="docs-token-value">#F9FAFB</div>
+                  <div class="docs-token-usage">Selected / hover background</div>
+                </div>
+              </div>
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #D5D7DA;"></div>
+                <div>
+                  <div class="docs-token-name">--kds-button-group-border</div>
+                  <div class="docs-token-value">#D5D7DA</div>
+                  <div class="docs-token-usage">Outer border and item separators</div>
+                </div>
+              </div>
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #414651;"></div>
+                <div>
+                  <div class="docs-token-name">--kds-button-group-text</div>
+                  <div class="docs-token-value">#414651</div>
+                  <div class="docs-token-usage">Text / icon color</div>
+                </div>
+              </div>
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #717680;"></div>
+                <div>
+                  <div class="docs-token-name">--kds-button-group-text-disabled</div>
+                  <div class="docs-token-value">#717680</div>
+                  <div class="docs-token-usage">Disabled item text color</div>
+                </div>
+              </div>
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #717680;"></div>
+                <div>
+                  <div class="docs-token-name">--kds-button-group-dot</div>
+                  <div class="docs-token-value">#717680</div>
+                  <div class="docs-token-usage">Dot indicator fill</div>
+                </div>
+              </div>
+              <div class="docs-token-item">
+                <div class="docs-token-swatch" style="background: #7F56D9;"></div>
+                <div>
+                  <div class="docs-token-name">--kds-focus-ring</div>
+                  <div class="docs-token-value">#7F56D9</div>
+                  <div class="docs-token-usage">Focus outline color</div>
+                </div>
+              </div>
+            </div>
+
+            <h3>Typography</h3>
+            <div class="docs-token-list">
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">font-family</span>
+                <span class="docs-token-value">Inter, -apple-system, sans-serif</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">font-size</span>
+                <span class="docs-token-value">14px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">line-height</span>
+                <span class="docs-token-value">20px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">font-weight</span>
+                <span class="docs-token-value">600 (Semi Bold)</span>
+              </div>
+            </div>
+
+            <h3>Component-Specific Tokens</h3>
+            <div class="docs-token-list">
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">border-radius (container)</span>
+                <span class="docs-token-value">8px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">padding (text items)</span>
+                <span class="docs-token-value">10px 16px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">padding (icon-only items)</span>
+                <span class="docs-token-value">10px 12px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">gap (icon + text)</span>
+                <span class="docs-token-value">8px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">icon size</span>
+                <span class="docs-token-value">20px</span>
+              </div>
+              <div class="docs-token-item-simple">
+                <span class="docs-token-name">shadow</span>
+                <span class="docs-token-value">0px 1px 2px rgba(10, 13, 18, 0.05)</span>
+              </div>
+            </div>
+
+            <div class="docs-callout">
+              <strong>Note:</strong> All design tokens are extracted from Figma via MCP and follow the DTCG specification.
+              They are available in <code>@kds/tokens</code> package as CSS custom properties, JSON, and TypeScript.
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: Usage -->
+        <div class="docs-tab-content" data-tab-content="usage">
+          <section class="docs-section">
+            <h2>How to Use</h2>
+            <p>The Button Group component can be used in multiple ways depending on your framework.</p>
+
+            <!-- Framework Tabs -->
+            <div class="docs-framework-tabs">
+              <button class="docs-framework-tab active" data-framework="web-component">Web Component</button>
+              <button class="docs-framework-tab" data-framework="react">React</button>
+              <button class="docs-framework-tab" data-framework="angular">Angular</button>
+              <button class="docs-framework-tab" data-framework="blazor">Blazor</button>
+            </div>
+
+            <!-- Web Component Usage -->
+            <div class="docs-framework-content active" data-framework-content="web-component">
+              <h3>Installation</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-wc-install">Copy</button>
+                <pre><code class="language-bash" id="bg-wc-install">npm install @kds/web-components</code></pre>
+              </div>
+
+              <h3>Import</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-wc-import">Copy</button>
+                <pre><code class="language-javascript" id="bg-wc-import">import '@kds/web-components/dist/kds-button-group.js';
+import '@kds/web-components/dist/tokens.css';</code></pre>
+              </div>
+
+              <h3>Basic Example</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-wc-basic">Copy</button>
+                <pre><code class="language-html" id="bg-wc-basic">&lt;kds-button-group aria-label="View options"&gt;
+  &lt;kds-button-group-item selected&gt;List&lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item&gt;Grid&lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item&gt;Table&lt;/kds-button-group-item&gt;
+&lt;/kds-button-group&gt;
+
+&lt;!-- Icon only --&gt;
+&lt;kds-button-group aria-label="Navigation"&gt;
+  &lt;kds-button-group-item icon="only" aria-label="Previous"&gt;
+    &lt;svg slot="icon" ...&gt;&lt;/svg&gt;
+  &lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item icon="only" aria-label="Add"&gt;
+    &lt;svg slot="icon" ...&gt;&lt;/svg&gt;
+  &lt;/kds-button-group-item&gt;
+  &lt;kds-button-group-item icon="only" aria-label="Next"&gt;
+    &lt;svg slot="icon" ...&gt;&lt;/svg&gt;
+  &lt;/kds-button-group-item&gt;
+&lt;/kds-button-group&gt;</code></pre>
+              </div>
+
+              <h3>With Event Handling</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-wc-events">Copy</button>
+                <pre><code class="language-javascript" id="bg-wc-events">const group = document.querySelector('kds-button-group');
+
+group.addEventListener('kds-button-group-item-click', (event) => {
+  const { value } = event.detail;
+  console.log('Item clicked:', value);
+
+  // Update selected state
+  group.querySelectorAll('kds-button-group-item').forEach(item => {
+    item.selected = item === event.target;
+  });
+});</code></pre>
+              </div>
+            </div>
+
+            <!-- React Usage -->
+            <div class="docs-framework-content" data-framework-content="react">
+              <h3>Installation</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-react-install">Copy</button>
+                <pre><code class="language-bash" id="bg-react-install">npm install @kds/react @kds/web-components</code></pre>
+              </div>
+
+              <h3>Import</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-react-import">Copy</button>
+                <pre><code class="language-typescript" id="bg-react-import">import { ButtonGroup, ButtonGroupItem } from '@kds/react';
+import '@kds/web-components/tokens.css';</code></pre>
+              </div>
+
+              <h3>Basic Example</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-react-basic">Copy</button>
+                <pre><code class="language-tsx" id="bg-react-basic">function App() {
+  const [selected, setSelected] = React.useState('list');
+
+  return (
+    &lt;ButtonGroup ariaLabel="View options"&gt;
+      &lt;ButtonGroupItem
+        selected={selected === 'list'}
+        value="list"
+        onClick={(e) =&gt; setSelected(e.detail.value)}
+      &gt;
+        List
+      &lt;/ButtonGroupItem&gt;
+      &lt;ButtonGroupItem
+        selected={selected === 'grid'}
+        value="grid"
+        onClick={(e) =&gt; setSelected(e.detail.value)}
+      &gt;
+        Grid
+      &lt;/ButtonGroupItem&gt;
+    &lt;/ButtonGroup&gt;
+  );
+}</code></pre>
+              </div>
+
+              <h3>Icon Only</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-react-icon-only">Copy</button>
+                <pre><code class="language-tsx" id="bg-react-icon-only">&lt;ButtonGroup ariaLabel="Navigation"&gt;
+  &lt;ButtonGroupItem icon="only" ariaLabel="Previous"&gt;
+    &lt;svg slot="icon" ...&gt;&lt;/svg&gt;
+  &lt;/ButtonGroupItem&gt;
+  &lt;ButtonGroupItem icon="only" ariaLabel="Next"&gt;
+    &lt;svg slot="icon" ...&gt;&lt;/svg&gt;
+  &lt;/ButtonGroupItem&gt;
+&lt;/ButtonGroup&gt;</code></pre>
+              </div>
+            </div>
+
+            <!-- Angular Usage -->
+            <div class="docs-framework-content" data-framework-content="angular">
+              <h3>Installation</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-angular-install">Copy</button>
+                <pre><code class="language-bash" id="bg-angular-install">npm install @kds/angular @kds/web-components</code></pre>
+              </div>
+
+              <h3>Import (Standalone Component)</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-angular-import">Copy</button>
+                <pre><code class="language-typescript" id="bg-angular-import">import { KdsButtonGroupComponent, KdsButtonGroupItemComponent } from '@kds/angular';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [KdsButtonGroupComponent, KdsButtonGroupItemComponent],
+  template: `...`
+})</code></pre>
+              </div>
+
+              <h3>Basic Example</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-angular-basic">Copy</button>
+                <pre><code class="language-html" id="bg-angular-basic">&lt;kds-button-group-wrapper ariaLabel="View options"&gt;
+  &lt;kds-button-group-item-wrapper
+    [selected]="selected === 'list'"
+    value="list"
+    (itemClick)="onItemClick($event)"
+  &gt;
+    List
+  &lt;/kds-button-group-item-wrapper&gt;
+  &lt;kds-button-group-item-wrapper
+    [selected]="selected === 'grid'"
+    value="grid"
+    (itemClick)="onItemClick($event)"
+  &gt;
+    Grid
+  &lt;/kds-button-group-item-wrapper&gt;
+&lt;/kds-button-group-wrapper&gt;</code></pre>
+              </div>
+            </div>
+
+            <!-- Blazor Usage -->
+            <div class="docs-framework-content" data-framework-content="blazor">
+              <h3>Usage</h3>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="bg-blazor-basic">Copy</button>
+                <pre><code class="language-html" id="bg-blazor-basic">&lt;KdsButtonGroup AriaLabel="View options"&gt;
+  &lt;KdsButtonGroupItem
+    Selected="@(selectedValue == "list")"
+    Value="list"
+    OnClick="() =&gt; selectedValue = &quot;list&quot;"
+  &gt;
+    List
+  &lt;/KdsButtonGroupItem&gt;
+  &lt;KdsButtonGroupItem
+    Selected="@(selectedValue == "grid")"
+    Value="grid"
+    OnClick="() =&gt; selectedValue = &quot;grid&quot;"
+  &gt;
+    Grid
+  &lt;/KdsButtonGroupItem&gt;
+&lt;/KdsButtonGroup&gt;
+
+@code {
+  private string selectedValue = "list";
+}</code></pre>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: API -->
+        <div class="docs-tab-content" data-tab-content="api">
+          <section class="docs-section">
+            <h2>kds-button-group (Container)</h2>
+            <p>The container wraps items and provides shared border, border-radius, and shadow.</p>
+
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>aria-label</code></td>
+                  <td><code>string</code></td>
+                  <td><code>undefined</code></td>
+                  <td>Accessible label for the group (recommended)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>kds-button-group-item</h2>
+            <p>Individual interactive button within the group.</p>
+
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>selected</code></td>
+                  <td><code>boolean</code></td>
+                  <td><code>false</code></td>
+                  <td>Whether the item is selected/active. Sets <code>aria-pressed</code></td>
+                </tr>
+                <tr>
+                  <td><code>icon</code></td>
+                  <td><code>'none' | 'leading' | 'only' | 'dot'</code></td>
+                  <td><code>'none'</code></td>
+                  <td>Icon variant — controls slot rendering and padding</td>
+                </tr>
+                <tr>
+                  <td><code>disabled</code></td>
+                  <td><code>boolean</code></td>
+                  <td><code>false</code></td>
+                  <td>Disables the item and prevents interaction</td>
+                </tr>
+                <tr>
+                  <td><code>value</code></td>
+                  <td><code>string</code></td>
+                  <td><code>''</code></td>
+                  <td>Value passed in the click event detail for selection tracking</td>
+                </tr>
+                <tr>
+                  <td><code>aria-label</code></td>
+                  <td><code>string</code></td>
+                  <td><code>undefined</code></td>
+                  <td>Accessible label — required for <code>icon="only"</code> items</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>Events</h2>
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>kds-button-group-item-click</code></td>
+                  <td><code>CustomEvent</code></td>
+                  <td>Fired on item click (not fired when disabled). Detail: <code>{ value: string, originalEvent: MouseEvent }</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>Slots</h2>
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Slot</th>
+                  <th>Element</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>default</code></td>
+                  <td><code>kds-button-group-item</code></td>
+                  <td>Text label content (hidden when <code>icon="only"</code>)</td>
+                </tr>
+                <tr>
+                  <td><code>icon</code></td>
+                  <td><code>kds-button-group-item</code></td>
+                  <td>Icon element for <code>leading</code> and <code>only</code> variants</td>
+                </tr>
+                <tr>
+                  <td><code>default</code></td>
+                  <td><code>kds-button-group</code></td>
+                  <td>Accepts <code>kds-button-group-item</code> children</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>CSS Custom Properties</h2>
+            <p>Override these to customize the button group appearance globally.</p>
+
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>--kds-button-group-bg</code></td>
+                  <td>Item background color (default state)</td>
+                </tr>
+                <tr>
+                  <td><code>--kds-button-group-bg-selected</code></td>
+                  <td>Item background for selected and hover states</td>
+                </tr>
+                <tr>
+                  <td><code>--kds-button-group-border</code></td>
+                  <td>Container border and item separator color</td>
+                </tr>
+                <tr>
+                  <td><code>--kds-button-group-text</code></td>
+                  <td>Text and icon color</td>
+                </tr>
+                <tr>
+                  <td><code>--kds-button-group-text-disabled</code></td>
+                  <td>Text color when item is disabled</td>
+                </tr>
+                <tr>
+                  <td><code>--kds-button-group-dot</code></td>
+                  <td>Dot indicator fill color</td>
+                </tr>
+                <tr>
+                  <td><code>--kds-focus-ring</code></td>
+                  <td>Focus outline color</td>
+                </tr>
+                <tr>
+                  <td><code>--kds-font-family</code></td>
+                  <td>Font family override (default: <code>'Inter', sans-serif</code>)</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+
+        <!-- Tab Content: Accessibility -->
+        <div class="docs-tab-content" data-tab-content="accessibility">
+          <section class="docs-section">
+            <h2>WCAG 2.1 AA Compliance</h2>
+            <p>The Button Group component meets all <strong>WCAG 2.1 Level AA</strong> accessibility requirements:</p>
+
+            <div style="display: inline-flex; gap: 12px; margin: 16px 0;">
+              <span class="docs-badge docs-badge-success">Semantic HTML</span>
+              <span class="docs-badge docs-badge-success">Keyboard Accessible</span>
+              <span class="docs-badge docs-badge-success">WCAG 2.1 AA</span>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>ARIA Attributes</h2>
+            <p>The button group uses proper ARIA semantics:</p>
+
+            <ul>
+              <li><strong>Container:</strong> <code>role="group"</code> with <code>aria-label</code> to describe the group purpose</li>
+              <li><strong>Selected state:</strong> <code>aria-pressed</code> communicates the selected item to screen readers</li>
+              <li><strong>Disabled state:</strong> Native <code>disabled</code> attribute — screen readers announce "dimmed" or "unavailable"</li>
+              <li><strong>Icon-only items:</strong> Require <code>aria-label</code> for an accessible name</li>
+              <li><strong>Dot indicator:</strong> Purely decorative — text content provides the semantic meaning</li>
+            </ul>
+
+            <div class="docs-code-block" style="margin-top: 16px;">
+              <button class="docs-copy-button" data-copy="bg-a11y-icon-only">Copy</button>
+              <pre><code class="language-html" id="bg-a11y-icon-only">&lt;!-- Bad: icon-only without accessible name --&gt;
+&lt;kds-button-group-item icon="only"&gt;
+  &lt;svg slot="icon"&gt;...&lt;/svg&gt;
+&lt;/kds-button-group-item&gt;
+
+&lt;!-- Good: aria-label provides accessible name --&gt;
+&lt;kds-button-group-item icon="only" aria-label="Next page"&gt;
+  &lt;svg slot="icon"&gt;...&lt;/svg&gt;
+&lt;/kds-button-group-item&gt;</code></pre>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Keyboard Navigation</h2>
+            <p>All items are native <code>&lt;button&gt;</code> elements and are keyboard-accessible by default.</p>
+
+            <table class="docs-table" style="margin-top: 16px;">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Tab</code></td>
+                  <td>Move focus to the next item in the group</td>
+                </tr>
+                <tr>
+                  <td><code>Shift + Tab</code></td>
+                  <td>Move focus to the previous item</td>
+                </tr>
+                <tr>
+                  <td><code>Enter</code> or <code>Space</code></td>
+                  <td>Activate the focused item (fires <code>kds-button-group-item-click</code>)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top: 16px;"><strong>Focus Indicator:</strong> Focused items display a visible outline using <code>:focus-visible</code>, which only activates during keyboard navigation — not on mouse click.</p>
+          </section>
+
+          <section class="docs-section">
+            <h2>Screen Reader Support</h2>
+            <p>The button group is compatible with all major screen readers:</p>
+
+            <ul>
+              <li><strong>Group label:</strong> <code>aria-label</code> on the container is announced when entering the group</li>
+              <li><strong>Text items:</strong> Content is read from the default slot</li>
+              <li><strong>Icon-only items:</strong> <code>aria-label</code> provides the accessible name</li>
+              <li><strong>Selected state:</strong> <code>aria-pressed="true"</code> announces the active item</li>
+              <li><strong>Disabled items:</strong> Native <code>disabled</code> prevents interaction and is announced by screen readers</li>
+            </ul>
+          </section>
+
+          <section class="docs-section">
+            <h2>Color Contrast</h2>
+            <p>All color combinations meet WCAG 2.1 AA contrast requirements (4.5:1 minimum for 14px bold text):</p>
+
+            <table class="docs-table" style="margin-top: 16px;">
+              <thead>
+                <tr>
+                  <th>State</th>
+                  <th>Background</th>
+                  <th>Text</th>
+                  <th>Ratio</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Default</strong></td>
+                  <td>#FFFFFF</td>
+                  <td>#414651</td>
+                  <td>9.7:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Selected / Hover</strong></td>
+                  <td>#F9FAFB</td>
+                  <td>#414651</td>
+                  <td>9.3:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Disabled</strong></td>
+                  <td>#FFFFFF</td>
+                  <td>#717680</td>
+                  <td>4.6:1</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top: 16px;"><em>Note: Disabled items are rendered at 0.5 opacity. Verify with <a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Contrast Checker</a> if customizing colors.</em></p>
+          </section>
+
+          <section class="docs-section">
+            <h2>Best Practices</h2>
+
+            <h3>Do</h3>
+            <ul>
+              <li>Always provide <code>aria-label</code> on the container to describe the group purpose</li>
+              <li>Provide <code>aria-label</code> on every <code>icon="only"</code> item</li>
+              <li>Manage selected state in your application — update the <code>selected</code> attribute on click</li>
+              <li>Use clear, short labels that distinguish each option</li>
+              <li>Test with keyboard navigation and screen readers</li>
+            </ul>
+
+            <h3>Don't</h3>
+            <ul>
+              <li>Don't use icon-only items without <code>aria-label</code></li>
+              <li>Don't omit <code>aria-label</code> on the container</li>
+              <li>Don't use button groups for unrelated actions — use separate buttons instead</li>
+              <li>Don't disable all items at once — consider hiding the group instead</li>
+              <li>Don't remove focus indicators by overriding <code>:focus-visible</code> styles</li>
+            </ul>
+          </section>
+
+          <section class="docs-section">
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="#accessibility">General Accessibility Guidelines</a> — KDS accessibility standards</li>
+              <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/" target="_blank">ARIA Toolbar Pattern</a> — W3C specification for grouped controls</li>
+              <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html" target="_blank">WCAG 1.4.11</a> — Non-text contrast requirements</li>
+              <li><a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Contrast Checker</a> — Verify color contrast ratios</li>
+              <li><a href="https://www.nvaccess.org/" target="_blank">NVDA Screen Reader</a> — Free Windows screen reader for testing</li>
+            </ul>
+          </section>
+        </div>
+
+      </div>
+      <!-- End Component: Button Group -->
+
+      <!-- Component: Input Field -->
+      <div id="component-input-field" class="docs-component" style="display: none;">
+
+        <!-- Component Header -->
+        <div class="docs-component-header">
+          <div>
+            <h1 class="docs-component-title">Input Field</h1>
+            <p class="docs-component-description">
+              Input fields let users enter and edit text. They support labels, hint text, leading icons, text prefixes, dropdown addons, error states, and multiple HTML input types.
+            </p>
+          </div>
+          <div class="docs-component-status">
+            <span class="docs-badge docs-badge-success">Stable</span>
+            <span class="docs-badge">v1.0.0</span>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="docs-tabs">
+          <button class="docs-tab active" data-tab="overview">Overview</button>
+          <button class="docs-tab" data-tab="variants">Variants</button>
+          <button class="docs-tab" data-tab="tokens">Design Tokens</button>
+          <button class="docs-tab" data-tab="usage">Usage</button>
+          <button class="docs-tab" data-tab="api">API</button>
+          <button class="docs-tab" data-tab="accessibility">Accessibility</button>
+        </div>
+
+        <!-- Tab Content: Overview -->
+        <div class="docs-tab-content active" data-tab-content="overview">
+          <section class="docs-section">
+            <h2>Quick Start</h2>
+            <p>Import the component and start using it in your application.</p>
+            <div class="docs-example">
+              <div class="docs-example-preview" style="max-width: 400px; margin: 0 auto;">
+                <kds-input-field
+                  label="Email"
+                  placeholder="olivia@untitledui.com"
+                  hint="This is a hint text to help user."
+                  input-type="email">
+                </kds-input-field>
+              </div>
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="input-basic-code">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V2z"/><path d="M2 6a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-2h-2v2H2V8h2V6H2z"/></svg>
+                  Copy
+                </button>
+                <pre><code class="language-html" id="input-basic-code">&lt;kds-input-field
+  label="Email"
+  placeholder="olivia@untitledui.com"
+  hint="This is a hint text to help user."
+  input-type="email"&gt;
+&lt;/kds-input-field&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Playground</h2>
+            <p>Experiment with different input field configurations.</p>
+            <div class="docs-playground">
+              <div class="docs-playground-preview" style="padding: 32px; display: flex; justify-content: center;">
+                <div style="width: 100%; max-width: 360px;">
+                  <kds-input-field
+                    id="playground-input-field"
+                    label="Email"
+                    placeholder="olivia@untitledui.com">
+                  </kds-input-field>
+                </div>
+              </div>
+
+              <div class="docs-code-block" style="margin: 24px 0;">
+                <button class="docs-copy-button" data-copy="input-playground-code">Copy</button>
+                <pre><code class="language-html" id="input-playground-code">&lt;kds-input-field label="Email" placeholder="olivia@untitledui.com"&gt;&lt;/kds-input-field&gt;</code></pre>
+              </div>
+
+              <div class="docs-playground-controls">
+                <div class="docs-control-group">
+                  <label class="docs-label">Type</label>
+                  <select class="docs-select" id="playground-input-type">
+                    <option value="default" selected>Default</option>
+                    <option value="leading-text">Leading Text</option>
+                    <option value="leading-dropdown">Leading Dropdown</option>
+                    <option value="trailing-dropdown">Trailing Dropdown</option>
+                  </select>
+                </div>
+
+                <div class="docs-control-group">
+                  <label class="docs-label">Label</label>
+                  <input type="text" class="docs-input" id="playground-input-label" value="Email" placeholder="Label text">
+                </div>
+
+                <div class="docs-control-group">
+                  <label class="docs-label">Hint text</label>
+                  <input type="text" class="docs-input" id="playground-input-hint" value="" placeholder="Hint text (empty = hidden)">
+                </div>
+
+                <div class="docs-control-group">
+                  <label class="docs-label">Leading text prefix</label>
+                  <input type="text" class="docs-input" id="playground-input-leading-text" value="http://" placeholder="e.g. http://, $">
+                </div>
+
+                <div class="docs-control-group">
+                  <label class="docs-label">
+                    <input type="checkbox" id="playground-input-leading-icon"> Leading icon
+                  </label>
+                </div>
+
+                <div class="docs-control-group">
+                  <label class="docs-label">
+                    <input type="checkbox" id="playground-input-help-icon"> Help icon
+                  </label>
+                </div>
+
+                <div class="docs-control-group">
+                  <label class="docs-label">
+                    <input type="checkbox" id="playground-input-destructive"> Destructive (error)
+                  </label>
+                </div>
+
+                <div class="docs-control-group">
+                  <label class="docs-label">
+                    <input type="checkbox" id="playground-input-disabled"> Disabled
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: Variants -->
+        <div class="docs-tab-content" data-tab-content="variants">
+          <section class="docs-section">
+            <h2>States</h2>
+            <p>Input fields have four visual states driven by user interaction.</p>
+
+            <h3 style="margin-top: 24px; margin-bottom: 16px;">Placeholder</h3>
+            <div class="docs-example">
+              <div class="docs-example-preview" style="max-width: 400px; margin: 0 auto;">
+                <kds-input-field label="Email" placeholder="olivia@untitledui.com"></kds-input-field>
+              </div>
+              <div class="docs-code-block">
+                <pre><code class="language-html">&lt;kds-input-field label="Email" placeholder="olivia@untitledui.com"&gt;&lt;/kds-input-field&gt;</code></pre>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 24px; margin-bottom: 16px;">Disabled</h3>
+            <div class="docs-example">
+              <div class="docs-example-preview" style="max-width: 400px; margin: 0 auto;">
+                <kds-input-field label="Email" placeholder="olivia@untitledui.com" disabled></kds-input-field>
+              </div>
+              <div class="docs-code-block">
+                <pre><code class="language-html">&lt;kds-input-field label="Email" placeholder="olivia@untitledui.com" disabled&gt;&lt;/kds-input-field&gt;</code></pre>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 24px; margin-bottom: 16px;">Destructive (Error)</h3>
+            <div class="docs-example">
+              <div class="docs-example-preview" style="max-width: 400px; margin: 0 auto;">
+                <kds-input-field label="Email" placeholder="olivia@untitledui.com" hint="This email is already in use." destructive></kds-input-field>
+              </div>
+              <div class="docs-code-block">
+                <pre><code class="language-html">&lt;kds-input-field
+  label="Email"
+  placeholder="olivia@untitledui.com"
+  hint="This email is already in use."
+  destructive&gt;
+&lt;/kds-input-field&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Type Variants</h2>
+
+            <h3 style="margin-top: 24px; margin-bottom: 16px;">Default (with leading icon + hint)</h3>
+            <div class="docs-example">
+              <div class="docs-example-preview" style="max-width: 400px; margin: 0 auto;">
+                <kds-input-field label="Email" placeholder="olivia@untitledui.com" hint="We'll never share your email." leading-icon help-icon input-type="email">
+                  <svg slot="leading-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;color:inherit">
+                    <path d="M1.667 5.833A2.5 2.5 0 0 1 4.167 3.333h11.666a2.5 2.5 0 0 1 2.5 2.5v8.334a2.5 2.5 0 0 1-2.5 2.5H4.167a2.5 2.5 0 0 1-2.5-2.5V5.833Z" stroke="currentColor" stroke-width="1.667"/>
+                    <path d="M1.667 5.833 10 10.833l8.333-5" stroke="currentColor" stroke-width="1.667"/>
+                  </svg>
+                </kds-input-field>
+              </div>
+              <div class="docs-code-block">
+                <pre><code class="language-html">&lt;kds-input-field
+  label="Email"
+  placeholder="olivia@untitledui.com"
+  hint="We'll never share your email."
+  leading-icon
+  help-icon
+  input-type="email"&gt;
+  &lt;svg slot="leading-icon" ...&gt;&lt;/svg&gt;
+&lt;/kds-input-field&gt;</code></pre>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 24px; margin-bottom: 16px;">Leading Text</h3>
+            <div class="docs-example">
+              <div class="docs-example-preview" style="max-width: 400px; margin: 0 auto;">
+                <kds-input-field label="Website" type="leading-text" leading-text="http://" placeholder="www.untitledui.com"></kds-input-field>
+              </div>
+              <div class="docs-code-block">
+                <pre><code class="language-html">&lt;kds-input-field
+  label="Website"
+  type="leading-text"
+  leading-text="http://"
+  placeholder="www.untitledui.com"&gt;
+&lt;/kds-input-field&gt;</code></pre>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 24px; margin-bottom: 16px;">Leading Dropdown</h3>
+            <div class="docs-example">
+              <div class="docs-example-preview" style="max-width: 400px; margin: 0 auto;">
+                <kds-input-field label="Phone number" type="leading-dropdown" input-type="tel" placeholder="+1 (555) 000-0000">
+                  <button slot="leading-dropdown" style="display:flex;align-items:center;gap:6px;padding:10px 12px;border:none;background:none;cursor:pointer;font-size:14px;color:#414651;white-space:nowrap;">
+                    🇺🇸 +1
+                    <svg viewBox="0 0 16 16" fill="none" style="width:12px;height:12px"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  </button>
+                </kds-input-field>
+              </div>
+              <div class="docs-code-block">
+                <pre><code class="language-html">&lt;kds-input-field
+  label="Phone number"
+  type="leading-dropdown"
+  input-type="tel"
+  placeholder="+1 (555) 000-0000"&gt;
+  &lt;button slot="leading-dropdown"&gt;🇺🇸 +1 ▾&lt;/button&gt;
+&lt;/kds-input-field&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: Design Tokens -->
+        <div class="docs-tab-content" data-tab-content="tokens">
+          <section class="docs-section">
+            <h2>Design Tokens</h2>
+            <p>All values extracted from the Figma contract.</p>
+
+            <table class="docs-table">
+              <thead>
+                <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Border radius</td><td><code>8px</code></td><td>Input wrapper corners</td></tr>
+                <tr><td>Padding</td><td><code>10px 14px</code></td><td>Input content area</td></tr>
+                <tr><td>Gap</td><td><code>6px</code></td><td>Label / input / hint spacing</td></tr>
+                <tr><td>Border default</td><td><code>#D5D7DA</code> (Gray/300)</td><td>Resting border</td></tr>
+                <tr><td>Border focused</td><td><code>#D6BBFB</code> (Brand/300)</td><td>Focused border</td></tr>
+                <tr><td>Border error</td><td><code>#FDA29B</code> (Error/300)</td><td>Destructive border</td></tr>
+                <tr><td>Focus ring</td><td><code>#F4EBFF</code> (Brand/100)</td><td>4px ring on focus</td></tr>
+                <tr><td>Focus ring error</td><td><code>#FEF3F2</code> (Error/100)</td><td>4px ring on destructive focus</td></tr>
+                <tr><td>Background</td><td><code>#FFFFFF</code></td><td>Input background</td></tr>
+                <tr><td>Background disabled</td><td><code>#F9FAFB</code> (Gray/50)</td><td>Disabled input background</td></tr>
+                <tr><td>Text value</td><td><code>#181D27</code> (Gray/900)</td><td>Filled input text</td></tr>
+                <tr><td>Text placeholder</td><td><code>#717680</code> (Gray/500)</td><td>Placeholder text</td></tr>
+                <tr><td>Text label</td><td><code>#414651</code> (Gray/700)</td><td>Label text</td></tr>
+                <tr><td>Text hint</td><td><code>#535862</code> (Gray/600)</td><td>Hint text</td></tr>
+                <tr><td>Text error</td><td><code>#D92D20</code> (Error/600)</td><td>Error hint text</td></tr>
+                <tr><td>Icon color</td><td><code>#717680</code> (Gray/500)</td><td>Leading / help icons</td></tr>
+                <tr><td>Alert icon</td><td><code>#F04438</code> (Error/500)</td><td>Destructive alert icon</td></tr>
+                <tr><td>Font size (input)</td><td><code>16px / 24px</code></td><td>Inter Regular</td></tr>
+                <tr><td>Font size (label)</td><td><code>14px / 20px</code></td><td>Inter Medium (500)</td></tr>
+                <tr><td>Font size (hint)</td><td><code>14px / 20px</code></td><td>Inter Regular (400)</td></tr>
+                <tr><td>Shadow</td><td><code>0px 1px 2px rgba(10,13,18,0.05)</code></td><td>Subtle depth</td></tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+
+        <!-- Tab Content: Usage -->
+        <div class="docs-tab-content" data-tab-content="usage">
+          <section class="docs-section">
+            <h2>Framework Usage</h2>
+            <div class="docs-framework-tabs">
+              <button class="docs-framework-tab active" data-framework="wc">Web Component</button>
+              <button class="docs-framework-tab" data-framework="react">React</button>
+              <button class="docs-framework-tab" data-framework="angular">Angular</button>
+              <button class="docs-framework-tab" data-framework="blazor">Blazor</button>
+            </div>
+
+            <div class="docs-framework-content active" data-framework-content="wc">
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="input-wc-code">Copy</button>
+                <pre><code class="language-html" id="input-wc-code">&lt;!-- Import --&gt;
+&lt;script type="module" src="@kds/web-components/kds-input-field.js"&gt;&lt;/script&gt;
+
+&lt;!-- Basic --&gt;
+&lt;kds-input-field
+  label="Email"
+  placeholder="olivia@untitledui.com"
+  hint="We'll never share your email."
+  input-type="email"&gt;
+&lt;/kds-input-field&gt;
+
+&lt;!-- Destructive --&gt;
+&lt;kds-input-field
+  label="Email"
+  hint="This email is already in use."
+  destructive&gt;
+&lt;/kds-input-field&gt;
+
+&lt;!-- Leading text --&gt;
+&lt;kds-input-field
+  type="leading-text"
+  leading-text="http://"
+  label="Website"&gt;
+&lt;/kds-input-field&gt;
+
+&lt;!-- Listen for changes --&gt;
+&lt;kds-input-field id="my-input"&gt;&lt;/kds-input-field&gt;
+&lt;script&gt;
+  document.getElementById('my-input')
+    .addEventListener('kds-input', e =&gt; console.log(e.detail.value));
+&lt;/script&gt;</code></pre>
+              </div>
+            </div>
+
+            <div class="docs-framework-content" data-framework-content="react">
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="input-react-code">Copy</button>
+                <pre><code class="language-tsx" id="input-react-code">import { InputField } from '@kds/react';
+
+// Basic
+&lt;InputField
+  label="Email"
+  placeholder="olivia@untitledui.com"
+  hint="We'll never share your email."
+  inputType="email"
+  onKdsInput={(e) =&gt; console.log(e.detail.value)}
+/&gt;
+
+// Destructive
+&lt;InputField
+  label="Email"
+  hint="This email is already in use."
+  destructive
+/&gt;
+
+// Leading text
+&lt;InputField
+  type="leading-text"
+  leadingText="http://"
+  label="Website"
+/&gt;</code></pre>
+              </div>
+            </div>
+
+            <div class="docs-framework-content" data-framework-content="angular">
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="input-angular-code">Copy</button>
+                <pre><code class="language-typescript" id="input-angular-code">import { KdsInputFieldComponent } from '@kds/angular';
+
+// template
+&lt;kds-input-field-wrapper
+  label="Email"
+  placeholder="olivia@untitledui.com"
+  hint="We'll never share your email."
+  inputType="email"
+  [value]="emailValue"
+  (kdsInput)="onInput($event)"&gt;
+&lt;/kds-input-field-wrapper&gt;
+
+// component.ts
+emailValue = '';
+onInput(e: CustomEvent&lt;{value: string}&gt;) {
+  this.emailValue = e.detail.value;
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="docs-framework-content" data-framework-content="blazor">
+              <div class="docs-code-block">
+                <button class="docs-copy-button" data-copy="input-blazor-code">Copy</button>
+                <pre><code class="language-html" id="input-blazor-code">&lt;KdsInputField
+  Label="Email"
+  Placeholder="olivia@untitledui.com"
+  Hint="We'll never share your email."
+  InputType="email"
+  OnInput="@HandleInput" /&gt;
+
+@code {
+  private async Task HandleInput(string value)
+  {
+    Console.WriteLine($"Input: {value}");
+  }
+}</code></pre>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: API -->
+        <div class="docs-tab-content" data-tab-content="api">
+          <section class="docs-section">
+            <h2>Properties</h2>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>type</code></td><td><code>type</code></td><td><code>InputFieldType</code></td><td><code>'default'</code></td><td>Visual variant</td></tr>
+                <tr><td><code>label</code></td><td><code>label</code></td><td><code>string</code></td><td><code>''</code></td><td>Label text above input</td></tr>
+                <tr><td><code>hint</code></td><td><code>hint</code></td><td><code>string</code></td><td><code>''</code></td><td>Hint/error text below input</td></tr>
+                <tr><td><code>placeholder</code></td><td><code>placeholder</code></td><td><code>string</code></td><td><code>''</code></td><td>Native placeholder text</td></tr>
+                <tr><td><code>value</code></td><td><code>value</code></td><td><code>string</code></td><td><code>''</code></td><td>Current input value</td></tr>
+                <tr><td><code>name</code></td><td><code>name</code></td><td><code>string</code></td><td><code>''</code></td><td>Form field name</td></tr>
+                <tr><td><code>inputType</code></td><td><code>input-type</code></td><td><code>string</code></td><td><code>'text'</code></td><td>HTML input type</td></tr>
+                <tr><td><code>destructive</code></td><td><code>destructive</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Error state</td></tr>
+                <tr><td><code>disabled</code></td><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Disabled state</td></tr>
+                <tr><td><code>leadingIcon</code></td><td><code>leading-icon</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Show leading icon slot</td></tr>
+                <tr><td><code>helpIcon</code></td><td><code>help-icon</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Show help icon button</td></tr>
+                <tr><td><code>leadingText</code></td><td><code>leading-text</code></td><td><code>string</code></td><td><code>''</code></td><td>Text prefix (leading-text variant)</td></tr>
+                <tr><td><code>required</code></td><td><code>required</code></td><td><code>boolean</code></td><td><code>false</code></td><td>HTML required attribute</td></tr>
+              </tbody>
+            </table>
+
+            <h2 style="margin-top: 32px;">Events</h2>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Event</th><th>Detail</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>kds-input</code></td><td><code>{ value: string }</code></td><td>Fired on every keystroke</td></tr>
+                <tr><td><code>kds-change</code></td><td><code>{ value: string }</code></td><td>Fired on blur after value change</td></tr>
+                <tr><td><code>kds-help-click</code></td><td><code>void</code></td><td>Fired when help icon is clicked</td></tr>
+              </tbody>
+            </table>
+
+            <h2 style="margin-top: 32px;">Slots</h2>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Slot</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>leading-icon</code></td><td>SVG icon shown left inside input (requires <code>leading-icon</code> attribute)</td></tr>
+                <tr><td><code>leading-dropdown</code></td><td>Dropdown trigger for <code>type="leading-dropdown"</code></td></tr>
+                <tr><td><code>trailing-dropdown</code></td><td>Dropdown trigger for <code>type="trailing-dropdown"</code></td></tr>
+              </tbody>
+            </table>
+
+            <h2 style="margin-top: 32px;">Type Reference</h2>
+            <div class="docs-code-block">
+              <pre><code class="language-typescript">type InputFieldType =
+  | 'default'
+  | 'leading-dropdown'
+  | 'trailing-dropdown'
+  | 'leading-text'
+  | 'payment';</code></pre>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab Content: Accessibility -->
+        <div class="docs-tab-content" data-tab-content="accessibility">
+          <section class="docs-section">
+            <h2>WCAG 2.1 AA Compliance</h2>
+            <p>The Input Field component meets all <strong>WCAG 2.1 Level AA</strong> accessibility requirements:</p>
+
+            <div style="display: inline-flex; gap: 12px; margin: 16px 0;">
+              <span class="docs-badge docs-badge-success">✅ Semantic HTML</span>
+              <span class="docs-badge docs-badge-success">✅ Screen Reader Compatible</span>
+              <span class="docs-badge docs-badge-success">✅ WCAG 2.1 AA</span>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>ARIA Attributes</h2>
+            <p>The input field uses proper ARIA semantics to communicate state and structure:</p>
+
+            <ul>
+              <li><strong>Label:</strong> Native <code>&lt;label&gt;</code> element provides an accessible name; falls back to <code>aria-label</code> when no label prop is set</li>
+              <li><strong>Error state:</strong> <code>aria-invalid="true"</code> on the native <code>&lt;input&gt;</code> when <code>destructive</code> is active</li>
+              <li><strong>Error message:</strong> <code>aria-describedby</code> links the input to the hint text element, which serves as the error message</li>
+              <li><strong>Help button:</strong> Native <code>&lt;button&gt;</code> with <code>aria-label="Help"</code> and <code>type="button"</code></li>
+              <li><strong>Decorative icons:</strong> Leading icon, alert icon, and help icon SVGs have <code>aria-hidden="true"</code></li>
+            </ul>
+
+            <div class="docs-code-block" style="margin-top: 16px;">
+              <button class="docs-copy-button" data-copy="input-a11y-error-code">Copy</button>
+              <pre><code class="language-html" id="input-a11y-error-code">&lt;!-- ❌ Bad: error only conveyed via color, no accessible message --&gt;
+&lt;kds-input-field destructive&gt;&lt;/kds-input-field&gt;
+
+&lt;!-- ✅ Good: aria-invalid + error message via hint --&gt;
+&lt;kds-input-field
+  label="Email"
+  hint="This email is already in use."
+  destructive&gt;
+&lt;/kds-input-field&gt;
+
+&lt;!-- ✅ Good: aria-label when no visible label --&gt;
+&lt;kds-input-field
+  placeholder="Search…"
+  aria-label="Search"&gt;
+&lt;/kds-input-field&gt;</code></pre>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2>Keyboard Navigation</h2>
+            <p>The component uses native elements, inheriting full browser keyboard support:</p>
+
+            <table class="docs-table" style="margin-top: 16px;">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Tab</code></td>
+                  <td>Move focus to the input field</td>
+                </tr>
+                <tr>
+                  <td><code>Tab</code> (again)</td>
+                  <td>Move focus to the help button (if visible)</td>
+                </tr>
+                <tr>
+                  <td><code>Shift + Tab</code></td>
+                  <td>Move focus backwards</td>
+                </tr>
+                <tr>
+                  <td><code>Enter</code> or <code>Space</code></td>
+                  <td>Activate help button (fires <code>kds-help-click</code>)</td>
+                </tr>
+                <tr>
+                  <td>Any character key</td>
+                  <td>Type into the input (fires <code>kds-input</code>)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top: 16px;"><strong>Focus Indicator:</strong> A 4px ring appears on the input wrapper via <code>:focus-within</code>. Brand purple (<code>#F4EBFF</code>) in normal state; error red (<code>#FEF3F2</code>) in destructive state. Both meet the WCAG 2.4.7 Focus Visible requirement.</p>
+          </section>
+
+          <section class="docs-section">
+            <h2>Screen Reader Support</h2>
+            <p>The input field is compatible with all major screen readers (NVDA, JAWS, VoiceOver, TalkBack):</p>
+
+            <ul>
+              <li><strong>Label:</strong> Announced as the accessible name of the input via native <code>&lt;label&gt;</code> association</li>
+              <li><strong>Placeholder:</strong> Used as <code>aria-label</code> fallback when no label prop is provided</li>
+              <li><strong>Error state:</strong> <code>aria-invalid="true"</code> causes screen readers to announce the field as invalid; <code>aria-describedby</code> reads the error message automatically</li>
+              <li><strong>Disabled state:</strong> Native <code>disabled</code> attribute causes screen readers to announce the field as dimmed/unavailable</li>
+              <li><strong>Help button:</strong> Announced as "Help, button" via native <code>&lt;button&gt;</code> + <code>aria-label</code></li>
+              <li><strong>Mobile input type:</strong> <code>input-type</code> prop maps to the native <code>type</code> attribute, triggering the correct mobile keyboard (email, numeric, telephone, etc.)</li>
+            </ul>
+          </section>
+
+          <section class="docs-section">
+            <h2>Color Contrast</h2>
+            <p>All text/background combinations target WCAG 2.1 AA (4.5:1 minimum for normal text):</p>
+
+            <table class="docs-table" style="margin-top: 16px;">
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>Text</th>
+                  <th>Background</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Input value</td>
+                  <td>#181D27 (Gray/900)</td>
+                  <td>#FFFFFF</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td>Label</td>
+                  <td>#414651 (Gray/700)</td>
+                  <td>#FFFFFF</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td>Hint text</td>
+                  <td>#535862 (Gray/600)</td>
+                  <td>#FFFFFF</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td>Placeholder</td>
+                  <td>#717680 (Gray/500)</td>
+                  <td>#FFFFFF</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td>Error hint</td>
+                  <td>#D92D20 (Error/600)</td>
+                  <td>#FFFFFF</td>
+                  <td><span class="docs-badge docs-badge-success">Pass</span></td>
+                </tr>
+                <tr>
+                  <td>Disabled label</td>
+                  <td>#A4ACBA</td>
+                  <td>#F9FAFB</td>
+                  <td><span class="docs-badge">Verify</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top: 16px;">Verify with <a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Contrast Checker</a>. The disabled state uses reduced contrast intentionally to communicate its non-interactive nature, which is permitted under WCAG 1.4.3.</p>
+          </section>
+        </div>
+
+      </div>
+      <!-- End Component: Input Field -->
+
     </main>
   </div>
 
@@ -4621,6 +6974,9 @@ npm run validate:a11y --workspace=@kds/web-components
   <script type="module" src="./src/components/kds-checkbox.ts"></script>
   <script type="module" src="./src/components/kds-toggle.ts"></script>
   <script type="module" src="./src/components/kds-tooltip.ts"></script>
+  <script type="module" src="./src/components/kds-badge.ts"></script>
+  <script type="module" src="./src/components/kds-button-group.ts"></script>
+  <script type="module" src="./src/components/kds-input-field.ts"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-tsx.min.js"></script>

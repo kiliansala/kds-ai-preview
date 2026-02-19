@@ -22,4 +22,13 @@ export type { ToggleSize } from './components/kds-toggle.js';
 export { KdsTooltip } from './components/kds-tooltip.js';
 export type { TooltipTheme, TooltipArrow } from './components/kds-tooltip.js';
 
+export { KdsBadge } from './components/kds-badge.js';
+export type { BadgeSize, BadgeColor, BadgeIcon } from './components/kds-badge.js';
+
+export { KdsButtonGroup, KdsButtonGroupItem } from './components/kds-button-group.js';
+export type { ButtonGroupItemIcon } from './components/kds-button-group.js';
+
+export { KdsInputField } from './components/kds-input-field.js';
+export type { InputFieldType } from './components/kds-input-field.js';
+
 export const version = '0.1.0';

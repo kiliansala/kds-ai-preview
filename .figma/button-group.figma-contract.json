@@ -1,0 +1,147 @@
+{
+  "title": "Button Group Component Contract",
+  "description": "Contract extracted from Figma Untitled UI Button Group component. This defines all required properties that the LIT component must implement.",
+  "source": {
+    "figmaFileId": "CICp1MWc31lkvjX3jYo1rj",
+    "componentId": "1046:10170",
+    "componentName": "Button group",
+    "extractedAt": "2026-02-18T00:00:00Z",
+    "mcp": "figma-desktop",
+    "notes": "Extracted via Figma Desktop MCP get_design_context + get_screenshot"
+  },
+  "components": {
+    "buttonGroup": {
+      "description": "Container component that groups multiple button items horizontally",
+      "properties": {
+        "icon": {
+          "description": "Icon variant for the entire group (Figma-level prop)",
+          "type": "enum",
+          "required": false,
+          "values": ["false", "leading", "only"],
+          "default": "false",
+          "figmaProperty": "Icon",
+          "notes": "In code, each item manages its own icon variant independently"
+        }
+      }
+    },
+    "buttonGroupItem": {
+      "description": "Individual button within the group",
+      "properties": {
+        "selected": {
+          "description": "Whether this item is the currently active/selected item",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "figmaProperty": "Current",
+          "notes": "Maps from Figma 'Current' property. Changes background to gray-50 and text to darker gray"
+        },
+        "icon": {
+          "description": "Icon variant of the item",
+          "type": "enum",
+          "required": false,
+          "values": ["none", "leading", "only", "dot"],
+          "default": "none",
+          "figmaProperty": "Icon",
+          "notes": "Controls what icon/element appears. 'dot' shows a colored circle indicator"
+        },
+        "disabled": {
+          "description": "Whether the item is disabled",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "figmaProperty": "State=Disabled",
+          "notes": "Reduces opacity, disables interaction"
+        }
+      }
+    }
+  },
+  "designTokens": {
+    "colors": {
+      "background": "#FFFFFF",
+      "backgroundSelected": "#F9FAFB",
+      "border": "#D5D7DA",
+      "text": "#414651",
+      "textDisabled": "#717680",
+      "dotAccent": "#717680"
+    },
+    "typography": {
+      "fontFamily": "Inter",
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "fontWeight": 600,
+      "fontStyle": "Semi Bold"
+    },
+    "spacing": {
+      "paddingY": "10px",
+      "paddingX": "16px",
+      "paddingXIconOnly": "12px",
+      "gap": "8px",
+      "iconSize": "20px"
+    },
+    "borderRadius": "8px",
+    "shadow": "0px 1px 2px 0px rgba(10, 13, 18, 0.05)"
+  },
+  "states": {
+    "default": {
+      "background": "#FFFFFF",
+      "border": "#D5D7DA",
+      "text": "#414651"
+    },
+    "hover": {
+      "background": "#F9FAFB",
+      "border": "#D5D7DA",
+      "text": "#414651"
+    },
+    "focused": {
+      "background": "#FFFFFF",
+      "border": "#D5D7DA",
+      "text": "#414651",
+      "outline": "2px solid focus-ring"
+    },
+    "disabled": {
+      "background": "#FFFFFF",
+      "border": "#D5D7DA",
+      "text": "#717680",
+      "opacity": 0.5
+    },
+    "selected": {
+      "background": "#F9FAFB",
+      "border": "#D5D7DA",
+      "text": "#414651"
+    }
+  },
+  "validation": {
+    "requiredProps": [],
+    "optionalProps": ["ariaLabel"],
+    "notes": [
+      "Button Group is an interactive component with hover, focus, and disabled states",
+      "Items are separated by right borders, container has rounded corners",
+      "The 'selected' state (Current in Figma) highlights the active item",
+      "Icon-only items have smaller horizontal padding (12px vs 16px)",
+      "Leading icon items show icon + text with 8px gap",
+      "Container has box-shadow xs and 8px border-radius",
+      "All items must be keyboard navigable (roving tabindex pattern recommended)"
+    ]
+  },
+  "_extraction_status": {
+    "status": "COMPLETE",
+    "extractedAt": "2026-02-18T00:00:00Z",
+    "extractedBy": "Figma MCP Desktop Server",
+    "dataSource": "get_design_context + get_screenshot",
+    "verified": true,
+    "variantsAnalyzed": [
+      "1046:10170 (Icon=False - text only group)",
+      "1046:10172 (Icon=Leading - icon + text group)",
+      "1046:10351 (Icon=Only - icon only group)",
+      "1046:9413 (ButtonGroupBase: Current=false, Icon=False, State=Default)",
+      "1046:9734 (ButtonGroupBase: Current=false, Icon=Leading, State=Default)",
+      "1046:10031 (ButtonGroupBase: Current=false, Icon=Only, State=Default)"
+    ],
+    "notes": [
+      "Button Group uses two sub-components: container and base item",
+      "Container handles border-radius, shadow, and overflow clipping",
+      "Base items handle content, states, and right-border separators",
+      "get_design_context returned React+Tailwind code which was converted to LIT patterns"
+    ]
+  }
+}

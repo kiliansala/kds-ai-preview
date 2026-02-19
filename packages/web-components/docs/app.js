@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initCheckboxPlayground();
   initTogglePlayground();
   initTooltipPlayground();
+  initBadgePlayground();
+  initButtonGroupPlayground();
+  initInputFieldPlayground();
   initCopyButtons();
   initNavigation();
   initSyntaxHighlighting();
@@ -647,6 +650,373 @@ function initTooltipPlayground() {
       updateTooltipPlaygroundCode(tooltip);
     });
   }
+}
+
+/**
+ * Update the badge playground code snippet
+ */
+function updateBadgePlaygroundCode(badge) {
+  const codeElement = document.getElementById('badge-playground-code');
+  if (!codeElement) return;
+
+  const size = badge.getAttribute('size') || 'sm';
+  const color = badge.getAttribute('color') || 'primary';
+  const icon = badge.getAttribute('icon') || 'false';
+
+  let attributes = `size="${size}" color="${color}"`;
+
+  if (icon !== 'false') {
+    attributes += ` icon="${icon}"`;
+  }
+
+  const html = `<kds-badge ${attributes}>Badge Text</kds-badge>`;
+  codeElement.textContent = html;
+
+  if (typeof Prism !== 'undefined') {
+    Prism.highlightElement(codeElement);
+  }
+}
+
+/**
+ * Initialize badge playground
+ */
+function initBadgePlayground() {
+  const badge = document.getElementById('playground-badge');
+  if (!badge) return;
+
+  const sizeSelect = document.getElementById('playground-badge-size');
+  const colorSelect = document.getElementById('playground-badge-color');
+  const iconSelect = document.getElementById('playground-badge-icon');
+
+  updateBadgePlaygroundCode(badge);
+
+  if (sizeSelect) {
+    sizeSelect.addEventListener('change', (e) => {
+      badge.setAttribute('size', e.target.value);
+      updateBadgePlaygroundCode(badge);
+    });
+  }
+
+  if (colorSelect) {
+    colorSelect.addEventListener('change', (e) => {
+      badge.setAttribute('color', e.target.value);
+      updateBadgePlaygroundCode(badge);
+    });
+  }
+
+  if (iconSelect) {
+    iconSelect.addEventListener('change', (e) => {
+      badge.setAttribute('icon', e.target.value);
+      updateBadgePlaygroundCode(badge);
+    });
+  }
+
+  badge.addEventListener('kds-badge-dismiss', () => {
+    console.log('Playground badge dismissed!');
+  });
+}
+
+/**
+ * Update the button group playground code snippet
+ */
+function updateButtonGroupPlaygroundCode() {
+  const codeElement = document.getElementById('button-group-playground-code');
+  if (!codeElement) return;
+
+  const item1 = document.getElementById('playground-bg-item-1');
+  const item2 = document.getElementById('playground-bg-item-2');
+  const item3 = document.getElementById('playground-bg-item-3');
+  if (!item1) return;
+
+  const icon = item1.getAttribute('icon') || 'none';
+  const disabled3 = item3 && item3.hasAttribute('disabled');
+
+  let itemContent;
+  if (icon === 'only') {
+    itemContent = `\n  <svg slot="icon" ...></svg>\n`;
+  } else if (icon === 'leading') {
+    itemContent = `\n    <svg slot="icon" ...></svg>\n    Option\n  `;
+  } else {
+    itemContent = 'Option';
+  }
+
+  const ariaAttr = icon === 'only' ? ' aria-label="Action"' : '';
+  const iconAttr = icon !== 'none' ? ` icon="${icon}"` : '';
+  const disabledAttr = disabled3 ? ' disabled' : '';
+
+  let html = `<kds-button-group aria-label="Options">`;
+  html += `\n  <kds-button-group-item${iconAttr} selected${ariaAttr}>${itemContent}</kds-button-group-item>`;
+  html += `\n  <kds-button-group-item${iconAttr}${ariaAttr}>${itemContent}</kds-button-group-item>`;
+  html += `\n  <kds-button-group-item${iconAttr}${disabledAttr}${ariaAttr}>${itemContent}</kds-button-group-item>`;
+  html += `\n</kds-button-group>`;
+
+  codeElement.textContent = html;
+
+  if (typeof Prism !== 'undefined') {
+    Prism.highlightElement(codeElement);
+  }
+}
+
+/**
+ * Initialize button group playground
+ */
+function initButtonGroupPlayground() {
+  const group = document.getElementById('playground-button-group');
+  if (!group) return;
+
+  const iconSelect = document.getElementById('playground-bg-icon');
+  const disabledCheckbox = document.getElementById('playground-bg-disabled');
+  const items = [
+    document.getElementById('playground-bg-item-1'),
+    document.getElementById('playground-bg-item-2'),
+    document.getElementById('playground-bg-item-3')
+  ];
+
+  updateButtonGroupPlaygroundCode();
+
+  if (iconSelect) {
+    iconSelect.addEventListener('change', (e) => {
+      const iconValue = e.target.value;
+      items.forEach(item => {
+        if (item) {
+          item.setAttribute('icon', iconValue);
+          if (iconValue === 'only') {
+            // Remove text content and add icon
+            item.textContent = '';
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('slot', 'icon');
+            svg.setAttribute('width', '20');
+            svg.setAttribute('height', '20');
+            svg.setAttribute('viewBox', '0 0 20 20');
+            svg.setAttribute('fill', 'none');
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', 'M10 4.167v11.666M4.167 10h11.666');
+            path.setAttribute('stroke', 'currentColor');
+            path.setAttribute('stroke-width', '1.67');
+            path.setAttribute('stroke-linecap', 'round');
+            path.setAttribute('stroke-linejoin', 'round');
+            svg.appendChild(path);
+            item.appendChild(svg);
+            item.setAttribute('aria-label', 'Action');
+          } else {
+            // Remove icons, restore text
+            const icons = item.querySelectorAll('[slot="icon"]');
+            icons.forEach(ic => ic.remove());
+            item.removeAttribute('aria-label');
+
+            if (iconValue === 'leading') {
+              const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+              svg.setAttribute('slot', 'icon');
+              svg.setAttribute('width', '20');
+              svg.setAttribute('height', '20');
+              svg.setAttribute('viewBox', '0 0 20 20');
+              svg.setAttribute('fill', 'none');
+              const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+              circle.setAttribute('cx', '10');
+              circle.setAttribute('cy', '10');
+              circle.setAttribute('r', '7.5');
+              circle.setAttribute('stroke', 'currentColor');
+              circle.setAttribute('stroke-width', '1.5');
+              svg.appendChild(circle);
+              item.prepend(svg);
+            }
+
+            // Ensure text content
+            const hasText = Array.from(item.childNodes).some(
+              node => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+            );
+            if (!hasText && iconValue !== 'only') {
+              item.appendChild(document.createTextNode('Option ' + (items.indexOf(item) + 1)));
+            }
+          }
+        }
+      });
+      updateButtonGroupPlaygroundCode();
+    });
+  }
+
+  if (disabledCheckbox) {
+    disabledCheckbox.addEventListener('change', (e) => {
+      const item3 = items[2];
+      if (item3) {
+        if (e.target.checked) {
+          item3.setAttribute('disabled', '');
+        } else {
+          item3.removeAttribute('disabled');
+        }
+      }
+      updateButtonGroupPlaygroundCode();
+    });
+  }
+
+  // Handle item clicks for selection
+  group.addEventListener('kds-button-group-item-click', (e) => {
+    const clickedItem = e.target;
+    items.forEach(item => {
+      if (item) {
+        if (item === clickedItem) {
+          item.setAttribute('selected', '');
+        } else {
+          item.removeAttribute('selected');
+        }
+      }
+    });
+    console.log('Button group item clicked:', e.detail);
+    updateButtonGroupPlaygroundCode();
+  });
+}
+
+/**
+ * Update the input field playground code snippet
+ */
+function updateInputFieldPlaygroundCode() {
+  const codeEl = document.getElementById('input-playground-code');
+  if (!codeEl) return;
+
+  const input = document.getElementById('playground-input-field');
+  if (!input) return;
+
+  const type      = input.getAttribute('type') || 'default';
+  const label     = input.getAttribute('label') || '';
+  const hint      = input.getAttribute('hint') || '';
+  const leadingTx = input.getAttribute('leading-text') || '';
+  const hasLeadingIcon = input.hasAttribute('leading-icon');
+  const hasHelpIcon    = input.hasAttribute('help-icon');
+  const isDestructive  = input.hasAttribute('destructive');
+  const isDisabled     = input.hasAttribute('disabled');
+
+  let attrs = `\n  label="${label}"`;
+  if (type !== 'default') attrs += `\n  type="${type}"`;
+  if (type === 'leading-text' && leadingTx) attrs += `\n  leading-text="${leadingTx}"`;
+  attrs += `\n  placeholder="olivia@untitledui.com"`;
+  if (hint) attrs += `\n  hint="${hint}"`;
+  if (hasLeadingIcon) attrs += `\n  leading-icon`;
+  if (hasHelpIcon)    attrs += `\n  help-icon`;
+  if (isDestructive)  attrs += `\n  destructive`;
+  if (isDisabled)     attrs += `\n  disabled`;
+
+  codeEl.textContent = `<kds-input-field${attrs}\n></kds-input-field>`;
+
+  if (typeof Prism !== 'undefined') {
+    Prism.highlightElement(codeEl);
+  }
+}
+
+/**
+ * Initialize input field playground
+ */
+function initInputFieldPlayground() {
+  const input = document.getElementById('playground-input-field');
+  if (!input) return;
+
+  const typeSelect      = document.getElementById('playground-input-type');
+  const labelInput      = document.getElementById('playground-input-label');
+  const hintInput       = document.getElementById('playground-input-hint');
+  const leadingTxInput  = document.getElementById('playground-input-leading-text');
+  const leadingIconCb   = document.getElementById('playground-input-leading-icon');
+  const helpIconCb      = document.getElementById('playground-input-help-icon');
+  const destructiveCb   = document.getElementById('playground-input-destructive');
+  const disabledCb      = document.getElementById('playground-input-disabled');
+
+  // Sync initial label value (component HTML already has label="Email" but ensure it matches control)
+  if (labelInput && labelInput.value) input.setAttribute('label', labelInput.value);
+
+  updateInputFieldPlaygroundCode();
+
+  if (typeSelect) {
+    typeSelect.addEventListener('change', (e) => {
+      const newType = e.target.value;
+      input.setAttribute('type', newType);
+
+      // Remove any previously injected demo slot content
+      input.querySelectorAll('[data-playground-slot]').forEach(el => el.remove());
+
+      if (newType === 'leading-text' && leadingTxInput && leadingTxInput.value) {
+        input.setAttribute('leading-text', leadingTxInput.value);
+      }
+
+      if (newType === 'leading-dropdown') {
+        const btn = document.createElement('button');
+        btn.setAttribute('slot', 'leading-dropdown');
+        btn.setAttribute('data-playground-slot', '');
+        btn.setAttribute('type', 'button');
+        btn.style.cssText = 'display:flex;align-items:center;gap:6px;padding:10px 12px;border:none;background:none;cursor:pointer;font-size:14px;color:#414651;white-space:nowrap;';
+        btn.innerHTML = '🇺🇸 +1 <svg viewBox="0 0 16 16" fill="none" style="width:12px;height:12px;flex-shrink:0"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        input.appendChild(btn);
+      }
+
+      if (newType === 'trailing-dropdown') {
+        const btn = document.createElement('button');
+        btn.setAttribute('slot', 'trailing-dropdown');
+        btn.setAttribute('data-playground-slot', '');
+        btn.setAttribute('type', 'button');
+        btn.style.cssText = 'display:flex;align-items:center;gap:6px;padding:10px 12px;border:none;background:none;cursor:pointer;font-size:14px;color:#414651;white-space:nowrap;';
+        btn.innerHTML = 'USD <svg viewBox="0 0 16 16" fill="none" style="width:12px;height:12px;flex-shrink:0"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        input.appendChild(btn);
+      }
+
+      updateInputFieldPlaygroundCode();
+    });
+  }
+
+  if (labelInput) {
+    labelInput.addEventListener('input', (e) => {
+      input.setAttribute('label', e.target.value);
+      updateInputFieldPlaygroundCode();
+    });
+  }
+
+  if (hintInput) {
+    hintInput.addEventListener('input', (e) => {
+      const val = e.target.value;
+      if (val) input.setAttribute('hint', val);
+      else input.removeAttribute('hint');
+      updateInputFieldPlaygroundCode();
+    });
+  }
+
+  if (leadingTxInput) {
+    leadingTxInput.addEventListener('input', (e) => {
+      input.setAttribute('leading-text', e.target.value);
+      updateInputFieldPlaygroundCode();
+    });
+  }
+
+  if (leadingIconCb) {
+    leadingIconCb.addEventListener('change', (e) => {
+      if (e.target.checked) input.setAttribute('leading-icon', '');
+      else input.removeAttribute('leading-icon');
+      updateInputFieldPlaygroundCode();
+    });
+  }
+
+  if (helpIconCb) {
+    helpIconCb.addEventListener('change', (e) => {
+      if (e.target.checked) input.setAttribute('help-icon', '');
+      else input.removeAttribute('help-icon');
+      updateInputFieldPlaygroundCode();
+    });
+  }
+
+  if (destructiveCb) {
+    destructiveCb.addEventListener('change', (e) => {
+      if (e.target.checked) input.setAttribute('destructive', '');
+      else input.removeAttribute('destructive');
+      updateInputFieldPlaygroundCode();
+    });
+  }
+
+  if (disabledCb) {
+    disabledCb.addEventListener('change', (e) => {
+      if (e.target.checked) input.setAttribute('disabled', '');
+      else input.removeAttribute('disabled');
+      updateInputFieldPlaygroundCode();
+    });
+  }
+
+  input.addEventListener('kds-help-click', () => {
+    console.log('Playground: help icon clicked');
+  });
 }
 
 /**

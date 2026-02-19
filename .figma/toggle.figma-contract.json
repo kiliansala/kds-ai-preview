@@ -1,5 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Toggle Component Contract",
   "description": "Contract extracted from Figma Untitled UI Toggle component. This defines all required properties that the LIT component must implement.",
   "source": {

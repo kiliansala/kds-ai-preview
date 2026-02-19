@@ -16,7 +16,6 @@
  * 4. Generates TypeScript interface (.figma/<component>.figma-contract.ts)
  */
 
-import { writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 

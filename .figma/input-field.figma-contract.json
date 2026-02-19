@@ -1,0 +1,245 @@
+{
+  "title": "Input Field Component Contract",
+  "description": "Contract extracted from Figma Untitled UI Input field component. Defines all properties the LIT component must implement.",
+  "source": {
+    "figmaFileId": "CICp1MWc31lkvjX3jYo1rj",
+    "componentId": "1090:57817",
+    "componentName": "Input field",
+    "extractedAt": "2026-02-18T00:00:00Z",
+    "mcp": "figma-desktop",
+    "notes": "Extracted via Figma Desktop MCP get_design_context on frame 1090:57817 and representative variant nodes"
+  },
+  "properties": {
+    "type": {
+      "description": "Input field variant type",
+      "type": "enum",
+      "required": true,
+      "values": ["default", "leading-dropdown", "trailing-dropdown", "leading-text", "payment"],
+      "default": "default",
+      "figmaProperty": "Type",
+      "figmaValues": {
+        "Default": "default",
+        "Leading dropdown": "leading-dropdown",
+        "Trailing dropdown": "trailing-dropdown",
+        "Leading text": "leading-text",
+        "Input field": "default",
+        "Payment input": "payment"
+      },
+      "notes": "Figma 'Input field' maps to 'default'. 'Payment input' shows card brand icon in leading slot."
+    },
+    "label": {
+      "description": "Label text displayed above the input. Empty string = no label.",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "figmaProperty": "Label",
+      "notes": "Figma prop is boolean (Label=True/False). In code it's a string to carry the label text."
+    },
+    "hint": {
+      "description": "Helper/hint text displayed below the input. In destructive state, renders as error message.",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "figmaProperty": "Hint text",
+      "notes": "Figma prop is boolean (Hint text=True/False). In code it's a string."
+    },
+    "placeholder": {
+      "description": "Placeholder text shown when input is empty.",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "figmaProperty": "n/a (content within state=Placeholder)",
+      "notes": "Figma shows 'olivia@untitledui.com' as placeholder example."
+    },
+    "value": {
+      "description": "Current input value. Controls Placeholder vs Filled visual state.",
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "name": {
+      "description": "HTML name attribute for form participation.",
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "inputType": {
+      "description": "HTML input type attribute.",
+      "type": "string",
+      "required": false,
+      "default": "text",
+      "notes": "Standard HTML input types: text, email, password, number, tel, url, search, etc."
+    },
+    "destructive": {
+      "description": "Error/destructive state. Changes border to red, shows alert icon, styles hint text as error.",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "Destructive",
+      "figmaValues": {
+        "False": false,
+        "True": true
+      }
+    },
+    "disabled": {
+      "description": "Disabled state. Maps to Figma State=Disabled.",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "State",
+      "figmaValues": {
+        "Disabled": true
+      }
+    },
+    "leadingIcon": {
+      "description": "Show leading icon slot (left side of input).",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "Leading icon"
+    },
+    "helpIcon": {
+      "description": "Show help/question-mark icon button (right side of input, before trailing elements).",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "figmaProperty": "Help icon"
+    },
+    "leadingText": {
+      "description": "Text prefix shown inside input on left (used with type='leading-text'). E.g. 'http://', '$'.",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "figmaProperty": "n/a (visual content in Leading text variant)"
+    },
+    "required": {
+      "description": "HTML required attribute for form validation.",
+      "type": "boolean",
+      "required": false,
+      "default": false
+    }
+  },
+  "states": {
+    "placeholder": {
+      "figmaValue": "State=Placeholder",
+      "description": "Input has no value. Text color is Gray/500.",
+      "trigger": "value is empty"
+    },
+    "filled": {
+      "figmaValue": "State=Filled",
+      "description": "Input has a value. Text color is Gray/900.",
+      "trigger": "value is non-empty"
+    },
+    "focused": {
+      "figmaValue": "State=Focused",
+      "description": "Input is focused. Brand border + focus ring.",
+      "trigger": ":focus-within CSS"
+    },
+    "disabled": {
+      "figmaValue": "State=Disabled",
+      "description": "Input is non-interactive. Gray/50 background, muted text.",
+      "trigger": "disabled attribute"
+    }
+  },
+  "designTokens": {
+    "input": {
+      "background": "#FFFFFF",
+      "borderRadius": "8px",
+      "paddingX": "14px",
+      "paddingY": "10px",
+      "gap": "8px",
+      "fontSize": "16px",
+      "lineHeight": "24px",
+      "fontWeight": "400",
+      "fontFamily": "Inter"
+    },
+    "label": {
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "fontWeight": "500",
+      "color": "#414651",
+      "marginBottom": "6px"
+    },
+    "hint": {
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "fontWeight": "400",
+      "color": "#535862",
+      "marginTop": "6px"
+    },
+    "borders": {
+      "default": "#D5D7DA",
+      "focused": "#D6BBFB",
+      "destructive": "#FDA29B",
+      "disabled": "#D5D7DA"
+    },
+    "shadows": {
+      "default": "0px 1px 2px 0px rgba(10, 13, 18, 0.05)",
+      "focused": "0px 0px 0px 4px #F4EBFF, 0px 1px 2px 0px rgba(10, 13, 18, 0.05)",
+      "focusedDestructive": "0px 0px 0px 4px #FEF3F2, 0px 1px 2px 0px rgba(10, 13, 18, 0.05)"
+    },
+    "text": {
+      "placeholder": "#717680",
+      "value": "#181D27",
+      "label": "#414651",
+      "hint": "#535862",
+      "error": "#D92D20",
+      "disabled": "#A4ACBA"
+    },
+    "backgrounds": {
+      "default": "#FFFFFF",
+      "disabled": "#F9FAFB"
+    },
+    "icons": {
+      "leading": "20x20px, color #717680 (placeholder) / #181D27 (filled)",
+      "alertCircle": "16x16px, color #F04438 (Error/500)",
+      "helpCircle": "16x16px, color #717680"
+    }
+  },
+  "slots": {
+    "default": "Label text (deprecated, use label prop)",
+    "leading-icon": "Custom SVG icon for leading icon slot",
+    "leading-dropdown": "Dropdown trigger element for leading-dropdown variant",
+    "trailing-dropdown": "Dropdown trigger element for trailing-dropdown variant"
+  },
+  "events": {
+    "kds-input": "Fired on every input change. detail: { value: string }",
+    "kds-change": "Fired on input blur after value change. detail: { value: string }",
+    "kds-help-click": "Fired when help icon is clicked"
+  },
+  "validation": {
+    "requiredProps": ["type"],
+    "optionalProps": ["label", "hint", "placeholder", "value", "name", "inputType", "destructive", "disabled", "leadingIcon", "helpIcon", "leadingText", "required"],
+    "notes": [
+      "State (Placeholder/Filled/Focused/Disabled) is derived, not a prop: Placeholder=empty value, Filled=has value, Focused=:focus-within, Disabled=disabled attr",
+      "Destructive can combine with any state except Disabled in Figma",
+      "When destructive=true, border becomes Error/300, alert-circle icon appears trailing",
+      "When destructive=true and hint is set, hint text renders as error message",
+      "Leading icon uses a named slot for custom SVGs",
+      "Leading text (type=leading-text) uses leadingText prop for prefix like 'http://' or '$'",
+      "Help icon fires kds-help-click event; consumer handles tooltip/popover",
+      "Form participation: delegates to internal <input> for name/value/required"
+    ]
+  },
+  "_extraction_status": {
+    "status": "COMPLETE",
+    "extractedAt": "2026-02-18T00:00:00Z",
+    "extractedBy": "Figma MCP Desktop Server",
+    "dataSource": "get_design_context on nodes: 1091:63799, 1091:63795, 1091:63801, 1094:7188",
+    "verified": true,
+    "variantsAnalyzed": [
+      "1091:63799 (Default, no icon, no label, no hint, placeholder)",
+      "1091:63795 (Default, no icon, label=true, hint=true, placeholder)",
+      "1091:63801 (Default, leadingIcon=true, no label, hint=true, focused)",
+      "1094:7188 (Default, no icon, no label, destructive=true, filled)"
+    ],
+    "notes": [
+      "6 type variants x 2 leadingIcon x 2 label x 2 hintText x 2 helpIcon x 2 destructive x 4 states = ~384 variants total",
+      "Focus ring uses Brand/100 (#F4EBFF) for normal, Error/100 (#FEF3F2) for destructive",
+      "Focused border: Brand/300 (#D6BBFB) normal, Error/300 (#FDA29B) destructive",
+      "Alert circle (16px) appears trailing when destructive=true (any state)",
+      "Leading icon (20px) shown when leadingIcon=true",
+      "Help icon (16px) shown when helpIcon=true, between input text and alert circle"
+    ]
+  }
+}

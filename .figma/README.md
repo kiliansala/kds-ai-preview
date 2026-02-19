@@ -1,107 +1,107 @@
-# Extracción de Componentes desde Figma
+# Component Extraction from Figma
 
-> Proceso para extraer propiedades de componentes desde Figma vía Claude CLI + MCP
+> Process for extracting component properties from Figma via Claude CLI + MCP
 
-## Proceso de Extracción
+## Extraction Process
 
-**IMPORTANTE**: La extracción se realiza usando **Claude CLI** con **Figma Desktop MCP Server**, NO directamente en Claude Code.
+**IMPORTANT**: Extraction is performed using **Claude CLI** with **Figma Desktop MCP Server**, NOT directly in Claude Code.
 
-### Paso 1: Preparar Figma Desktop
+### Step 1: Prepare Figma Desktop
 
-1. Abrir Figma Desktop con archivo **"Untitled UI v2.0"** (fileKey: `CICp1MWc31lkvjX3jYo1rj`)
-2. Navegar a la página de componentes base
-3. Activar **Dev Mode** en Figma
-4. **Seleccionar el componente** que quieres extraer (debe estar en foreground/seleccionado)
+1. Open Figma Desktop with the **"Untitled UI v2.0"** file (fileKey: `CICp1MWc31lkvjX3jYo1rj`)
+2. Navigate to the base components page
+3. Enable **Dev Mode** in Figma
+4. **Select the component** you want to extract (must be in the foreground/selected)
 
-### Paso 2: Extraer en Claude CLI
+### Step 2: Extract in Claude CLI
 
-Con el componente seleccionado, ejecutar en Claude CLI:
+With the component selected, run in Claude CLI:
 
 ```
-Extrae el componente seleccionado en Figma usando get_design_context.
-Dame el output completo con todas las propiedades del componente:
+Extract the selected Figma component using get_design_context.
+Give me the complete output with all component properties:
 - NodeId
-- Propiedades (size, state, type, etc.)
-- Valores posibles para cada propiedad
-- Valores por defecto
-- Medidas y spacing
-- Colores y tokens de diseño
+- Properties (size, state, type, etc.)
+- Possible values for each property
+- Default values
+- Measurements and spacing
+- Colors and design tokens
 ```
 
-### Paso 3: Pasar Output a Claude Code
+### Step 3: Pass Output to Claude Code
 
-Copiar el output completo y pegarlo en Claude Code para que genere los archivos de contrato.
-
----
-
-## NodeIds de Componentes Conocidos
-
-| Componente | NodeId | Status |
-|------------|--------|--------|
-| Button | `1038:34411` | ✅ Completado |
-| Checkbox | `1097:63652` | ✅ Completado |
-| Toggle | `1102:4208` | ✅ Extraído |
+Copy the complete output and paste it into Claude Code to generate the contract files.
 
 ---
 
-## Ejemplo Completo
+## Known Component NodeIds
+
+| Component | NodeId | Status |
+|-----------|--------|--------|
+| Button | `1038:34411` | Completed |
+| Checkbox | `1097:63652` | Completed |
+| Toggle | `1102:4208` | Extracted |
+
+---
+
+## Full Example
 
 ```bash
-# 1. En Figma Desktop:
-#    - Abrir "Untitled UI v2.0"
-#    - Activar Dev Mode
-#    - Seleccionar componente Toggle
+# 1. In Figma Desktop:
+#    - Open "Untitled UI v2.0"
+#    - Enable Dev Mode
+#    - Select the Toggle component
 
-# 2. En Claude CLI:
-> "Extrae el componente seleccionado en Figma usando get_design_context.
-   Dame el output completo con nodeId, propiedades, valores, medidas y tokens"
+# 2. In Claude CLI:
+> "Extract the selected Figma component using get_design_context.
+   Give me the complete output with nodeId, properties, values, measurements and tokens"
 
-# 3. Copiar output y pasarlo a Claude Code
+# 3. Copy output and pass it to Claude Code
 ```
 
 ---
 
-## Archivos Generados
+## Generated Files
 
-Después de la extracción, se crean:
+After extraction, the following files are created:
 
-### 1. Contrato JSON
+### 1. JSON Contract
 **`.figma/{component}.figma-contract.json`**
 
-Schema con todas las propiedades del componente.
+Schema with all component properties.
 
 **Template**: [button.figma-contract.json](button.figma-contract.json)
 
-### 2. Contrato TypeScript
+### 2. TypeScript Contract
 **`.figma/{component}.figma-contract.ts`**
 
-Tipos TypeScript y constante para validación.
+TypeScript types and constant for validation.
 
 **Template**: [button.figma-contract.ts](button.figma-contract.ts)
 
 ---
 
-## Workflow Completo
+## Full Workflow
 
-1. **Extracción Figma** (este proceso) → Obtener propiedades
-2. **Crear contratos** (.json + .ts) → Definir schema
-3. **Implementación LIT** → Componente web
-4. **Validación contrato** → Verificar 100% fidelidad
-5. **Validación A11y** → WCAG 2.1 AA compliance
-6. **Framework wrappers** → React, Angular, Blazor
-7. **Documentación** → index.html interactivo
-8. **Testing final** → Validaciones + manual
+1. **Figma Extraction** (this process) -> Get properties
+2. **Create contracts** (.json + .ts) -> Define schema
+3. **LIT Implementation** -> Web component
+4. **Contract validation** -> Verify 100% fidelity
+5. **A11y validation** -> WCAG 2.1 AA compliance
+6. **Framework wrappers** -> React, Angular, Blazor
+7. **Documentation** -> Interactive index.html
+8. **Final testing** -> Validations + manual
 
-Ver detalles en [../docs/DEVELOPMENT.md](../docs/DEVELOPMENT.md)
+See details in [../docs/DEVELOPMENT.md](../docs/DEVELOPMENT.md)
 
 ---
 
-## Referencias
+## References
 
-- **Workflow completo**: [docs/DEVELOPMENT.md](../docs/DEVELOPMENT.md)
+- **Full workflow**: [docs/DEVELOPMENT.md](../docs/DEVELOPMENT.md)
 - **Templates**: [button.figma-contract.json](button.figma-contract.json), [button.figma-contract.ts](button.figma-contract.ts)
-- **Progreso**: [../ROADMAP.md](../ROADMAP.md)
+- **Progress**: [../ROADMAP.md](../ROADMAP.md)
 
 ---
 
-*Última actualización: 2026-02-11*
+*Last updated: 2026-02-11*

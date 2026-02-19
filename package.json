@@ -18,7 +18,10 @@
     "tokens:extract": "node scripts/extract-tokens.js",
     "components:build": "npm run build --workspace=packages/web-components",
     "wrappers:build": "npm run build --workspaces --workspace=packages/wrappers",
-    "validate:button": "tsx scripts/validate-button-contract.ts"
+    "validate:button": "tsx scripts/validate-button-contract.ts",
+    "validate:badge": "tsx scripts/validate-badge-contract.ts",
+    "validate:badge:a11y": "tsx scripts/validate-badge-a11y.ts",
+    "test:badge": "tsx scripts/test-badge-component.ts"
   },
   "devDependencies": {
     "@types/node": "^25.2.3",
