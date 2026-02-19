@@ -3,7 +3,7 @@
  * Handles tabs, playground, code copying, and navigation
  */
 
-import { marked } from 'https://cdn.jsdelivr.net/npm/marked@14/+esm';
+import { marked } from 'marked';
 import introMd from '../../../docs/INTRO.md?raw';
 import architectureMd from '../../../docs/ARCHITECTURE.md?raw';
 import developmentMd from '../../../docs/DEVELOPMENT.md?raw';
