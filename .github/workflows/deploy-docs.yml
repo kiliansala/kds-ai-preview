@@ -27,19 +27,14 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: packages/web-components/package-lock.json
+          cache-dependency-path: package-lock.json
 
-      - name: Install tokens dependencies
-        working-directory: packages/tokens
+      - name: Install dependencies
         run: npm ci
 
       - name: Build tokens
         working-directory: packages/tokens
         run: npm run build
-
-      - name: Install web-components dependencies
-        working-directory: packages/web-components
-        run: npm ci
 
       - name: Build docs
         working-directory: packages/web-components
