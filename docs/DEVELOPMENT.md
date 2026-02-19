@@ -168,6 +168,36 @@ Update `packages/web-components/index.html` with:
 - Complete API (Properties, Events, Slots)
 - Accessibility (WCAG 2.1 AA)
 
+### 9. Validate Documentation Page
+
+Run the docs page validator to ensure the component's Vite page meets the Button standard.
+
+```bash
+# Validate a specific component
+npm run validate:docs:input-field --workspace=@kds/web-components
+
+# Or directly
+tsx scripts/validate-docs-page.ts input-field
+```
+
+**What it checks** (using Button as reference):
+
+| Group | Checks |
+|---|---|
+| **[1] Structure** | Header with title, description, status badges |
+| **[2] Tabs** | All 6 tabs: overview, variants, tokens, usage, api, accessibility |
+| **[3] Overview** | Quick Start section, Playground with `id="playground-{name}"`, dynamic `<code id="...">`, controls |
+| **[4] Code Blocks** | Every `.docs-code-block` has a `.docs-copy-button` with SVG icon; every `data-copy="X"` has matching `id="X"` |
+| **[5] Design Tokens** | `<h3>Colors</h3>` with `.docs-token-swatch` using CSS vars; Typography + Component-Specific sections |
+| **[6] Usage** | 4 framework tabs (web-component, react, angular, blazor) each with Installation, Import, Basic Example |
+| **[7] API** | Properties (4 columns), Events, Slots, CSS Custom Properties tables |
+| **[8] Accessibility** | WCAG badges, Keyboard Navigation, Screen Reader, Color Contrast sections |
+| **[9] Playground JS** | `init{Component}Playground()` and `update{Component}PlaygroundCode()` in `app.js` |
+
+**Exit codes**: `0` = all pass, `1` = errors found (warnings are non-blocking).
+
+**Fix all errors before marking the component as complete.**
+
 ---
 
 ## Available Scripts
