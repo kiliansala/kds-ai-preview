@@ -33,6 +33,18 @@ if (document.readyState === 'loading') {
   init();
 }
 
+// Page IDs used in the sidebar navigation
+const MD_PAGE_IDS = new Set(['readme', 'architecture', 'development', 'accessibility', 'roadmap']);
+
+// Marked renderer: strip heading IDs to avoid conflicts with sidebar page IDs
+marked.use({
+  renderer: {
+    heading({ text, depth }) {
+      return `<h${depth}>${text}</h${depth}>\n`;
+    }
+  }
+});
+
 /**
  * Render markdown pages from .md source files
  */
@@ -49,7 +61,66 @@ function initMarkdownPages() {
     const container = document.getElementById(id);
     if (!container) return;
     container.innerHTML = marked.parse(content);
+    fixMarkdownLinks(container);
     if (window.Prism) Prism.highlightAllUnder(container);
+  });
+}
+
+/**
+ * Fix links inside rendered markdown:
+ * - Internal .md file links → map to sidebar navigation
+ * - Unknown relative links → open in new tab or disable
+ */
+function fixMarkdownLinks(container) {
+  // Map from .md filenames to page IDs
+  const mdToPage = {
+    'README.md': 'readme',
+    'docs/ARCHITECTURE.md': 'architecture',
+    'docs/DEVELOPMENT.md': 'development',
+    'docs/ACCESSIBILITY.md': 'accessibility',
+    'ROADMAP.md': 'roadmap',
+    'ARCHITECTURE.md': 'architecture',
+    'DEVELOPMENT.md': 'development',
+    'ACCESSIBILITY.md': 'accessibility',
+  };
+
+  container.querySelectorAll('a[href]').forEach(a => {
+    const href = a.getAttribute('href');
+
+    // Internal anchor that matches a page ID → trigger nav
+    if (href.startsWith('#') && MD_PAGE_IDS.has(href.slice(1))) {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(`.docs-nav-link[href="${href}"]`)?.click();
+      });
+      return;
+    }
+
+    // .md file reference → map to page nav
+    const pageId = mdToPage[href] || mdToPage[href.replace(/^.*\//, '')];
+    if (pageId) {
+      a.setAttribute('href', '#' + pageId);
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(`.docs-nav-link[href="#${pageId}"]`)?.click();
+      });
+      return;
+    }
+
+    // External link → open in new tab
+    if (href.startsWith('http')) {
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      return;
+    }
+
+    // Other relative links → disable (they'd 404 in the browser)
+    if (!href.startsWith('#')) {
+      a.removeAttribute('href');
+      a.style.cursor = 'default';
+      a.style.textDecoration = 'none';
+      a.style.color = 'inherit';
+    }
   });
 }
 
@@ -578,8 +649,10 @@ function initNavigation() {
       });
       targetElement.style.display = 'block';
 
-      // Scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Scroll to top — try the main container first, fall back to window
+      const mainEl = document.querySelector('.docs-main');
+      if (mainEl) mainEl.scrollTop = 0;
+      window.scrollTo({ top: 0 });
 
       // Re-highlight code blocks on the new page
       setTimeout(() => {
