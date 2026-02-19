@@ -2,6 +2,22 @@
 
 > **Commitment to accessibility**: All KDS components follow WCAG 2.1 AA standards
 
+## Table of Contents
+
+- [Overview](#overview)
+- [WCAG 2.1 Compliance](#wcag-21-compliance)
+- [Accessibility Validation System](#accessibility-validation-system)
+- [Component-Specific Guidelines](#component-specific-guidelines)
+- [Design Tokens & Accessibility](#design-tokens--accessibility)
+- [Testing Checklist](#testing-checklist)
+- [Common Patterns](#common-patterns)
+- [Tools & Resources](#tools--resources)
+- [Future Improvements](#future-improvements)
+- [Validation Script Output](#validation-script-output)
+- [Contact & Support](#contact--support)
+
+---
+
 ## Overview
 
 This guide documents our accessibility standards, validation processes, and best practices for the KDS Component Library. Every component must pass both design contract validation AND accessibility validation before being released.

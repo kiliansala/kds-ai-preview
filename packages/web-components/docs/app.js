@@ -10,37 +10,6 @@ import developmentMd from '../../../docs/DEVELOPMENT.md?raw';
 import accessibilityMd from '../../../docs/ACCESSIBILITY.md?raw';
 import roadmapMd from '../../../ROADMAP.md?raw';
 
-// Modules are deferred — DOM is already parsed when this runs
-function init() {
-  // Navigation first — must work even if playground inits fail
-  initNavigation();
-  initMarkdownPages();
-  initTabs();
-  initFrameworkTabs();
-  initCopyButtons();
-  initSyntaxHighlighting();
-
-  // Playground inits are non-critical — isolate failures
-  const playgrounds = [
-    initPlayground,
-    initCheckboxPlayground,
-    initTogglePlayground,
-    initTooltipPlayground,
-    initBadgePlayground,
-    initButtonGroupPlayground,
-    initInputFieldPlayground,
-  ];
-  for (const fn of playgrounds) {
-    try { fn(); } catch (err) { console.error(`[KDS] ${fn.name} failed:`, err); }
-  }
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
-
 // Page IDs used in the sidebar navigation
 const MD_PAGE_IDS = new Set(['readme', 'architecture', 'development', 'accessibility', 'roadmap']);
 
@@ -52,6 +21,34 @@ marked.use({
     }
   }
 });
+
+// Modules are deferred — DOM is already parsed when this runs
+function init() {
+  const fns = [
+    initNavigation,
+    initMarkdownPages,
+    initTabs,
+    initFrameworkTabs,
+    initCopyButtons,
+    initSyntaxHighlighting,
+    initPlayground,
+    initCheckboxPlayground,
+    initTogglePlayground,
+    initTooltipPlayground,
+    initBadgePlayground,
+    initButtonGroupPlayground,
+    initInputFieldPlayground,
+  ];
+  for (const fn of fns) {
+    try { fn(); } catch (err) { console.error(`[KDS] ${fn.name} failed:`, err); }
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
 /**
  * Render markdown pages from .md source files
@@ -134,26 +131,27 @@ function fixMarkdownLinks(container) {
 
 /**
  * Initialize main tabs (Overview, Variants, Tokens, Usage, API)
+ * Scoped per component so tabs in one component don't affect others.
  */
 function initTabs() {
-  const tabs = document.querySelectorAll('.docs-tab');
-  const tabContents = document.querySelectorAll('.docs-tab-content');
+  document.querySelectorAll('.docs-component').forEach(component => {
+    const tabs = component.querySelectorAll('.docs-tab');
+    const tabContents = component.querySelectorAll('.docs-tab-content');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetTab = tab.dataset.tab;
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetTab = tab.dataset.tab;
 
-      // Update active tab
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
 
-      // Update active content
-      tabContents.forEach(content => {
-        if (content.dataset.tabContent === targetTab) {
-          content.classList.add('active');
-        } else {
-          content.classList.remove('active');
-        }
+        tabContents.forEach(content => {
+          if (content.dataset.tabContent === targetTab) {
+            content.classList.add('active');
+          } else {
+            content.classList.remove('active');
+          }
+        });
       });
     });
   });
@@ -161,26 +159,27 @@ function initTabs() {
 
 /**
  * Initialize framework tabs (Web Component, React, Angular, Blazor)
+ * Scoped per component.
  */
 function initFrameworkTabs() {
-  const frameworkTabs = document.querySelectorAll('.docs-framework-tab');
-  const frameworkContents = document.querySelectorAll('.docs-framework-content');
+  document.querySelectorAll('.docs-component').forEach(component => {
+    const frameworkTabs = component.querySelectorAll('.docs-framework-tab');
+    const frameworkContents = component.querySelectorAll('.docs-framework-content');
 
-  frameworkTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetFramework = tab.dataset.framework;
+    frameworkTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetFramework = tab.dataset.framework;
 
-      // Update active tab
-      frameworkTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+        frameworkTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
 
-      // Update active content
-      frameworkContents.forEach(content => {
-        if (content.dataset.frameworkContent === targetFramework) {
-          content.classList.add('active');
-        } else {
-          content.classList.remove('active');
-        }
+        frameworkContents.forEach(content => {
+          if (content.dataset.frameworkContent === targetFramework) {
+            content.classList.add('active');
+          } else {
+            content.classList.remove('active');
+          }
+        });
       });
     });
   });
@@ -1145,22 +1144,6 @@ function debounce(func, wait) {
     timeout = setTimeout(later, wait);
   };
 }
-
-/**
- * Add smooth scroll behavior
- */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  });
-});
 
 /**
  * Console welcome message

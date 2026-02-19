@@ -2,6 +2,19 @@
 
 > Detailed progress tracking for the project
 
+## Table of Contents
+
+- [Current Status](#current-status)
+- [Important Technical Decisions](#important-technical-decisions)
+- [Progress Metrics](#progress-metrics)
+- [Implementation Strategy](#implementation-strategy)
+- [Next Steps](#next-steps)
+- [Mitigated Risks](#mitigated-risks)
+- [Remaining Risks](#remaining-risks)
+- [References](#references)
+
+---
+
 ## Current Status
 
 **Last updated**: 2026-02-18

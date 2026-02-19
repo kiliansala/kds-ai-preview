@@ -2,6 +2,17 @@
 
 > AI-generated Design System PoC — Figma as Single Source of Truth, components validated end-to-end across React, Angular, and Blazor.
 
+## Table of Contents
+
+- [What is this?](#what-is-this)
+- [Key Pillars](#key-pillars)
+- [Components](#components)
+- [Quick Start](#quick-start)
+- [Using a Component](#using-a-component)
+- [Project](#project)
+
+---
+
 ## What is this?
 
 KDS AI Preview demonstrates how to build an automated Design System where **Figma is the single source of truth**. Every component is extracted from Figma via MCP, validated against a design contract, and shipped as a framework-agnostic web component with wrappers for React, Angular, and Blazor.

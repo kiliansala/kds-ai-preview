@@ -2,6 +2,21 @@
 
 > Development guide and tooling for KDS AI Preview
 
+## Table of Contents
+
+- [Philosophy](#philosophy)
+- [Quick Start](#quick-start)
+- [Workflow: New Component](#workflow-new-component)
+- [Available Scripts](#available-scripts)
+- [File Structure](#file-structure)
+- [Build Process](#build-process)
+- [Contract Validation](#contract-validation)
+- [Accessibility Validation](#accessibility-validation)
+- [Troubleshooting](#troubleshooting)
+- [References](#references)
+
+---
+
 ## Philosophy
 
 This project uses **Figma as Single Source of Truth (SSOT)**. LIT components implement exactly the properties defined in Figma through:
