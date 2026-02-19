@@ -12,19 +12,27 @@ import roadmapMd from '../../../ROADMAP.md?raw';
 
 // Modules are deferred — DOM is already parsed when this runs
 function init() {
+  // Navigation first — must work even if playground inits fail
+  initNavigation();
   initMarkdownPages();
   initTabs();
   initFrameworkTabs();
-  initPlayground();
-  initCheckboxPlayground();
-  initTogglePlayground();
-  initTooltipPlayground();
-  initBadgePlayground();
-  initButtonGroupPlayground();
-  initInputFieldPlayground();
   initCopyButtons();
-  initNavigation();
   initSyntaxHighlighting();
+
+  // Playground inits are non-critical — isolate failures
+  const playgrounds = [
+    initPlayground,
+    initCheckboxPlayground,
+    initTogglePlayground,
+    initTooltipPlayground,
+    initBadgePlayground,
+    initButtonGroupPlayground,
+    initInputFieldPlayground,
+  ];
+  for (const fn of playgrounds) {
+    try { fn(); } catch (err) { console.error(`[KDS] ${fn.name} failed:`, err); }
+  }
 }
 
 if (document.readyState === 'loading') {
@@ -618,49 +626,46 @@ function initCopyButtons() {
 }
 
 /**
- * Initialize sidebar navigation
+ * Initialize sidebar navigation using event delegation
  */
 function initNavigation() {
-  const navLinks = document.querySelectorAll('.docs-nav-link:not(.docs-nav-link-disabled)');
-  const allPages = document.querySelectorAll('.docs-page, .docs-component');
+  const sidebar = document.querySelector('.docs-sidebar');
+  if (!sidebar) return;
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
+  sidebar.addEventListener('click', (e) => {
+    const link = e.target.closest('.docs-nav-link:not(.docs-nav-link-disabled)');
+    if (!link) return;
+    e.preventDefault();
 
-      // Get target from href (for getting started pages) or data-component (for components)
-      let targetId;
-      if (link.dataset.component) {
-        targetId = `component-${link.dataset.component}`;
-      } else {
-        targetId = link.getAttribute('href').substring(1); // Remove # from href
-      }
+    // Get target from data-component (components) or href (getting started pages)
+    const targetId = link.dataset.component
+      ? `component-${link.dataset.component}`
+      : link.getAttribute('href')?.substring(1);
 
-      const targetElement = document.getElementById(targetId);
-      if (!targetElement) return;
+    const targetElement = targetId && document.getElementById(targetId);
+    if (!targetElement) return;
 
-      // Update active nav link
-      navLinks.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
+    // Update active nav link
+    sidebar.querySelectorAll('.docs-nav-link').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
 
-      // Hide all pages and show target
-      allPages.forEach(page => {
-        page.style.display = 'none';
-      });
-      targetElement.style.display = 'block';
-
-      // Scroll to top — try the main container first, fall back to window
-      const mainEl = document.querySelector('.docs-main');
-      if (mainEl) mainEl.scrollTop = 0;
-      window.scrollTo({ top: 0 });
-
-      // Re-highlight code blocks on the new page
-      setTimeout(() => {
-        if (typeof Prism !== 'undefined') {
-          Prism.highlightAll();
-        }
-      }, 50);
+    // Hide all pages and show target
+    document.querySelectorAll('.docs-page, .docs-component').forEach(page => {
+      page.style.display = 'none';
     });
+    targetElement.style.display = 'block';
+
+    // Scroll to top
+    const mainEl = document.querySelector('.docs-main');
+    if (mainEl) mainEl.scrollTop = 0;
+    window.scrollTo({ top: 0 });
+
+    // Re-highlight code blocks on the new page
+    setTimeout(() => {
+      if (typeof Prism !== 'undefined') {
+        Prism.highlightAll();
+      }
+    }, 50);
   });
 }
 
