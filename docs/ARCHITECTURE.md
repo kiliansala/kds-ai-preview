@@ -2,7 +2,7 @@
 
 > Complete end-to-end flow documentation: Figma -> Design System -> Framework Wrappers
 
-**Last updated**: 2026-02-10
+**Last updated**: 2026-02-19
 
 ## Table of Contents
 
@@ -26,9 +26,9 @@ This project is a **Proof of Concept (PoC)** demonstrating how to build an autom
 - **DTCG** (Design Tokens Community Group) for tokens
 - **Framework wrappers** for React, Angular, and Blazor
 
-### Philosophy: Button-First
+### Philosophy: Button-First, Then Scale
 
-Complete the **entire** flow with the Button component before scaling to other components. Button serves as a **reusable template** for Input, Checkbox, Radio, etc.
+Complete the **entire** flow with the Button component first, then replicate the validated workflow. 7 components completed to date: Button, Checkbox, Toggle, Tooltip, Badge, Button Group, Input Field.
 
 ---
 
@@ -76,11 +76,12 @@ Complete the **entire** flow with the Button component before scaling to other c
 |                    WEB COMPONENTS (LIT)                        |
 |                packages/web-components/                        |
 |                                                                |
-|  kds-button.ts                                                |
-|  - @customElement('kds-button')                               |
-|  - @property decorators                                       |
-|  - CSS with var(--kds-*)                                      |
-|  - Validated against Figma contract                           |
+|  kds-button.ts, kds-checkbox.ts, kds-toggle.ts               |
+|  kds-tooltip.ts, kds-badge.ts, kds-button-group.ts           |
+|  kds-input-field.ts                                           |
+|  - @customElement('kds-*')                                    |
+|  - @property decorators, CSS with var(--kds-*)                |
+|  - Validated against Figma contract (7 components)            |
 +----------------------------+----------------------------------+
                              |
            +-----------------+-----------------+
@@ -279,9 +280,9 @@ import '@kds/tokens/css'; // CSS import
 **Purpose:** Web components with LIT
 
 **Output:**
-- `dist/index.js` (31KB)
+- `dist/index.js` (bundled)
 - `dist/index.d.ts` (TypeScript declarations)
-- Exports: `KdsButton`, types
+- Exports: `KdsButton`, `KdsCheckbox`, `KdsToggle`, `KdsTooltip`, `KdsBadge`, `KdsButtonGroup`, `KdsInputField`, types
 
 **Usage:**
 ```typescript
@@ -381,7 +382,7 @@ tsx scripts/validate-button-contract.ts
 #### `validate-component-contract.ts`
 Generic validation template (reference).
 
-**Documentation:** `.figma/TOOLING-GUIDE.md` (500+ lines)
+**Documentation:** `docs/DEVELOPMENT.md`
 
 ---
 
@@ -483,12 +484,12 @@ Generic validation template (reference).
 | Package | Files | LOC (approx) |
 |---------|-------|---------------|
 | tokens | 4 | 250 |
-| web-components | 3 | 450 |
-| react wrapper | 3 | 200 |
-| angular wrapper | 4 | 250 |
-| blazor wrapper | 4 | 180 |
-| scripts | 3 | 700 |
-| **Total** | **21** | **~2000** |
+| web-components | 9+ | 3,500+ |
+| react wrapper | 9+ | 700+ |
+| angular wrapper | 9+ | 800+ |
+| blazor wrapper | 9+ | 600+ |
+| scripts | 15+ | 3,500+ |
+| **Total** | **80+** | **~12,000+** |
 
 ### Extracted Tokens
 
@@ -510,29 +511,24 @@ Generic validation template (reference).
 
 ---
 
-## Next Steps (Post-PoC)
+## Next Steps
 
-### Scaling to More Components
+### Remaining Components (Phase 6)
 
-1. **Input component**
-   - Copy Button tooling
-   - Extract contract via MCP
-   - Implement in LIT
-   - Create wrappers
+**Completed (7/13)**: Button, Checkbox, Toggle, Tooltip, Badge, Button Group, Input Field
 
-2. **Checkbox, Radio**
-   - Same flow
-   - Reuse validation scripts
+**Next**:
+1. **Checkbox Groups** - Reuses existing Checkbox (~5-7h)
+2. **Avatars** - Image/initials component (~4-5h)
+3. **Progress Indicators** - Linear/circular (~5-6h)
+4. **Dropdowns** - Complex with keyboard nav (~7-9h)
 
-3. **Select, Modal, etc.**
-   - More complex components
-   - Adjust tooling as needed
+**Blocked**: Tags, Text editors (locked in Figma)
 
 ### System Improvements
 
-- **Full automation:** Script that executes the entire flow
 - **Visual regression testing:** Compare Figma captures vs rendered
-- **Storybook:** Interactive documentation
+- **Automated tests:** Unit + integration tests
 - **CI/CD:** Automated validation in PRs
 
 ---
@@ -547,4 +543,4 @@ Generic validation template (reference).
 
 ---
 
-*Last revision: 2026-02-10 | Maintained by: Kilian Sala*
+*Last revision: 2026-02-19 | Maintained by: Kilian Sala*

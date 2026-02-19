@@ -30,7 +30,7 @@ Build a Design System where:
 | **Phase 3** | Framework Wrappers (React + Angular + Blazor) | Completed |
 | **Phase 4** | Documentation & Tooling | Completed |
 | **Phase 5** | Presentation & Demo | Completed |
-| **Phase 6** | Scaling to More Components | In progress (38%) |
+| **Phase 6** | Scaling to More Components | In progress (54%) |
 
 **Components:**
 - **Button** (100%) - Completed end-to-end with interactive documentation
@@ -38,9 +38,11 @@ Build a Design System where:
 - **Toggle** (100%) - Completed end-to-end with interactive documentation
 - **Tooltip** (100%) - Completed end-to-end with interactive documentation
 - **Badge** (100%) - Completed end-to-end with 13 colors, 8 icon variants
-- **6 base components** pending (Input, Avatar, Dropdowns, etc.)
+- **Button Group** (100%) - Completed end-to-end with interactive documentation
+- **Input Field** (100%) - Completed end-to-end with interactive documentation
+- **6 base components** pending (Checkbox Groups, Avatar, Dropdowns, etc.)
 
-**Repeatable workflow** completed across 5 components.
+**Repeatable 9-step workflow** completed across 7 components.
 
 ### Interactive Documentation
 
@@ -50,7 +52,7 @@ npm run dev --workspace=@kds/web-components
 ```
 
 The interactive documentation includes:
-- Playground with live controls for Button, Checkbox, Toggle, Tooltip, and Badge
+- Playground with live controls for all 7 components
 - All variants for each component
 - Documented design tokens
 - Copyable code for Web Component, React, Angular, Blazor
@@ -60,14 +62,14 @@ The interactive documentation includes:
 ### Next Steps
 
 **Immediate**:
-- Implement **Button groups** (reuses existing Button, ~3-4 hours)
-- Implement Checkbox groups (reuses existing Checkbox)
+- Implement **Checkbox Groups** (reuses existing Checkbox, ~5-7 hours)
 - Implement Avatars (~4-5 hours)
+- Implement Progress Indicators (~5-6 hours)
 
 **Phase 6 - Scaling** (in progress):
-- 13 base components from Untitled UI (5 completed, 6 pending)
-- Repeatable 8-step workflow (~5-7 hours per component)
-- Priority: Button groups, Checkbox groups, Avatars, Progress, Input (last)
+- 13 base components from Untitled UI (7 completed, 4 pending)
+- Repeatable 9-step workflow (~5-7 hours per component)
+- Priority: Checkbox Groups, Avatars, Progress, Dropdowns
 
 See [ROADMAP.md](ROADMAP.md) for detailed tracking and full list.
 
@@ -81,7 +83,7 @@ Design Contracts (.figma/*.json, *.ts)
 Design Tokens (@kds/tokens)
     | DTCG format (tokens.json, tokens.css)
 Web Components (@kds/web-components)
-    | LIT 3.x (kds-button.ts)
+    | LIT 3.x (7 components: button, checkbox, toggle, tooltip, badge, button-group, input-field)
 Framework Wrappers
     |-- React (@kds/react)
     |-- Angular (@kds/angular)
@@ -118,7 +120,7 @@ import { KdsButton } from '@kds/web-components';
 import '@kds/web-components/tokens.css';
 ```
 
-**Available components:** `<kds-button>`, `<kds-checkbox>`, `<kds-toggle>`, `<kds-tooltip>`, `<kds-badge>`
+**Available components:** `<kds-button>`, `<kds-checkbox>`, `<kds-toggle>`, `<kds-tooltip>`, `<kds-badge>`, `<kds-button-group>`, `<kds-input-field>`
 
 ### 3. [@kds/react](packages/wrappers/react/)
 React wrappers for web components.
@@ -268,17 +270,20 @@ Integrated in the build process:
 
 ## Design System
 
-### Philosophy: Button-First
+### Philosophy: Button-First, Then Scale
 
-Complete the **entire** flow with one component (Button) before scaling:
-1. Extraction from Figma (MCP)
-2. Contract validation
-3. Design tokens (DTCG)
-4. Web component (LIT)
-5. Framework wrappers (React, Angular, Blazor)
-6. Documentation
+Complete the **entire** 9-step flow with one component (Button) before scaling:
+1. Figma Extraction (MCP)
+2. Design Contracts (JSON + TypeScript)
+3. LIT Component
+4. Contract Validation
+5. A11y Validation
+6. Framework Wrappers (React, Angular, Blazor)
+7. Interactive Documentation
+8. Validate & Auto-fix Docs
+9. Final Testing
 
-Button serves as the **template** to replicate with Input, Checkbox, etc.
+Button served as the **template** — now replicated across 7 components.
 
 ### Components
 
@@ -289,7 +294,12 @@ Button serves as the **template** to replicate with Input, Checkbox, etc.
 | Toggle | Done | Done | Done | Done | Done | Done |
 | Tooltip | Done | Done | Done | Done | Done | Done |
 | Badge | Done | Done | Done | Done | Done | Done |
-| Input | Planned | - | - | - | - | - |
+| Button Group | Done | Done | Done | Done | Done | Done |
+| Input Field | Done | Done | Done | Done | Done | Done |
+| Checkbox Groups | Planned | - | - | - | - | - |
+| Avatars | Planned | - | - | - | - | - |
+| Progress | Planned | - | - | - | - | - |
+| Dropdowns | Planned | - | - | - | - | - |
 
 ### Design Tokens
 
@@ -325,10 +335,10 @@ This project demonstrates:
 ## Metrics
 
 - **Packages:** 5 (@kds/tokens, web-components, react, angular, blazor)
-- **Components:** 5 (Button, Checkbox, Toggle, Tooltip, Badge) - 100% end-to-end complete
+- **Components:** 7 (Button, Checkbox, Toggle, Tooltip, Badge, Button Group, Input Field) - 100% end-to-end complete
 - **Tokens:** 90+ (colors, typography, shadows, component-specific)
 - **Lines of code:** ~12,000+ (AI-generated)
-- **Documentation:** ~8,500+ lines (ARCHITECTURE, METRICS, examples, interactive docs)
+- **Documentation:** ~8,500+ lines (interactive docs, guides, examples)
 - **Supported frameworks:** 3 (React, Angular 20/21, Blazor)
 - **Working examples:** 3 (one per framework)
 
@@ -340,26 +350,23 @@ See [METRICS.md](METRICS.md) for full analysis.
 
 **All technical phases finished:**
 - ARCHITECTURE.md - Complete technical flow
-- METRICS.md - Metrics and comparisons
-- TOOLING-GUIDE.md - Complete tooling guide
 - Working examples for 3 frameworks
-- Button component end-to-end validated
+- 7 components end-to-end validated (100% Figma fidelity + WCAG 2.1 AA)
 
 ### Post-PoC (Phase 6: Scaling)
 
-1. **Button/Checkbox groups** - Grouping components (next)
+1. **Checkbox Groups** - Reuses existing Checkbox (next)
 2. **Avatars, Progress** - Visual components
 3. **Dropdowns** - Complex component with positioning
-4. **Input** - Complex form component (last)
-5. **Visual Regression Testing** - Figma captures vs rendered
-6. **CI/CD** - Full automation
+4. **Visual Regression Testing** - Figma captures vs rendered
+5. **CI/CD** - Full automation
 
 See [ROADMAP.md](ROADMAP.md) for details.
 
 ## Author
 
 **Kilian Sala**
-Head of UX Design @ Kapsch
+Kapsch Head of UX
 [kilian.sala@kapsch.net](mailto:kilian.sala@kapsch.net)
 
 ## License

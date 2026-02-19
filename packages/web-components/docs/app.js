@@ -3,8 +3,16 @@
  * Handles tabs, playground, code copying, and navigation
  */
 
-// Wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', () => {
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked@14/+esm';
+import readmeMd from '../../../README.md?raw';
+import architectureMd from '../../../docs/ARCHITECTURE.md?raw';
+import developmentMd from '../../../docs/DEVELOPMENT.md?raw';
+import accessibilityMd from '../../../docs/ACCESSIBILITY.md?raw';
+import roadmapMd from '../../../ROADMAP.md?raw';
+
+// Modules are deferred — DOM is already parsed when this runs
+function init() {
+  initMarkdownPages();
   initTabs();
   initFrameworkTabs();
   initPlayground();
@@ -17,7 +25,33 @@ document.addEventListener('DOMContentLoaded', () => {
   initCopyButtons();
   initNavigation();
   initSyntaxHighlighting();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
+/**
+ * Render markdown pages from .md source files
+ */
+function initMarkdownPages() {
+  const pages = [
+    { id: 'readme-md', content: readmeMd },
+    { id: 'architecture-md', content: architectureMd },
+    { id: 'development-md', content: developmentMd },
+    { id: 'accessibility-md', content: accessibilityMd },
+    { id: 'roadmap-md', content: roadmapMd },
+  ];
+
+  pages.forEach(({ id, content }) => {
+    const container = document.getElementById(id);
+    if (!container) return;
+    container.innerHTML = marked.parse(content);
+    if (window.Prism) Prism.highlightAllUnder(container);
+  });
+}
 
 /**
  * Initialize main tabs (Overview, Variants, Tokens, Usage, API)

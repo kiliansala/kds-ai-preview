@@ -666,3 +666,165 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   Markdown content (rendered from .md files via marked)
+   ============================================================ */
+
+.docs-markdown-content {
+  max-width: 860px;
+  line-height: 1.7;
+  color: var(--kds-color-gray-700, #344054);
+}
+
+.docs-markdown-content h1 {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--kds-color-gray-900, #101828);
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.docs-markdown-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--kds-color-gray-900, #101828);
+  margin: 48px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--kds-color-gray-200, #EAECF0);
+}
+
+.docs-markdown-content h1 + h2 {
+  margin-top: 32px;
+}
+
+.docs-markdown-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--kds-color-gray-900, #101828);
+  margin: 28px 0 10px;
+}
+
+.docs-markdown-content h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--kds-color-gray-800, #1D2939);
+  margin: 20px 0 8px;
+}
+
+.docs-markdown-content p {
+  color: var(--kds-color-gray-600, #475467);
+  margin: 0 0 16px;
+}
+
+.docs-markdown-content > p:first-of-type {
+  font-size: 18px;
+  color: var(--kds-color-gray-500, #667085);
+  margin-bottom: 32px;
+}
+
+.docs-markdown-content ul,
+.docs-markdown-content ol {
+  color: var(--kds-color-gray-600, #475467);
+  padding-left: 24px;
+  margin: 0 0 16px;
+}
+
+.docs-markdown-content li {
+  margin-bottom: 6px;
+}
+
+.docs-markdown-content li input[type="checkbox"] {
+  margin-right: 6px;
+  accent-color: var(--kds-color-brand-600, #7F56D9);
+}
+
+.docs-markdown-content a {
+  color: var(--kds-color-brand-600, #7F56D9);
+  text-decoration: none;
+}
+
+.docs-markdown-content a:hover {
+  text-decoration: underline;
+}
+
+.docs-markdown-content code {
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: 13px;
+  background: var(--kds-color-gray-100, #F2F4F7);
+  color: var(--kds-color-gray-800, #1D2939);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.docs-markdown-content pre {
+  background: #1e1e2e;
+  border-radius: 8px;
+  padding: 20px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+}
+
+.docs-markdown-content pre code {
+  background: none;
+  color: #cdd6f4;
+  padding: 0;
+  font-size: 13px;
+  border-radius: 0;
+}
+
+.docs-markdown-content blockquote {
+  border-left: 3px solid var(--kds-color-brand-300, #C4B5FD);
+  margin: 0 0 16px;
+  padding: 8px 16px;
+  background: var(--kds-color-brand-25, #FAFAFF);
+  border-radius: 0 6px 6px 0;
+  color: var(--kds-color-gray-600, #475467);
+}
+
+.docs-markdown-content blockquote p {
+  margin: 0;
+  color: inherit;
+}
+
+.docs-markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 16px 0 24px;
+  border: 1px solid var(--kds-color-gray-200, #EAECF0);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.docs-markdown-content th {
+  background: var(--kds-color-gray-50, #F9FAFB);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--kds-color-gray-700, #344054);
+  border-bottom: 1px solid var(--kds-color-gray-200, #EAECF0);
+}
+
+.docs-markdown-content td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--kds-color-gray-100, #F2F4F7);
+  color: var(--kds-color-gray-600, #475467);
+  vertical-align: top;
+}
+
+.docs-markdown-content tr:last-child td {
+  border-bottom: none;
+}
+
+.docs-markdown-content hr {
+  border: none;
+  border-top: 1px solid var(--kds-color-gray-200, #EAECF0);
+  margin: 40px 0;
+}
+
+.docs-markdown-content img {
+  max-width: 100%;
+  height: auto;
+  display: none; /* hide shields.io badges and other decorative images */
+}

@@ -8,7 +8,11 @@ export default defineConfig({
   // Dev server configuration
   server: {
     port: 5173,
-    open: true
+    open: true,
+    fs: {
+      // Allow serving files from the monorepo root (for ?raw .md imports)
+      allow: ['../..']
+    }
   },
 
   build: {

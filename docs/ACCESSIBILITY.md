@@ -286,7 +286,7 @@ $ npm run validate:a11y
 For accessibility questions or issues:
 
 1. Check this guide first
-2. Review [TOOLING-GUIDE.md](./TOOLING-GUIDE.md) for validation commands
+2. Review [DEVELOPMENT.md](./DEVELOPMENT.md) for validation commands
 3. Consult [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
 4. Open an issue in the project repository
 
@@ -294,4 +294,4 @@ For accessibility questions or issues:
 
 **Remember**: Accessibility is not optional. It's a fundamental requirement for all components.
 
-*Last updated: 2026-02-10 | Maintained by: Kilian Sala*
+*Last updated: 2026-02-19 | Maintained by: Kilian Sala*

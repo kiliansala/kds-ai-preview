@@ -70,32 +70,18 @@ docs(readme): update setup instructions
 
 ## Generating a New Component
 
-### Step 1: Extract from Figma
-```bash
-# Use the MCP server to extract the component
-# Claude AI will analyze the design and generate tokens
-```
+The full 9-step workflow is documented in [docs/DEVELOPMENT.md](./DEVELOPMENT.md#workflow-new-component).
 
-### Step 2: Generate Web Component
-```bash
-# Use Claude Code with the prompt:
-# "Generate a LIT web component for [ComponentName] using these tokens..."
-```
-
-### Step 3: Generate Wrappers
-```bash
-# Use Claude Code to generate wrappers:
-# "Create React/Angular/Blazor wrappers for kds-[component-name]"
-```
-
-### Step 4: Documentation and Tests
-```bash
-# Claude automatically generates:
-# - JSDoc comments
-# - Storybook stories
-# - Unit tests
-# - Usage examples
-```
+**Summary**:
+1. **Figma Extraction** - Extract via Claude CLI + MCP (`get_design_context`)
+2. **Design Contracts** - Create `.figma/{component}.figma-contract.{json,ts}`
+3. **LIT Component** - Implement `packages/web-components/src/components/kds-{component}.ts`
+4. **Contract Validation** - Create and run `scripts/validate-{component}-contract.ts`
+5. **A11y Validation** - Create and run `scripts/validate-{component}-a11y.ts`
+6. **Framework Wrappers** - React, Angular, Blazor
+7. **Interactive Documentation** - Update `packages/web-components/index.html`
+8. **Validate & Auto-fix Docs** - Run `validate:docs` → `fix:docs` → `validate:docs`
+9. **Final Testing** - Contract + a11y + manual browser testing
 
 ## Code Standards
 
@@ -166,9 +152,9 @@ Before creating a PR, verify:
 ## Support
 
 For questions or issues:
-- **Technical Lead**: Kilian Sala (kilian@kapsch.net)
+- **Technical Lead**: Kilian Sala (kilian.sala@kapsch.net)
 - **Documentation**: See [docs/](../docs/)
-- **AI Prompts**: See [docs/AI-WORKFLOW.md](./AI-WORKFLOW.md)
+- **Development Guide**: See [docs/DEVELOPMENT.md](./DEVELOPMENT.md)
 
 ---
 

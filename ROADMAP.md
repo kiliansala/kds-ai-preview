@@ -15,20 +15,21 @@
 - **Tooltip** (100%) - Implemented end-to-end with wrappers and full documentation
 - **Badge** (100%) - Implemented end-to-end with 13 colors, 8 icon variants, wrappers and full documentation
 - **Button Group** (100%) - Implemented end-to-end with wrappers and full documentation
+- **Input Field** (100%) - Implemented end-to-end with wrappers and full documentation
 
 **Key achievements**:
-- Button, Checkbox, Toggle, Tooltip, Badge, and Button Group from Figma through to wrappers (React, Angular, Blazor)
+- Button, Checkbox, Toggle, Tooltip, Badge, Button Group, and Input Field from Figma through to wrappers (React, Angular, Blazor)
 - Figma-to-Code validation system working (100% fidelity)
-- Repeatable workflow validated and completed across 6 components (8/8 tasks)
+- Repeatable workflow validated and completed across 7 components (9/9 tasks)
 - 90+ design tokens extracted and implemented (DTCG)
-- Complete interactive documentation for Button, Checkbox, Toggle, Tooltip, Badge, and Button Group
+- Complete interactive documentation for all 7 components
 - Working examples for 3 frameworks
 - Angular wrappers updated to v20/v21
 - ~12,000+ lines of AI-generated code
 - ~8,500+ lines of documentation
 - 64 automated tests for Badge (contract, a11y, component)
 
-**Next step**: Implement Checkbox Groups (reuses Checkbox, ~5-7h).
+**Next step**: Implement Checkbox Groups (reuses Checkbox, ~5-7h). Input Field is complete.
 
 ### Completed
 
@@ -120,11 +121,11 @@
 ### In Progress
 
 #### Phase 6: Scaling to More Components (Post-PoC)
-**Status**: In progress - Button, Checkbox, Toggle, and Tooltip completed
+**Status**: In progress - 7 components completed (Button, Checkbox, Toggle, Tooltip, Badge, Button Group, Input Field)
 
-**Repeatable Workflow** (validated with Button, Checkbox, Toggle, and Tooltip):
+**Repeatable Workflow** (validated with all 7 components):
 
-Each component follows this 8-step process:
+Each component follows this 9-step process:
 
 1. **Figma Extraction** (via MCP)
    - Run `get_design_context` to get properties
@@ -169,7 +170,12 @@ Each component follows this 8-step process:
    - Tabs: Variants, Usage, API, Accessibility
    - **Time**: ~1-2 hours
 
-8. **Testing and Final Validation**
+8. **Validate & Auto-fix Docs**
+   - Run `validate:docs` → `fix:docs` → `validate:docs`
+   - Ensure docs page meets Button standard (75 checks)
+   - **Time**: ~15-30 minutes
+
+9. **Testing and Final Validation**
    - Run validations (contract + a11y)
    - Manual browser testing
    - Screen reader verification
@@ -242,15 +248,15 @@ Each component follows this 8-step process:
 - [x] Wrappers (React, Angular, Blazor)
 - [x] Complete interactive documentation
 
-##### Inputs
-**Estimate**: 6-8 hours (most complex component)
-**Notes**: Includes states, validation, placeholders, types
-- [ ] Figma extraction
-- [ ] Contracts
-- [ ] LIT implementation
-- [ ] Validations
-- [ ] Wrappers
-- [ ] Documentation
+##### Input Field (100% - COMPLETED)
+**Status**: Complete end-to-end implementation
+- [x] Figma extraction (nodeId: 1090:57817)
+- [x] Contracts created
+- [x] LIT implementation (`kds-input-field.ts`)
+- [x] Contract validation PASSED
+- [x] A11y validation PASSED
+- [x] Wrappers (React, Angular, Blazor)
+- [x] Complete interactive documentation in index.html
 
 ##### Dropdowns
 **Estimate**: 7-9 hours (complex component)
@@ -311,12 +317,12 @@ Each component follows this 8-step process:
 ---
 
 **Total Base Components**: 13 components
-- Completed: 6 (Button, Checkbox, Toggle, Tooltip, Badge, Button Group)
+- Completed: 7 (Button, Checkbox, Toggle, Tooltip, Badge, Button Group, Input Field)
 - In progress: 0
-- Pending: 5 components
+- Pending: 4 components (Checkbox Groups, Avatars, Progress, Dropdowns)
 - Blocked: 2 components (locked in Figma)
 
-**Total estimate**: ~38-57 hours to complete the 6 remaining available components
+**Total estimate**: ~21-31 hours to complete the 4 remaining available components
 
 ---
 
@@ -335,8 +341,7 @@ Each component follows this 8-step process:
 8. Implement Dropdowns (complex, ~7-9 hours)
 
 **Long term** (1-2 months):
-9. Implement **Input** (large/complex component, ~6-8 hours) - **Saved for last**
-10. Request unlock for Tags and Text editors
+9. Request unlock for Tags and Text editors
 
 ## Important Technical Decisions
 
@@ -359,17 +364,17 @@ Each component follows this 8-step process:
 ## Progress Metrics
 
 **Phase 6 - Component Scaling**:
-- **Components completed**: 6/13 (Button, Checkbox, Toggle, Tooltip, Badge, Button Group)
+- **Components completed**: 7/13 (Button, Checkbox, Toggle, Tooltip, Badge, Button Group, Input Field)
 - **Components in progress**: 0/13
-- **Components pending**: 5/13
+- **Components pending**: 4/13
 - **Components blocked**: 2/13 (locked in Figma)
-- **Total Phase 6 progress**: ~46% (6/13 components)
+- **Total Phase 6 progress**: ~54% (7/13 components)
 
 **General**:
 - **Frameworks with wrappers**: 3/3 (React, Angular, Blazor)
 - **Tokens formalized**: 100% (90+ tokens in DTCG format)
 - **Static documentation**: 100% (ARCHITECTURE, METRICS, examples)
-- **Live documentation**: 6/13 components (Button, Checkbox, Toggle, Tooltip, Badge, Button Group in index.html)
+- **Live documentation**: 7/13 components (Button, Checkbox, Toggle, Tooltip, Badge, Button Group, Input Field in index.html)
 - **Phases 1-5**: COMPLETED
 - **Repeatable workflow**: VALIDATED (Button + Checkbox + Toggle + Tooltip + Badge)
 - **Tests**: Badge 64/64 PASSED
@@ -389,7 +394,7 @@ Button served as the **model/template** to establish the workflow.
 
 ### Phase 6 (Scaling): Repeatable Workflow
 
-**Philosophy**: Replicate validated 8-step process for each component.
+**Philosophy**: Replicate validated 9-step process for each component.
 
 **Priority order**:
 1. **Simple components first** (Checkbox, Toggle, Badge) - validate workflow
@@ -436,12 +441,7 @@ Button served as the **model/template** to establish the workflow.
 
 ### Long Term (2-3 Months)
 
-8. **Input Component** - **SAVED FOR LAST**
-   - Large and complex component (multiple types, validation, states)
-   - **Estimate**: ~6-8 hours
-   - **Reason**: High complexity, better to implement simpler components first
-
-9. **Blocked components**
+8. **Blocked components**
    - Request unlock for Tags
    - Request unlock for Text editors
 
@@ -472,4 +472,4 @@ Button served as the **model/template** to establish the workflow.
 
 ---
 
-*Last revision: 2026-02-18 | Maintained by: Kilian Sala*
+*Last revision: 2026-02-19 | Maintained by: Kilian Sala*
