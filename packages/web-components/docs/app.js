@@ -4,7 +4,7 @@
  */
 
 import { marked } from 'https://cdn.jsdelivr.net/npm/marked@14/+esm';
-import readmeMd from '../../../README.md?raw';
+import introMd from '../../../docs/INTRO.md?raw';
 import architectureMd from '../../../docs/ARCHITECTURE.md?raw';
 import developmentMd from '../../../docs/DEVELOPMENT.md?raw';
 import accessibilityMd from '../../../docs/ACCESSIBILITY.md?raw';
@@ -50,7 +50,7 @@ marked.use({
  */
 function initMarkdownPages() {
   const pages = [
-    { id: 'readme-md', content: readmeMd },
+    { id: 'readme-md', content: introMd },
     { id: 'architecture-md', content: architectureMd },
     { id: 'development-md', content: developmentMd },
     { id: 'accessibility-md', content: accessibilityMd },
